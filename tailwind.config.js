@@ -37,6 +37,9 @@ module.exports = {
         nunito: "Nunito, sans-serif",
         montserrat: "Montserrat, sans-serif",
       },
+      boxShadow: {
+        button: "0 0 64px -10px rgba(0,0,0,0.7)",
+      },
     },
   },
   purge: ["./dist/**/*.html", "./src/**/*.js"],
