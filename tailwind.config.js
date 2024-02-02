@@ -1,21 +1,11 @@
 /** @type {import('tailwindcss').Config} */
+const safelist = require("./safelist");
+
 module.exports = {
+  mode: "jit",
   content: ["./dist/*.html", "./node_modules/flowbite/**/*.js"],
   darkMode: "class",
-  safelist: [
-    "w-64",
-    "w-1/2",
-    "rounded-l-lg",
-    "rounded-r-lg",
-    "bg-gray-200",
-    "grid-cols-4",
-    "grid-cols-7",
-    "h-6",
-    "leading-6",
-    "h-9",
-    "leading-9",
-    "shadow-lg",
-  ],
+  safelist: [safelist],
   theme: {
     extend: {
       animation: {
@@ -39,6 +29,11 @@ module.exports = {
       },
       boxShadow: {
         button: "0 0 64px -10px rgba(0,0,0,0.7)",
+      },
+    },
+    variants: {
+      extend: {
+        opacity: ["hover", "focus"],
       },
     },
   },
