@@ -20,11 +20,23 @@ content.addEventListener("mouseover", (e) => {
 content.addEventListener("mouseout", (e) => {
   _handleNavPageHover(e);
 });
+document.addEventListener("DOMContentLoaded", () => {
+  _handlePageChangeTxt();
+});
 
 //> Functions
 
 let span = document.createElement("span");
 span.className = "font-josefin text-2xl text-gray-700 dark:text-gray-500";
+
+function _handlePageChangeTxt() {
+  let currentPage = content.querySelector('a[aria-current="page"]');
+
+  if (currentPage) {
+    span.textContent = `${currentPage.getAttribute("data-page")} `;
+    currentPage.insertBefore(span, currentPage.firstChild);
+  }
+}
 
 function _handleNavPageHover(e) {
   if (e.target === span) return;
@@ -38,4 +50,3 @@ function _handleNavPageHover(e) {
     }
   }
 }
-
