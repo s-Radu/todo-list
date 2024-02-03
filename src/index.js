@@ -6,11 +6,14 @@ import "./darkMode.js";
 //> module imports
 import nav from "./nav.js";
 
-//> DOM elements
+//> Content Page
 const content = document.getElementById("content");
 
 //> Append elements
 content.appendChild(nav());
+
+//> DOM elements
+let darkModeToggle = content.querySelector("#toggle");
 
 //> Event listeners
 
@@ -23,6 +26,7 @@ content.addEventListener("mouseout", (e) => {
 document.addEventListener("DOMContentLoaded", () => {
   _handlePageChangeTxt();
 });
+darkModeToggle.addEventListener("click", toggleDarkMode);
 
 //> Functions
 
@@ -49,4 +53,21 @@ function _handleNavPageHover(e) {
       e.target.removeChild(span);
     }
   }
+}
+
+function toggleDarkMode() {
+  const circle = content.querySelector("#circle");
+  const toggle = content.querySelector("#toggle");
+  const html = document.querySelector("html");
+
+  const isDarkMode = circle.classList.contains("translate-x-5");
+
+  circle.classList.toggle("translate-x-5", !isDarkMode);
+  circle.classList.toggle("bg-black", !isDarkMode);
+  circle.classList.toggle("bg-white", isDarkMode);
+
+  html.classList.toggle("dark", !isDarkMode);
+
+  toggle.classList.toggle("bg-black", isDarkMode);
+  toggle.classList.toggle("bg-white", !isDarkMode);
 }
