@@ -1,5 +1,5 @@
 const path = require("path");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+
 module.exports = {
   mode: "development",
   devtool: "source-map",
@@ -8,7 +8,6 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "./bundle.js",
   },
-  plugins: [new CleanWebpackPlugin()],
   devServer: {
     static: {
       directory: path.resolve(__dirname, "dist"),
