@@ -8,7 +8,7 @@ export default function nav() {
                 <a href="#"> <img src="./images/logo.png" alt="Logo page" class="w-20 h-20 m-4"> </a>
             </div>
             <ul
-                class="flex flex-col justify-between font-josefin p-4 mt-4 h-full w-64 bg-gray-50 border-0 dark:bg-gray-900 dark:border-gray-700">
+                class="flex flex-col justify-between font-josefin p-4 h-full w-64 bg-gray-50 border-0 dark:bg-gray-900 dark:border-gray-700">
                 <li>
                     <a href="#"
                         class="block py-2 px-3 text-white bg-blue-700  bg-transparent  dark:text-blue-500"
