@@ -4,7 +4,7 @@ export default function nav() {
     "bg-white border-b-2 border-gray-800 dark:border-gray-600 dark:bg-gray-900";
   nav.innerHTML = `
   <div class="flex flex-wrap items-center justify-between mx-auto p-4">
-                <div class="flex justify-between items-center w-32 ml-4">
+                <div class="flex justify-between items-center w-32 md:ml-4">
 
                         <button class="rounded-lg hover:scale-105" type="button" data-drawer-target="drawer-navigation"
                             data-drawer-show="drawer-navigation" aria-controls="drawer-navigation">
@@ -34,8 +34,18 @@ export default function nav() {
                     </a>
                 </div>
 
-                <div class="flex justify-between items-center w-32 mr-4">
-                    <button class="text-white text-6xl font-josefin">+</button>
+                <div class="flex justify-between items-center w-32 md:mr-4">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="40" height="40">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                                <path
+                                    d="M12 7V17M12 12H17M7 12H9.5M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+                                    class="dark:stroke-white stroke-black" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round">
+                                </path>
+                            </g>
+                        </svg>  
                     <div id="toggle"
                         class="w-12 h-6 flex items-center bg-black rounded-full p-1 cursor-pointer transform duration-200 ease-in-expo">
                         <div id="circle"
