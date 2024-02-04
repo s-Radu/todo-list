@@ -3,8 +3,8 @@ export default function nav() {
   nav.className =
     "bg-white border-b-2 border-gray-800 dark:border-gray-600 dark:bg-gray-900";
   nav.innerHTML = `
-  <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-                <div class="flex justify-between items-center w-32">
+  <div class="flex flex-wrap items-center justify-between mx-auto p-4">
+                <div class="flex justify-between items-center w-32 ml-4">
                     <button class="text-white">Something</button>
                     <a href="#"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="40"
                             hight="40">
@@ -22,7 +22,7 @@ export default function nav() {
                     </a>
                 </div>
 
-                <div class="flex justify-between items-center w-32">
+                <div class="flex justify-between items-center w-32 mr-4">
                     <button class="text-white text-6xl font-josefin">+</button>
                     <div id="toggle"
                         class="w-12 h-6 flex items-center bg-black rounded-full p-1 cursor-pointer transform duration-200 ease-in-expo">

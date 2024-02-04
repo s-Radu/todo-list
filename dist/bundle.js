@@ -8100,12 +8100,14 @@ __webpack_require__.r(__webpack_exports__);
 //> module imports
 
 
-//> DOM elements
+//> Content Page
 const content = document.getElementById("content");
-let darkModeToggle = content.querySelector("#toggle");
 
 //> Append elements
 content.appendChild((0,_nav_js__WEBPACK_IMPORTED_MODULE_3__["default"])());
+
+//> DOM elements
+let darkModeToggle = content.querySelector("#toggle");
 
 //> Event listeners
 
