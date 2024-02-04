@@ -1,3 +1,5 @@
+import { getElement } from "./utilis";
+
 export default (function darkMode() {
   // On page load or when changing themes, best to add inline in `head` to avoid FOUC
   if (
@@ -10,3 +12,20 @@ export default (function darkMode() {
     document.documentElement.classList.remove("dark");
   }
 })();
+
+export function toggleDarkMode() {
+  const circle = getElement("#circle");
+  const toggle = getElement("#toggle");
+  const html = document.querySelector("html");
+
+  const isDarkMode = circle.classList.contains("translate-x-5");
+
+  circle.classList.toggle("translate-x-5", !isDarkMode);
+  circle.classList.toggle("bg-black", !isDarkMode);
+  circle.classList.toggle("bg-white", isDarkMode);
+
+  html.classList.toggle("dark", !isDarkMode);
+
+  toggle.classList.toggle("bg-black", isDarkMode);
+  toggle.classList.toggle("bg-white", !isDarkMode);
+}
