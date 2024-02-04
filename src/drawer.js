@@ -118,6 +118,100 @@ export default function drawer() {
                     <li>
                         <a href="#"
                             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-700">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="fill-black dark:fill-white" width="24"
+                                height="24">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                <g id="SVGRepo_iconCarrier">
+                                    <path
+                                        d="M9 12v1h1v-1H9zm-2 0v1h1v-1H7zm-2 0v1h1v-1H5zm4-4v1h1V8H9zM7 8v1h1V8H7zM5 8v1h1V8H5zm4-4v1h1V4H9zM7 5h1V4H7v1zM5 5h1V4H5v1zm4 3v1h1V8H9zM7 9h1V8H7v1zM5 9h1V8H5v1zm4 3v1h1v-1H9zm-2 1h1v-1H7v1zm-2 0h1v-1H5v1zm17 2V2H2v13h13v3h-2v1H4v1h9v1h5v-1h2v-1h-2v-1h-2v-3h6zM3 3h18v3H3V3zm0 4h18v3H3V7zm14 12v1h-3v-1h3zM3 14v-3h18v3H3zm6-1h1v-1H9v1zm0-4h1V8H9v1zm0-4h1V4H9v1zm-2 8h1v-1H7v1zm0-4h1V8H7v1zm0-4h1V4H7v1zm-2 8h1v-1H5v1zm0-4h1V8H5v1zm0-4h1V4H5v1zm4-1v1h1V4H9zM7 4v1h1V4H7zM5 4v1h1V4H5z">
+                                    </path>
+                                    <path fill="none" d="M0 0h24v24H0z"></path>
+                                </g>
+                            </svg>
+                            <span class="flex-1 ms-3 whitespace-nowrap">All</span>
+                            <span
+                                class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-white bg-black rounded-full dark:bg-white dark:text-black">25</span>
+                            </a>
+                        </li>
+
+                    <li>
+                        <a href="#"
+                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-700">
+                            <svg class="fill-black dark:fill-white" viewBox="0 0 512 512" enable-background="new 0 0 512 512"
+                                id="Daily_x5F_active_x5F_user" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24">
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                <g id="SVGRepo_iconCarrier">
+                                    <g>
+                                        <path
+                                            d="M151.762,370.541c-3.488-1.346-7.412,0.385-8.762,3.874s0.385,7.413,3.874,8.763 c32.244,12.471,35.709,55.182,35.834,71.343H63.563c0.126-16.167,3.593-58.872,35.835-71.343c3.489-1.35,5.223-5.273,3.874-8.763 c-1.349-3.489-5.271-5.226-8.761-3.874c-49.245,19.048-44.546,88.328-44.322,91.268c0.27,3.533,3.213,6.26,6.754,6.26h132.385 c3.541,0,6.485-2.727,6.754-6.258C196.306,458.869,201.007,389.589,151.762,370.541z">
+                                        </path>
+                                        <path
+                                            d="M370.538,391.494c3.74,0,6.774-3.033,6.774-6.773c0-3.741-3.034-6.775-6.774-6.775h-53.607 c-3.74,0-6.774,3.034-6.774,6.775v76.574c0,3.74,3.034,6.773,6.774,6.773h53.607c3.74,0,6.774-3.033,6.774-6.773v-50.916 c0-3.741-3.034-6.774-6.774-6.774s-6.774,3.033-6.774,6.774v44.142h-40.059v-63.026H370.538z">
+                                        </path>
+                                        <path
+                                            d="M280.767,300.421c3.741,0,6.774-3.034,6.774-6.774s-3.033-6.774-6.774-6.774H227.16c-3.742,0-6.774,3.034-6.774,6.774 v167.648c0,3.74,3.032,6.773,6.774,6.773h53.607c3.741,0,6.774-3.033,6.774-6.773V319.864c0-3.74-3.033-6.774-6.774-6.774 c-3.74,0-6.774,3.034-6.774,6.774v134.656h-40.059v-154.1H280.767z">
+                                        </path>
+                                        <path
+                                            d="M123.135,362.84c38.155,0,69.196-31.039,69.196-69.193s-31.041-69.195-69.196-69.195 c-38.154,0-69.194,31.041-69.194,69.195S84.981,362.84,123.135,362.84z M123.135,238c30.685,0,55.647,24.963,55.647,55.646 c0,30.682-24.963,55.646-55.647,55.646c-30.683,0-55.646-24.964-55.646-55.646C67.489,262.963,92.452,238,123.135,238z">
+                                        </path>
+                                        <path
+                                            d="M329.528,199.951V65.823c0-3.741-3.034-6.774-6.774-6.774h-44.913v-8.343c0-3.741-3.033-6.774-6.774-6.774 c-3.74,0-6.773,3.033-6.773,6.774v28.087c0,3.74,3.033,6.774,6.773,6.774c3.741,0,6.774-3.034,6.774-6.774v-6.196h38.139v38.207 h-20.26c-3.74,0-6.774,3.034-6.774,6.774s3.034,6.774,6.774,6.774h20.26v75.599c0,10.193-8.294,18.485-18.487,18.485H182.847 c-3.741,0-6.774,3.034-6.774,6.774s3.033,6.774,6.774,6.774h114.646C315.157,231.985,329.528,217.614,329.528,199.951z">
+                                        </path>
+                                        <path
+                                            d="M110.372,201.824c3.742,0,6.774-3.033,6.774-6.773v-70.698h144.341c3.741,0,6.774-3.034,6.774-6.774 s-3.033-6.774-6.774-6.774H117.146V72.597h19.091c3.742,0,6.774-3.033,6.774-6.773c0-3.741-3.033-6.774-6.774-6.774h-25.865 c-3.742,0-6.774,3.033-6.774,6.774v129.228C103.598,198.791,106.63,201.824,110.372,201.824z">
+                                        </path>
+                                        <path
+                                            d="M216.563,85.567c3.741,0,6.774-3.034,6.774-6.774v-6.196h22.077c3.742,0,6.774-3.033,6.774-6.773 c0-3.741-3.033-6.774-6.774-6.774h-22.077v-8.343c0-3.741-3.033-6.774-6.774-6.774c-3.742,0-6.774,3.033-6.774,6.774v28.087 C209.789,82.533,212.821,85.567,216.563,85.567z">
+                                        </path>
+                                        <path
+                                            d="M162.058,85.567c3.742,0,6.774-3.034,6.774-6.774v-6.196h21.942c3.741,0,6.774-3.033,6.774-6.773 c0-3.741-3.033-6.774-6.774-6.774h-21.942v-8.343c0-3.741-3.033-6.774-6.774-6.774c-3.741,0-6.774,3.033-6.774,6.774v28.087 C155.284,82.533,158.317,85.567,162.058,85.567z">
+                                        </path>
+                                        <path
+                                            d="M162.84,167.837c-3.742,0-6.774,3.033-6.774,6.773v11.561c0,3.74,3.032,6.774,6.774,6.774h34.73 c3.742,0,6.774-3.034,6.774-6.774v-34.731c0-3.74-3.033-6.774-6.774-6.774h-34.73c-3.742,0-6.774,3.034-6.774,6.774 c0,3.741,3.032,6.774,6.774,6.774h27.956v21.183h-21.182v-4.786C169.614,170.87,166.581,167.837,162.84,167.837z">
+                                        </path>
+                                        <path
+                                            d="M235.556,167.837c-3.742,0-6.774,3.033-6.774,6.773v11.561c0,3.74,3.032,6.774,6.774,6.774h34.73 c3.74,0,6.774-3.034,6.774-6.774v-34.731c0-3.74-3.034-6.774-6.774-6.774h-34.73c-3.742,0-6.774,3.034-6.774,6.774 c0,3.741,3.032,6.774,6.774,6.774h27.956v21.183H242.33v-4.786C242.33,170.87,239.297,167.837,235.556,167.837z">
+                                        </path>
+                                        <path
+                                            d="M455.254,144.665c-3.741,0-6.774,3.034-6.774,6.774v303.081h-40.06V133.183h46.834c3.74,0,6.773-3.033,6.773-6.773 c0-3.741-3.033-6.774-6.773-6.774h-53.608c-3.74,0-6.774,3.033-6.774,6.774v334.886c0,3.74,3.034,6.773,6.774,6.773h53.608 c3.74,0,6.773-3.033,6.773-6.773V151.439C462.027,147.699,458.994,144.665,455.254,144.665z">
+                                        </path>
+                                    </g>
+                                </g>
+                            </svg>
+                            <span class="flex-1 ms-3 whitespace-nowrap">Active</span>
+                            <span
+                                class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-white bg-black rounded-full dark:bg-white dark:text-black">13</span>
+                            </a>
+                        </li>
+
+                    <li>
+                        <a href="#"
+                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-700">
+                            <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" width="24"
+                                height=24>
+                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                <g id="SVGRepo_iconCarrier">
+                                    <path
+                                        d="M15.3742 5.98559L10.3742 14.9856C9.72664 16.1511 7.97832 15.1798 8.62585 14.0143L13.6258 5.01431C14.2734 3.84876 16.0217 4.82005 15.3742 5.98559Z"
+                                        class="fill-black dark:fill-white"></path>
+                                    <path
+                                        d="M5.1247 9.71907L10.1247 13.7191C11.1659 14.552 9.91646 16.1137 8.87531 15.2808L3.87531 11.2808C2.83415 10.4479 4.08354 8.88615 5.1247 9.71907Z"
+                                        class="fill-black dark:fill-white"></path>
+                                </g>
+                            </svg>
+                            <span class="flex-1 ms-3 whitespace-nowrap">Completed</span>
+                            <span
+                                class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-white bg-black rounded-full dark:bg-white dark:text-black">12</span>
+                            </a>
+                        </li>
+
+                    <li>
+                        <a href="#"
+                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-700">
                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24"
                                 height=24>
                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -143,27 +237,7 @@ export default function drawer() {
                         </a>
                     </li>
 
-                    <li>
-                        <a href="#"
-                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-700">
-                            <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" width="24"
-                                height=24>
-                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                <g id="SVGRepo_iconCarrier">
-                                    <path
-                                        d="M15.3742 5.98559L10.3742 14.9856C9.72664 16.1511 7.97832 15.1798 8.62585 14.0143L13.6258 5.01431C14.2734 3.84876 16.0217 4.82005 15.3742 5.98559Z"
-                                        class="fill-black dark:fill-white"></path>
-                                    <path
-                                        d="M5.1247 9.71907L10.1247 13.7191C11.1659 14.552 9.91646 16.1137 8.87531 15.2808L3.87531 11.2808C2.83415 10.4479 4.08354 8.88615 5.1247 9.71907Z"
-                                        class="fill-black dark:fill-white"></path>
-                                </g>
-                            </svg>
-                            <span class="flex-1 ms-3 whitespace-nowrap">Completed</span>
-                            <span
-                                class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-white bg-black rounded-full dark:bg-white dark:text-black">12</span>
-                        </a>
-                    </li>
+                   
                 </ul>
                 <div class="text-black dark:text-white" id="todaysDate">
 
