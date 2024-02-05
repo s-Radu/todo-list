@@ -1,7 +1,9 @@
-//? this is how we delegate the event listener for the parent element of each drawer option
 import { getElement } from "./utilis";
 
-export let ids = [
+const DROPDOWN_SELECTOR = "#dropdown-example";
+const NEW_PROJECT_SELECTOR = "#newProject";
+
+let ids = [
   "home",
   "projects",
   "allProjects",
@@ -11,49 +13,79 @@ export let ids = [
   "newProject",
 ];
 
-export let newProjectsIds = [
+let newProjectsIds = [
   "newProject-something",
   "newProject-test",
   "newProject-dummy",
 ];
 
-export function check() {
-  newProjectsIds.forEach((id) => {
-    const element = getElement(`#${id}`);
-
-    if (element) {
-      element.addEventListener("click", deleteNewProject);
-    }
-  });
+export function getIds() {
+  return [...ids];
 }
 
-export function addNewProject(e) {
-  e.stopPropagation();
+export function getNewProjectsIds() {
+  return [...newProjectsIds];
+}
 
-  const ele = e.target.closest("#newProject");
-  if (ele) {
-    newProject();
+export function addEventListenerToDropdown() {
+  const parentElement = getElement(DROPDOWN_SELECTOR);
+
+  if (parentElement) {
+    parentElement.addEventListener("click", handleDropdownClick);
   }
 }
 
-function deleteNewProject(e) {
+function handleDropdownClick(e) {
+  let ele = e.target.closest("li");
+  if (ele) {
+    newProjectsIds.forEach((id) => {
+      if (ele.id === id) {
+        removeNewProject(e);
+      }
+    });
+  }
+}
+
+export function addNewProjectIfClicked(e) {
+  e.stopPropagation();
+
+  const ele = e.target.closest(NEW_PROJECT_SELECTOR);
+  if (ele) {
+    createNewProject();
+  }
+}
+
+function removeNewProject(e) {
   let element = e.target.closest("li");
   newProjectsIds = newProjectsIds.filter((id) => id !== element.id);
 
   element.remove();
-
-  console.log(newProjectsIds);
 }
 
-function newProject() {
-  //? the below will be deleted as the title the user gives to the project will be used as an ID for the new project
-  const randomNumber = Math.floor(Math.random() * 1000);
+function createNewProject() {
+  const newId = generateNewProjectId();
+  const newElement = createNewElement(newId);
 
+  insertNewElement(newElement);
+  newProjectsIds.push(newId);
+}
+
+function generateNewProjectId() {
+  const randomNumber = Math.floor(Math.random() * 1000);
+  return `newProject-${randomNumber}`;
+}
+
+function createNewElement(newId) {
   const newTitle = "New Project";
-  const newId = `newProject-${randomNumber}`;
   const newElement = document.createElement("li");
   newElement.id = newId;
-  newElement.innerHTML = `
+  newElement.innerHTML = generateNewProjectElement(newTitle);
+
+  return newElement;
+}
+
+function generateNewProjectElement(newTitle) {
+  return `
         <a href="#" class="flex items-center justify-between w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group
          hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 focus:bg-gray-700">${newTitle}
          <span>
@@ -64,12 +96,11 @@ function newProject() {
          </span>
          </a>
         `;
+}
 
-  //> Get the parent ul and the newProject li
+function insertNewElement(newElement) {
   const parentUl = getElement("#dropdown-example");
   const newProjectLi = getElement("#newProject");
 
-  //> Insert the new element before newProject
   parentUl.insertBefore(newElement, newProjectLi);
-  newProjectsIds.push(newId);
 }

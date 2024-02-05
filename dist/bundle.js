@@ -8739,14 +8739,16 @@ function nav() {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   addNewProject: () => (/* binding */ addNewProject),
-/* harmony export */   check: () => (/* binding */ check),
-/* harmony export */   ids: () => (/* binding */ ids),
-/* harmony export */   newProjectsIds: () => (/* binding */ newProjectsIds)
+/* harmony export */   addEventListenerToDropdown: () => (/* binding */ addEventListenerToDropdown),
+/* harmony export */   addNewProjectIfClicked: () => (/* binding */ addNewProjectIfClicked),
+/* harmony export */   getIds: () => (/* binding */ getIds),
+/* harmony export */   getNewProjectsIds: () => (/* binding */ getNewProjectsIds)
 /* harmony export */ });
 /* harmony import */ var _utilis__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utilis */ "./src/utilis.js");
-//? this is how we delegate the event listener for the parent element of each drawer option
 
+
+const DROPDOWN_SELECTOR = "#dropdown-example";
+const NEW_PROJECT_SELECTOR = "#newProject";
 
 let ids = [
   "home",
@@ -8764,43 +8766,73 @@ let newProjectsIds = [
   "newProject-dummy",
 ];
 
-function check() {
-  newProjectsIds.forEach((id) => {
-    const element = (0,_utilis__WEBPACK_IMPORTED_MODULE_0__.getElement)(`#${id}`);
-
-    if (element) {
-      element.addEventListener("click", deleteNewProject);
-    }
-  });
+function getIds() {
+  return [...ids];
 }
 
-function addNewProject(e) {
-  e.stopPropagation();
+function getNewProjectsIds() {
+  return [...newProjectsIds];
+}
 
-  const ele = e.target.closest("#newProject");
-  if (ele) {
-    newProject();
+function addEventListenerToDropdown() {
+  const parentElement = (0,_utilis__WEBPACK_IMPORTED_MODULE_0__.getElement)(DROPDOWN_SELECTOR);
+
+  if (parentElement) {
+    parentElement.addEventListener("click", handleDropdownClick);
   }
 }
 
-function deleteNewProject(e) {
+function handleDropdownClick(e) {
+  let ele = e.target.closest("li");
+  if (ele) {
+    newProjectsIds.forEach((id) => {
+      if (ele.id === id) {
+        removeNewProject(e);
+      }
+    });
+  }
+}
+
+function addNewProjectIfClicked(e) {
+  e.stopPropagation();
+
+  const ele = e.target.closest(NEW_PROJECT_SELECTOR);
+  if (ele) {
+    createNewProject();
+  }
+}
+
+function removeNewProject(e) {
   let element = e.target.closest("li");
   newProjectsIds = newProjectsIds.filter((id) => id !== element.id);
 
   element.remove();
-
-  console.log(newProjectsIds);
 }
 
-function newProject() {
-  //? the below will be deleted as the title the user gives to the project will be used as an ID for the new project
-  const randomNumber = Math.floor(Math.random() * 1000);
+function createNewProject() {
+  const newId = generateNewProjectId();
+  const newElement = createNewElement(newId);
 
+  insertNewElement(newElement);
+  newProjectsIds.push(newId);
+}
+
+function generateNewProjectId() {
+  const randomNumber = Math.floor(Math.random() * 1000);
+  return `newProject-${randomNumber}`;
+}
+
+function createNewElement(newId) {
   const newTitle = "New Project";
-  const newId = `newProject-${randomNumber}`;
   const newElement = document.createElement("li");
   newElement.id = newId;
-  newElement.innerHTML = `
+  newElement.innerHTML = generateNewProjectElement(newTitle);
+
+  return newElement;
+}
+
+function generateNewProjectElement(newTitle) {
+  return `
         <a href="#" class="flex items-center justify-between w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group
          hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 focus:bg-gray-700">${newTitle}
          <span>
@@ -8811,14 +8843,13 @@ function newProject() {
          </span>
          </a>
         `;
+}
 
-  //> Get the parent ul and the newProject li
+function insertNewElement(newElement) {
   const parentUl = (0,_utilis__WEBPACK_IMPORTED_MODULE_0__.getElement)("#dropdown-example");
   const newProjectLi = (0,_utilis__WEBPACK_IMPORTED_MODULE_0__.getElement)("#newProject");
 
-  //> Insert the new element before newProject
   parentUl.insertBefore(newElement, newProjectLi);
-  newProjectsIds.push(newId);
 }
 
 
@@ -12604,7 +12635,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var flowbite__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flowbite */ "./node_modules/flowbite/lib/esm/index.js");
 /* harmony import */ var _darkMode_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./darkMode */ "./src/darkMode.js");
 /* harmony import */ var _utilis__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utilis */ "./src/utilis.js");
-/* harmony import */ var _newProjects_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./newProjects.js */ "./src/newProjects.js");
+/* harmony import */ var _newProjects__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./newProjects */ "./src/newProjects.js");
 /* harmony import */ var _drawer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./drawer */ "./src/drawer.js");
 /* harmony import */ var _nav__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./nav */ "./src/nav.js");
 /* harmony import */ var _home__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./home */ "./src/home.js");
@@ -12624,6 +12655,8 @@ __webpack_require__.r(__webpack_exports__);
 //! IIFE
 
 (function () {
+  const TOGGLE_SELECTOR = "#toggle";
+
   //> Content Page
   const content = document.getElementById("content");
 
@@ -12633,24 +12666,23 @@ __webpack_require__.r(__webpack_exports__);
   content.appendChild((0,_home__WEBPACK_IMPORTED_MODULE_7__["default"])());
 
   //> DOM elements
-  let darkModeToggle = (0,_utilis__WEBPACK_IMPORTED_MODULE_3__.getElement)("#toggle");
+  let darkModeToggle = (0,_utilis__WEBPACK_IMPORTED_MODULE_3__.getElement)(TOGGLE_SELECTOR);
 
   //> Event listeners
-
   darkModeToggle.addEventListener("click", _darkMode_js__WEBPACK_IMPORTED_MODULE_2__.toggleDarkMode);
 
   //> Functions
   // getUserName(); //> Will be put back to work as soon as we got things moving better
 
-  _newProjects_js__WEBPACK_IMPORTED_MODULE_4__.ids.forEach((id) => {
+  _newProjects__WEBPACK_IMPORTED_MODULE_4__.getIds().forEach((id) => {
     const element = (0,_utilis__WEBPACK_IMPORTED_MODULE_3__.getElement)(`#${id}`);
 
     if (element) {
-      element.addEventListener("click", _newProjects_js__WEBPACK_IMPORTED_MODULE_4__.addNewProject);
+      element.addEventListener("click", _newProjects__WEBPACK_IMPORTED_MODULE_4__.addNewProjectIfClicked);
     }
   });
 
-  content.addEventListener("click", _newProjects_js__WEBPACK_IMPORTED_MODULE_4__.check);
+  _newProjects__WEBPACK_IMPORTED_MODULE_4__.addEventListenerToDropdown();
 })();
 
 })();
