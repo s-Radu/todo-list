@@ -8,6 +8,7 @@ import { toggleDarkMode } from "./darkMode";
 import { getUserName } from "./drawer";
 import nav from "./nav";
 import drawer from "./drawer";
+import home from "./home";
 
 //! IIFE
 
@@ -18,6 +19,7 @@ import drawer from "./drawer";
   //> Append elements
   content.appendChild(nav());
   content.appendChild(drawer());
+  content.appendChild(home());
 
   //> DOM elements
   let darkModeToggle = getElement("#toggle");
