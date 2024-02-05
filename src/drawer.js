@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import { getElement } from "./utilis";
 
 export default function drawer() {
@@ -257,36 +258,48 @@ export function getUserName() {
   userNameDisplay.textContent = userName;
 }
 
-function todaysDate() {
-  let str = "";
-  const days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-  const now = new Date();
+// function todaysDate() {
+//   let str = "";
+//   const days = [
+//     "Sunday",
+//     "Monday",
+//     "Tuesday",
+//     "Wednesday",
+//     "Thursday",
+//     "Friday",
+//     "Saturday",
+//   ];
+//   const months = [
+//     "January",
+//     "February",
+//     "March",
+//     "April",
+//     "May",
+//     "June",
+//     "July",
+//     "August",
+//     "September",
+//     "October",
+//     "November",
+//     "December",
+//   ];
+//   const now = new Date();
 
-  str += `${days[now.getDay()]} ${now.getDate()} ${
-    months[now.getMonth()]
-  } ${now.getFullYear()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
+//   str += `${days[now.getDay()]} ${now.getDate()} ${
+//     months[now.getMonth()]
+//   } ${now.getFullYear()} ${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
+
+//   const todaysDate = getElement("#todaysDate");
+//   todaysDate.textContent = str;
+// }
+
+// setInterval(todaysDate, 1000);
+
+//? Formating the above function to make use of date-fns library
+
+function todaysDate() {
+  const now = new Date();
+  const str = format(now, "EEEE, d MMMM yyyy HH:mm:ss");
 
   const todaysDate = getElement("#todaysDate");
   todaysDate.textContent = str;
