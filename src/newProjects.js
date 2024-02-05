@@ -76,7 +76,7 @@ function generateNewProjectId() {
 }
 
 function createNewElement(newId) {
-  const newTitle = "New Project";
+  const newTitle = generateNewProjectId();
   const newElement = document.createElement("li");
   newElement.id = newId;
   newElement.innerHTML = generateNewProjectElement(newTitle);
