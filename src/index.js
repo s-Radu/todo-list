@@ -33,9 +33,16 @@ import home from "./home";
 
   //? this is how we delegate the event listener for the parent element of each drawer option
 
-  document.addEventListener("click", (e) => {
-    if (e.target.closest("#home")) {
-      console.log("works");
+  let ids = ["home", "projects", "allProjects", "active", "completed", "notes"];
+  ids.forEach((id) => {
+    const element = getElement(`#${id}`);
+
+    if (element) {
+      element.addEventListener("click", consoleLogClick);
     }
   });
+
+  function consoleLogClick(e) {
+    console.log(e.target.closest("li").id);
+  }
 })();

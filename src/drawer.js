@@ -5,7 +5,7 @@ export default function drawer() {
   const drawer = document.createElement("div");
   drawer.id = "drawer-navigation";
   drawer.className =
-    "fixed top-0 left-0 z-40 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white w-64 dark:bg-gray-800 font-josefin";
+    "fixed top-0 left-0 z-40 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white rounded-r-2xl border-r-2 border-gray-600 w-64 dark:bg-gray-800 font-josefin";
   drawer.setAttribute("tabindex", "-1");
   drawer.setAttribute("aria-labelledby", "drawer-navigation-label");
   drawer.innerHTML = `
@@ -44,8 +44,8 @@ export default function drawer() {
                         </a>
                     </li>
 
-                    <li>
-                        <button type="button"
+                    <li id="projects">
+                        <button type="button" 
                             class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 focus:bg-gray-700"
                             aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
                             <svg class="dark:fill-white fill-black" version="1.1" id="Layer_1"
@@ -116,7 +116,7 @@ export default function drawer() {
                         </ul>
                     </li>
 
-                    <li>
+                    <li id="allProjects">
                         <a href="#"
                             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-700">
                             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="fill-black dark:fill-white" width="24"
@@ -136,7 +136,7 @@ export default function drawer() {
                             </a>
                         </li>
 
-                    <li>
+                    <li id="active">
                         <a href="#"
                             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-700">
                             <svg class="fill-black dark:fill-white" viewBox="0 0 512 512" enable-background="new 0 0 512 512"
@@ -188,7 +188,7 @@ export default function drawer() {
                             </a>
                         </li>
 
-                    <li>
+                    <li id="completed">
                         <a href="#"
                             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-700">
                             <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" width="24"
@@ -210,7 +210,7 @@ export default function drawer() {
                             </a>
                         </li>
 
-                    <li>
+                    <li id="notes">
                         <a href="#"
                             class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-700">
                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24"
