@@ -3,7 +3,7 @@ export default function activeProjects() {
   ele.className = "flex flex-col font-josefin text-white container mx-auto m-4";
   ele.id = "activeProjectsPage";
   ele.innerHTML = `
-  <h1 class="text-center text-4xl m-4 text-gray-500 dark:text-white">All Projects</h1>
+  <h1 class="text-center text-4xl m-4 text-gray-500 dark:text-white">Active Projects</h1>
 
             <div class="grid grid-cols-autoFill gap-2">
                 <div
