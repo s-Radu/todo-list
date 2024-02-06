@@ -1,7 +1,7 @@
 export default function nav() {
   let nav = document.createElement("nav");
   nav.className =
-    "bg-white border-b-2 border-gray-800 dark:border-gray-600 dark:bg-gray-900";
+    "bg-white border-b-2 border-gray-800 dark:border-gray-600 dark:bg-gray-800";
   nav.innerHTML = `
   <div class="flex flex-wrap items-center justify-between mx-auto p-4">
                 <div class="flex justify-between items-center w-32 md:ml-4">
