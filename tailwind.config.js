@@ -66,5 +66,20 @@ module.exports = {
     },
   },
   purge: ["./dist/**/*.html", "./src/**/*.js"],
-  plugins: [require("flowbite/plugin")],
+  plugins: [
+    require("flowbite/plugin"),
+    function ({ addUtilities }) {
+      const newUtilities = {
+        ".scrollbar-hidden": {
+          "scrollbar-width": "none" /* For Firefox */,
+          /* For Chrome, Edge, and Safari */
+          "&::-webkit-scrollbar": {
+            display: "none",
+          },
+        },
+      };
+
+      addUtilities(newUtilities);
+    },
+  ],
 };

@@ -5,7 +5,7 @@ export default function drawer() {
   const drawer = document.createElement("div");
   drawer.id = "drawer-navigation";
   drawer.className =
-    "fixed top-0 left-0 z-40 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white rounded-r-2xl border-r-2 border-gray-600 w-64 dark:bg-gray-800 font-josefin";
+    "fixed top-0 left-0 z-40 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white rounded-r-2xl border-r-2 border-gray-600 w-64 dark:bg-gray-800 font-josefin scrollbar-hidden";
   drawer.setAttribute("tabindex", "-1");
   drawer.setAttribute("aria-labelledby", "drawer-navigation-label");
   drawer.innerHTML = `
