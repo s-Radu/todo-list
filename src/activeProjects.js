@@ -7,7 +7,7 @@ export default function activeProjects() {
 
             <div class="flex flex-wrap justify-center items-start gap-4 p-5 overflow-y-auto scrollbar-hide w-full">
                 <div
-                    class="bg-white dark:bg-gray-800 shadow-lg dark:shadow-white dark:shadow-sm rounded-lg p-4 flex flex-col justify-between items-center max-w-96">
+                    class="bg-white dark:bg-gray-800 shadow-lg shadow-blue-400 dark:shadow-blue-500 dark:shadow-sm rounded-lg p-4 flex flex-col justify-between items-center max-w-96">
                     <h2 class="text-xl font-semibold m-4 text-gray-500 dark:text-gray-200">Task 1</h2>
                     <p class="text-gray-500">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur
                         repellendus mollitia quo rerum fuga! In?</p>
