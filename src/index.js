@@ -13,6 +13,7 @@ import homePage from "./home";
 import projectsPage from "./allProjects";
 import activeProjectsPage from "./activeProjects";
 import completedProjectsPage from "./completedProjects";
+import notesPage from "./notes";
 
 //! IIFE
 
@@ -20,15 +21,16 @@ import completedProjectsPage from "./completedProjects";
   const TOGGLE_SELECTOR = "#toggle";
 
   //> Content Page
-  const content = document.getElementById("content");
+  const parentElement = document.getElementById("content");
 
   //> Append elements
-  content.appendChild(nav());
-  content.appendChild(drawer());
-  content.appendChild(homePage());
-  content.appendChild(projectsPage());
-  content.appendChild(activeProjectsPage());
-  content.appendChild(completedProjectsPage());
+  parentElement.appendChild(nav());
+  parentElement.appendChild(drawer());
+  parentElement.appendChild(homePage());
+  parentElement.appendChild(projectsPage());
+  parentElement.appendChild(activeProjectsPage());
+  parentElement.appendChild(completedProjectsPage());
+  parentElement.appendChild(notesPage());
 
   //> DOM elements
   let darkModeToggle = getElement(TOGGLE_SELECTOR);
