@@ -11,6 +11,7 @@ import nav from "./nav";
 import drawer from "./drawer";
 import homePage from "./home";
 import projectsPage from "./allProjects";
+import activeProjectsPage from "./activeProjects";
 
 //! IIFE
 
@@ -25,6 +26,7 @@ import projectsPage from "./allProjects";
   content.appendChild(drawer());
   content.appendChild(homePage());
   content.appendChild(projectsPage());
+  content.appendChild(activeProjectsPage());
 
   //> DOM elements
   let darkModeToggle = getElement(TOGGLE_SELECTOR);
