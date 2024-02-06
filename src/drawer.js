@@ -24,8 +24,8 @@ export default function drawer() {
             <div class="py-4 overflow-y-auto flex flex-col justify-between h-full">
                 <ul class="space-y-2 font-medium">
                     <li id="home">
-                        <a href="#"
-                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-700">
+                        <div
+                            class="cursor-pointer flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-700">
                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24"
                                 hight="24">
                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -41,7 +41,7 @@ export default function drawer() {
                                 </g>
                             </svg>
                             <span class="ms-3">Home</span>
-                        </a>
+                        </div>
                     </li>
 
                     <li id="projects">
@@ -84,41 +84,41 @@ export default function drawer() {
                         </button>
                         <ul id="dropdown-example" class="hidden py-2 space-y-2">
                             <li id="newProject-dummy">
-                                <a href="#"
-                                    class="flex items-center justify-between w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 focus:bg-gray-700">Dummy
+                                <div
+                                    class="cursor-pointer flex items-center justify-between w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 focus:bg-gray-700">Dummy
                                     <span>
                                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                                         </svg>
                                     </span>
-                                    </a>
+                                    </div>
                             </li>
                             <li id="newProject-test">
-                                <a href="#"
-                                    class="flex items-center justify-between w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 focus:bg-gray-700">Test
+                                <div
+                                    class="cursor-pointer flex items-center justify-between w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 focus:bg-gray-700">Test
                                     <span>
                                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                                         </svg>
                                     </span>
-                                    </a>
+                                    </div>
                             </li>
                             <li id="newProject-something">
-                                <a href="#"
-                                    class="flex items-center justify-between w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 focus:bg-gray-700">Something
+                                <div
+                                    class="cursor-pointer flex items-center justify-between w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 focus:bg-gray-700">Something
                                     <span>
                                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
                                         </svg>
                                     </span>
-                                    </a>
+                                    </div>
                             </li>
                             <li id="newProject">
-                                <a href="#"
-                                    class="flex items-center justify-between w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 focus:bg-gray-700">
+                                <div
+                                    class="cursor-pointer flex items-center justify-between w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 focus:bg-gray-700">
                                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="20"
                                         height="20">
                                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -131,15 +131,15 @@ export default function drawer() {
                                                 stroke-linecap="round" stroke-linejoin="round"></path>
                                         </g>
                                     </svg>
-                                    <p class="text-end text-xs mt-[.2rem] italic text-gray-300">&nbsp; New project</p>
-                                </a>
+                                    <p class="text-center w-full text-xs mt-[.2rem] italic text-gray-300">New project</p>
+                                </div>
                             </li>
                         </ul>
                     </li>
 
                     <li id="allProjects">
-                        <a href="#"
-                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-700">
+                        <div
+                            class="cursor-pointer flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-700">
                             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="fill-black dark:fill-white" width="24"
                                 height="24">
                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -154,12 +154,12 @@ export default function drawer() {
                             <span class="flex-1 ms-3 whitespace-nowrap">All</span>
                             <span
                                 class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-white bg-black rounded-full dark:bg-white dark:text-black">25</span>
-                            </a>
+                            </div>
                         </li>
 
                     <li id="active">
-                        <a href="#"
-                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-700">
+                        <div
+                            class="cursor-pointer flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-700">
                             <svg class="fill-black dark:fill-white" viewBox="0 0 512 512" enable-background="new 0 0 512 512"
                                 id="Daily_x5F_active_x5F_user" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
                                 xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24">
@@ -206,12 +206,12 @@ export default function drawer() {
                             <span class="flex-1 ms-3 whitespace-nowrap">Active</span>
                             <span
                                 class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-white bg-black rounded-full dark:bg-white dark:text-black">13</span>
-                            </a>
+                            </div>
                         </li>
 
                     <li id="completed">
-                        <a href="#"
-                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-700">
+                        <div
+                            class="cursor-pointer flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-700">
                             <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" width="24"
                                 height=24>
                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -228,12 +228,12 @@ export default function drawer() {
                             <span class="flex-1 ms-3 whitespace-nowrap">Completed</span>
                             <span
                                 class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-white bg-black rounded-full dark:bg-white dark:text-black">12</span>
-                            </a>
+                            </div>
                         </li>
 
                     <li id="notes">
-                        <a href="#"
-                            class="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-700">
+                        <div
+                            class="cursor-pointer flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-700">
                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24"
                                 height=24>
                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -256,14 +256,10 @@ export default function drawer() {
                             <span class="flex-1 ms-3 whitespace-nowrap">Notes</span>
                             <span
                                 class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-white bg-black rounded-full dark:bg-white dark:text-black">3</span>
-                        </a>
+                        </div>
                     </li>
-
-                   
                 </ul>
-                <div class="text-black dark:text-white" id="todaysDate">
-
-                </div>
+                <div class="text-black dark:text-white mt-6" id="todaysDate"></div>
             </div>
   `;
 

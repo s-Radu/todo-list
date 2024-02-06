@@ -96,7 +96,7 @@ function createNewElement(newId) {
 //? Generates a new project list item element with classes and a title
 function generateNewProjectElement(newTitle) {
   return `
-        <a href="#" class="flex items-center justify-between w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group
+        <div class="cursor-pointer flex items-center justify-between w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group
          hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 focus:bg-gray-700">${newTitle}
          <span>
               <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
@@ -104,7 +104,7 @@ function generateNewProjectElement(newTitle) {
                       d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
               </svg>
          </span>
-         </a>
+         </div>
         `;
 }
 
