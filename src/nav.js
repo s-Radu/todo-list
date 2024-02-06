@@ -19,7 +19,7 @@ export default function nav() {
                             </svg>
                         </button>
 
-                    <a href="#">
+                    <a href="#" class="hover:scale-105">
                         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="40"
                             hight="40">
                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -37,7 +37,7 @@ export default function nav() {
                 </div>
 
                 <div class="flex justify-between items-center w-32 md:mr-4">
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="40" height="40" class="cursor-pointer">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="40" height="40" class="cursor-pointer hover:scale-105">
                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                             <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                             <g id="SVGRepo_iconCarrier">
@@ -49,7 +49,7 @@ export default function nav() {
                             </g>
                         </svg>  
                     <div id="toggle"
-                        class="w-12 h-6 flex items-center bg-black rounded-full p-1 cursor-pointer transform duration-200 ease-in-expo">
+                        class="w-12 h-6 flex items-center bg-black rounded-full p-1 cursor-pointer transform duration-200 ease-in-expo hover:scale-105">
                         <div id="circle"
                             class="w-5 h-5 bg-white rounded-full shadow-md shadow-black duration-500 translate-x-5  ease-in-expo">
                         </div>
