@@ -9,7 +9,8 @@ import * as newProjects from "./newProjects";
 import { getUserName } from "./drawer";
 import nav from "./nav";
 import drawer from "./drawer";
-import home from "./home";
+import homePage from "./home";
+import projectsPage from "./allProjects";
 
 //! IIFE
 
@@ -22,7 +23,8 @@ import home from "./home";
   //> Append elements
   content.appendChild(nav());
   content.appendChild(drawer());
-  content.appendChild(home());
+  content.appendChild(homePage());
+  content.appendChild(projectsPage());
 
   //> DOM elements
   let darkModeToggle = getElement(TOGGLE_SELECTOR);
