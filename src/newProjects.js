@@ -19,14 +19,17 @@ let newProjectsIds = [
   "newProject-dummy",
 ];
 
+//? Returns a spread out array of ids
 export function getIds() {
   return [...ids];
 }
 
+//? Returns a spread out array of newProjectsIds
 export function getNewProjectsIds() {
   return [...newProjectsIds];
 }
 
+//? Adds delegated event listener to the dropdown so we can have enevt listeners on newly added projects
 export function addEventListenerToDropdown() {
   const parentElement = getElement(DROPDOWN_SELECTOR);
 
@@ -35,6 +38,7 @@ export function addEventListenerToDropdown() {
   }
 }
 
+//? the event listener that will get added to the dropdown list item elements
 function handleDropdownClick(e) {
   let ele = e.target.closest("li");
   if (ele) {
@@ -46,6 +50,7 @@ function handleDropdownClick(e) {
   }
 }
 
+//? the event listener that will get added to the new project list item elements
 export function addNewProjectIfClicked(e) {
   e.stopPropagation();
 
@@ -55,6 +60,7 @@ export function addNewProjectIfClicked(e) {
   }
 }
 
+//? Removes the new project from the list
 function removeNewProject(e) {
   let element = e.target.closest("li");
   newProjectsIds = newProjectsIds.filter((id) => id !== element.id);
@@ -62,6 +68,7 @@ function removeNewProject(e) {
   element.remove();
 }
 
+//? Creates a new project and adds it to the ids array
 function createNewProject() {
   const newId = generateNewProjectId();
   const newElement = createNewElement(newId);
@@ -70,11 +77,13 @@ function createNewProject() {
   newProjectsIds.push(newId);
 }
 
+//? Generates a new project id [ will later be changed into adding the id by the title of the project added by the user]
 function generateNewProjectId() {
   const randomNumber = Math.floor(Math.random() * 1000);
   return `newProject-${randomNumber}`;
 }
 
+//? Creates a new list item element with an id provided by the above function
 function createNewElement(newId) {
   const newTitle = generateNewProjectId();
   const newElement = document.createElement("li");
@@ -84,6 +93,7 @@ function createNewElement(newId) {
   return newElement;
 }
 
+//? Generates a new project list item element with classes and a title
 function generateNewProjectElement(newTitle) {
   return `
         <a href="#" class="flex items-center justify-between w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group
@@ -98,9 +108,10 @@ function generateNewProjectElement(newTitle) {
         `;
 }
 
+//? Inserts the new element into the dropdown list
 function insertNewElement(newElement) {
-  const parentUl = getElement("#dropdown-example");
-  const newProjectLi = getElement("#newProject");
+  const parentUl = getElement(DROPDOWN_SELECTOR);
+  const newProjectLi = getElement(NEW_PROJECT_SELECTOR);
 
   parentUl.insertBefore(newElement, newProjectLi);
 }
