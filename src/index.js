@@ -8,16 +8,17 @@ import { toggleDarkMode } from "./darkMode";
 import * as newProjects from "./newProjects";
 import { getUserName } from "./drawer";
 import nav from "./nav";
-import drawer from "./drawer";
+import navDrawer from "./drawer";
 import homePage from "./home";
 import projectsPage from "./allProjects";
 import activeProjectsPage from "./activeProjects";
 import completedProjectsPage from "./completedProjects";
 import notesPage from "./notes";
+import footer from "./footer";
 
 //! IIFE
 
-(function () {
+(async function () {
   const TOGGLE_SELECTOR = "#toggle";
 
   //> Content Page
@@ -25,12 +26,13 @@ import notesPage from "./notes";
 
   //> Append elements
   parentElement.appendChild(nav());
-  parentElement.appendChild(drawer());
+  parentElement.appendChild(navDrawer());
   parentElement.appendChild(homePage());
-  parentElement.appendChild(projectsPage());
-  parentElement.appendChild(activeProjectsPage());
-  parentElement.appendChild(completedProjectsPage());
-  parentElement.appendChild(notesPage());
+  // parentElement.appendChild(projectsPage());
+  // parentElement.appendChild(activeProjectsPage());
+  // parentElement.appendChild(completedProjectsPage());
+  // parentElement.appendChild(notesPage());
+  parentElement.appendChild(await footer());
 
   //> DOM elements
   let darkModeToggle = getElement(TOGGLE_SELECTOR);
