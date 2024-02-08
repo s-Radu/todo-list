@@ -1,7 +1,7 @@
 export default function activeProjects() {
   let ele = document.createElement("div");
   ele.className =
-    "flex flex-col font-josefin text-white container mx-auto m-4 h-screen";
+    "flex flex-col font-josefin text-white container mx-auto m-4 min-h-screen";
   ele.id = "activeProjectsPage";
   ele.innerHTML = `
   <h1 class="text-center text-4xl m-4 text-gray-500 dark:text-white">Active Projects</h1>
