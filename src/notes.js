@@ -1,7 +1,8 @@
 export default function allProjects() {
   let ele = document.createElement("div");
   ele.className =
-    "flex flex-col font-josefin text-white container mx-auto m-4 min-h-screen";
+    //? might have to add padding bot
+    "flex flex-col font-josefin text-white container mx-auto m-4 min-h-screen ";
   ele.id = "allProjectsPage";
   ele.innerHTML = `
     <h1 class="text-center text-4xl m-4 text-gray-500 dark:text-white">Notes</h1>
@@ -66,7 +67,8 @@ export default function allProjects() {
                       <p class="text-gray-500">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur
                           repellendus mollitia quo rerum fuga! In?</p>
                       <p class="text-sm text-gray-500 italic m-4 self-end">Due: <span>25.02.2024</span></p>
-              </div>
+                     </div>
+                </div>
     `;
 
   return ele;
