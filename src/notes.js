@@ -1,11 +1,12 @@
 export default function allProjects() {
   let ele = document.createElement("div");
-  ele.className = "flex flex-col font-josefin text-white container mx-auto m-4";
+  ele.className =
+    "flex flex-col font-josefin text-white container mx-auto m-4 h-screen";
   ele.id = "allProjectsPage";
   ele.innerHTML = `
     <h1 class="text-center text-4xl m-4 text-gray-500 dark:text-white">Notes</h1>
   
-              <div class="flex flex-wrap justify-center items-start gap-4 p-5 overflow-y-auto scrollbar-hide w-full">
+              <div class="flex flex-wrap justify-center items-start gap-4 p-5">
                   <div
                       class="bg-white dark:bg-gray-800 shadow-lg  shadow-rose-500 dark:shadow-rose-600 dark:shadow-sm rounded-lg p-4 flex flex-col justify-between items-center relative max-w-96">
                         <span class="absolute top-4 right-4 cursor-pointer hover:scale-105 text-gray-400 dark:hover:text-white hover:text-black">
