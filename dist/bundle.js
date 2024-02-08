@@ -3843,6 +3843,9 @@ input[type="range"]::-ms-fill-lower {
 .relative {
   position: relative;
 }
+.bottom-0 {
+  bottom: 0px;
+}
 .end-2 {
   right: 0.5rem;
 }
@@ -3851,6 +3854,9 @@ input[type="range"]::-ms-fill-lower {
 }
 .left-0 {
   left: 0px;
+}
+.right-0 {
+  right: 0px;
 }
 .right-4 {
   right: 1rem;
@@ -3867,6 +3873,9 @@ input[type="range"]::-ms-fill-lower {
 .top-4 {
   top: 1rem;
 }
+.z-20 {
+  z-index: 20;
+}
 .z-40 {
   z-index: 40;
 }
@@ -3877,8 +3886,26 @@ input[type="range"]::-ms-fill-lower {
   margin-left: auto;
   margin-right: auto;
 }
+.mb-4 {
+  margin-bottom: 1rem;
+}
+.mb-6 {
+  margin-bottom: 1.5rem;
+}
+.me-2 {
+  margin-right: 0.5rem;
+}
+.me-2\\.5 {
+  margin-right: 0.625rem;
+}
+.me-4 {
+  margin-right: 1rem;
+}
 .ms-3 {
   margin-left: 0.75rem;
+}
+.mt-3 {
+  margin-top: 0.75rem;
 }
 .mt-4 {
   margin-top: 1rem;
@@ -3928,6 +3955,9 @@ input[type="range"]::-ms-fill-lower {
 .h-screen {
   height: 100vh;
 }
+.min-h-screen {
+  min-height: 100vh;
+}
 .w-1\\/2 {
   width: 50%;
 }
@@ -3946,11 +3976,17 @@ input[type="range"]::-ms-fill-lower {
 .w-5 {
   width: 1.25rem;
 }
+.w-6 {
+  width: 1.5rem;
+}
 .w-64 {
   width: 16rem;
 }
 .w-8 {
   width: 2rem;
+}
+.w-80 {
+  width: 20rem;
 }
 .w-full {
   width: 100%;
@@ -3978,6 +4014,11 @@ input[type="range"]::-ms-fill-lower {
 .translate-x-5 {
   --tw-translate-x: 1.25rem;
   transform: translate(1.25rem, var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+  transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+}
+.translate-x-full {
+  --tw-translate-x: 100%;
+  transform: translate(100%, var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 .transform {
@@ -4028,6 +4069,9 @@ input[type="range"]::-ms-fill-lower {
 .overflow-y-auto {
   overflow-y: auto;
 }
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
 .whitespace-nowrap {
   white-space: nowrap;
 }
@@ -4048,6 +4092,10 @@ input[type="range"]::-ms-fill-lower {
   border-top-left-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
 }
+.rounded-l-xl {
+  border-top-left-radius: 0.75rem;
+  border-bottom-left-radius: 0.75rem;
+}
 .rounded-r-2xl {
   border-top-right-radius: 1rem;
   border-bottom-right-radius: 1rem;
@@ -4060,11 +4108,31 @@ input[type="range"]::-ms-fill-lower {
   border-top-left-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
 }
+.rounded-t-xl {
+  border-top-left-radius: 0.75rem;
+  border-top-right-radius: 0.75rem;
+}
 .border-b-2 {
   border-bottom-width: 2px;
 }
+.border-l-2 {
+  border-left-width: 2px;
+}
 .border-r-2 {
   border-right-width: 2px;
+}
+.border-t {
+  border-top-width: 1px;
+}
+.border-black {
+  --tw-border-opacity: 1;
+  border-color: rgba(0, 0, 0, 1);
+  border-color: rgba(0, 0, 0, var(--tw-border-opacity));
+}
+.border-gray-200 {
+  --tw-border-opacity: 1;
+  border-color: rgba(229, 231, 235, 1);
+  border-color: rgba(229, 231, 235, var(--tw-border-opacity));
 }
 .border-gray-600 {
   --tw-border-opacity: 1;
@@ -4145,12 +4213,22 @@ input[type="range"]::-ms-fill-lower {
 .text-center {
   text-align: center;
 }
+.indent-2 {
+  text-indent: 0.5rem;
+}
 .font-josefin {
   font-family: Josefin Sans, sans-serif;
+}
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
 }
 .text-4xl {
   font-size: 2.25rem;
   line-height: 2.5rem;
+}
+.text-\\[1\\.1rem\\] {
+  font-size: 1.1rem;
 }
 .text-base {
   font-size: 1rem;
@@ -4210,6 +4288,11 @@ input[type="range"]::-ms-fill-lower {
   color: rgba(107, 114, 128, 1);
   color: rgba(107, 114, 128, var(--tw-text-opacity));
 }
+.text-gray-700 {
+  --tw-text-opacity: 1;
+  color: rgba(55, 65, 81, 1);
+  color: rgba(55, 65, 81, var(--tw-text-opacity));
+}
 .text-gray-900 {
   --tw-text-opacity: 1;
   color: rgba(17, 24, 39, 1);
@@ -4219,6 +4302,12 @@ input[type="range"]::-ms-fill-lower {
   --tw-text-opacity: 1;
   color: rgba(255, 255, 255, 1);
   color: rgba(255, 255, 255, var(--tw-text-opacity));
+}
+.shadow {
+  --tw-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);
+  box-shadow: 0 0 rgba(0,0,0,0), 0 0 rgba(0,0,0,0), 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 rgba(0,0,0,0)), var(--tw-ring-shadow, 0 0 rgba(0,0,0,0)), var(--tw-shadow);
 }
 .shadow-lg {
   --tw-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
@@ -4289,6 +4378,10 @@ input[type="range"]::-ms-fill-lower {
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
 }
 
+.hover\\:cursor-pointer:hover {
+  cursor: pointer;
+}
+
 .hover\\:bg-gray-100:hover {
   --tw-bg-opacity: 1;
   background-color: rgba(243, 244, 246, 1);
@@ -4313,10 +4406,20 @@ input[type="range"]::-ms-fill-lower {
   color: rgba(0, 0, 0, var(--tw-text-opacity));
 }
 
+.hover\\:text-gray-500:hover {
+  --tw-text-opacity: 1;
+  color: rgba(107, 114, 128, 1);
+  color: rgba(107, 114, 128, var(--tw-text-opacity));
+}
+
 .hover\\:text-gray-900:hover {
   --tw-text-opacity: 1;
   color: rgba(17, 24, 39, 1);
   color: rgba(17, 24, 39, var(--tw-text-opacity));
+}
+
+.hover\\:underline:hover {
+  text-decoration-line: underline;
 }
 
 .focus\\:bg-gray-700:focus {
@@ -4331,10 +4434,22 @@ input[type="range"]::-ms-fill-lower {
   border-color: rgba(75, 85, 99, var(--tw-border-opacity));
 }
 
+.dark .dark\\:border-white {
+  --tw-border-opacity: 1;
+  border-color: rgba(255, 255, 255, 1);
+  border-color: rgba(255, 255, 255, var(--tw-border-opacity));
+}
+
 .dark .dark\\:bg-blue-900 {
   --tw-bg-opacity: 1;
   background-color: rgba(35, 56, 118, 1);
   background-color: rgba(35, 56, 118, var(--tw-bg-opacity));
+}
+
+.dark .dark\\:bg-gray-600 {
+  --tw-bg-opacity: 1;
+  background-color: rgba(75, 85, 99, 1);
+  background-color: rgba(75, 85, 99, var(--tw-bg-opacity));
 }
 
 .dark .dark\\:bg-gray-800 {
@@ -4373,6 +4488,12 @@ input[type="range"]::-ms-fill-lower {
   --tw-text-opacity: 1;
   color: rgba(209, 213, 219, 1);
   color: rgba(209, 213, 219, var(--tw-text-opacity));
+}
+
+.dark .dark\\:text-gray-400 {
+  --tw-text-opacity: 1;
+  color: rgba(156, 163, 175, 1);
+  color: rgba(156, 163, 175, var(--tw-text-opacity));
 }
 
 .dark .dark\\:text-white {
@@ -4432,7 +4553,28 @@ input[type="range"]::-ms-fill-lower {
   color: rgba(255, 255, 255, var(--tw-text-opacity));
 }
 
+.dark .hover\\:dark\\:text-white:hover {
+  --tw-text-opacity: 1;
+  color: rgba(255, 255, 255, 1);
+  color: rgba(255, 255, 255, var(--tw-text-opacity));
+}
+
+@media (min-width: 640px) {
+
+  .sm\\:mt-0 {
+    margin-top: 0px;
+  }
+
+  .sm\\:text-center {
+    text-align: center;
+  }
+}
+
 @media (min-width: 768px) {
+
+  .md\\:me-6 {
+    margin-right: 1.5rem;
+  }
 
   .md\\:ml-4 {
     margin-left: 1rem;
@@ -4441,12 +4583,20 @@ input[type="range"]::-ms-fill-lower {
   .md\\:mr-4 {
     margin-right: 1rem;
   }
+
+  .md\\:flex-row {
+    flex-direction: row;
+  }
+
+  .md\\:p-6 {
+    padding: 1.5rem;
+  }
 }
 
 .rtl\\:text-right:where([dir="rtl"], [dir="rtl"] *) {
   text-align: right;
 }
-`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"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","sourcesContent":["@import \"tailwindcss/base\";\n@import \"tailwindcss/components\";\n@import \"tailwindcss/utilities\";\n\n@import url(\"https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:ital,wght@0,300;0,400;1,300;1,400&family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;1,6..12,300;1,6..12,400&display=swap\");\n"],"sourceRoot":""}]);
+`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"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","sourcesContent":["@import \"tailwindcss/base\";\n@import \"tailwindcss/components\";\n@import \"tailwindcss/utilities\";\n\n@import url(\"https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:ital,wght@0,300;0,400;1,300;1,400&family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;1,6..12,300;1,6..12,400&display=swap\");\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8341,7 +8491,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 function activeProjects() {
   let ele = document.createElement("div");
-  ele.className = "flex flex-col font-josefin text-white container mx-auto m-4";
+  ele.className =
+    "flex flex-col font-josefin text-white container mx-auto m-4 min-h-screen";
   ele.id = "activeProjectsPage";
   ele.innerHTML = `
   <h1 class="text-center text-4xl m-4 text-gray-500 dark:text-white">Active Projects</h1>
@@ -8377,12 +8528,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 function allProjects() {
   let ele = document.createElement("div");
-  ele.className = "flex flex-col font-josefin text-white container mx-auto m-4";
+  ele.className =
+    "flex flex-col font-josefin text-white container mx-auto m-4 min-h-screen";
   ele.id = "allProjectsPage";
   ele.innerHTML = `
   <h1 class="text-center text-4xl m-4 text-gray-500 dark:text-white">All Projects</h1>
 
-            <div class="flex flex-wrap justify-center items-start gap-4 p-5 overflow-y-auto scrollbar-hide w-full">
+            <div class="flex flex-wrap justify-center items-start gap-4 p-5 h-full w-full">
                 <div
                     class="bg-white dark:bg-gray-800 shadow-lg dark:shadow-white dark:shadow-sm rounded-lg p-4 flex flex-col justify-between items-center max-w-96">
                     <h2 class="text-xl font-semibold m-4 text-gray-500 dark:text-gray-200">Task 1</h2>
@@ -8413,7 +8565,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 function completedProjects() {
   let ele = document.createElement("div");
-  ele.className = "flex flex-col font-josefin text-white container mx-auto m-4";
+  ele.className =
+    "flex flex-col font-josefin text-white container mx-auto m-4 min-h-screen";
   ele.id = "completedProjectsPage";
   ele.innerHTML = `
   <h1 class="text-center text-4xl m-4 text-gray-500 dark:text-white">Completed Projects</h1>
@@ -8826,6 +8979,341 @@ setInterval(todaysDate, 1000);
 
 /***/ }),
 
+/***/ "./src/footer.js":
+/*!***********************!*\
+  !*** ./src/footer.js ***!
+  \***********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ footer)
+/* harmony export */ });
+function footer() {
+  let footer = document.createElement("footer");
+  footer.id = "footer";
+  footer.className =
+    "fixed bottom-0 left-0 z-20 w-full p-4 bg-white border-t border-gray-200 rounded-t-xl shadow flex flex-col md:flex-row items-center justify-between md:p-6 dark:bg-gray-800 dark:border-gray-600";
+  footer.innerHTML = `
+  <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a
+  href="https://github.com/s-Radu"
+  class="hover:underline hover:text-gray-500 dark:hover:text-white">lilVoid™</a>. All Rights Reserved.
+    </span>
+            <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+                <li id="navAbout">
+                    <p class="hover:underline me-4 md:me-6 cursor-pointer" type="button"
+                        data-drawer-target="drawer-right-example" data-drawer-show="drawer-right-example"
+                        data-drawer-placement="right" aria-controls="drawer-right-example">
+                        About
+                    </p>
+                </li>
+                <li id="navPrivacy">
+                    <p class="hover:underline me-4 md:me-6 cursor-pointer" type="button"
+                        data-drawer-target="drawer-right-example" data-drawer-show="drawer-right-example"
+                        data-drawer-placement="right" aria-controls="drawer-right-example">
+                        Privacy Policy
+                    </p>
+                </li>
+                <li id="navLicencing">
+                    <p class="hover:underline me-4 md:me-6 cursor-pointer" type="button"
+                        data-drawer-target="drawer-right-example" data-drawer-show="drawer-right-example"
+                        data-drawer-placement="right" aria-controls="drawer-right-example">
+                        Licencing
+                    </p>
+                </li>
+                <li id="navContact">
+                    <p class="hover:underline me-4 md:me-6 cursor-pointer" type="button"
+                        data-drawer-target="drawer-right-example" data-drawer-show="drawer-right-example"
+                        data-drawer-placement="right" aria-controls="drawer-right-example">
+                        Contact
+                    </p>
+                </li>
+            </ul>
+            `;
+
+  let drawerContents = {
+    navAbout: { title: about.title, content: about.content },
+    navPrivacy: { title: privacy.title, content: privacy.content },
+    navLicencing: { title: licencing.title, content: licencing.content },
+    navContact: { title: contact.title, content: contact.content },
+  };
+
+  let drawer = createDrawer(drawerContents["navAbout"].content);
+  footer.appendChild(drawer);
+
+  let listItems = footer.querySelectorAll("li");
+  listItems.forEach((item) => {
+    item.addEventListener("click", () => {
+      let content = drawerContents[item.id];
+      if (content) {
+        drawer.innerHTML = content.title + content.content;
+      }
+    });
+  });
+  return footer;
+}
+
+function createDrawer(title, content) {
+  const ele = document.createElement("div");
+  ele.id = "drawer-right-example";
+  ele.setAttribute("tabindex", "-1");
+  ele.setAttribute("aria-labelledby", "drawer-right-label");
+  ele.className =
+    "fixed top-0 bottom-0 right-0 z-40 min-h-screen p-4 overflow-y-auto rounded-l-xl border-l-2 border-black dark:border-white transition-transform translate-x-full bg-white w-80 dark:bg-gray-600";
+  return ele;
+}
+
+let about = {
+  title: `<span id="drawer-right-label"
+    class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400">
+        <svg class="w-6 h-6 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+            viewBox="0 0 20 20">
+            <path
+                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+        </svg>
+    <p class="text-2xl text-gray-700 dark:text-gray-300">About</p>
+    </span>
+
+    <button type="button" data-drawer-hide="drawer-right-example" aria-controls="drawer-right-example"
+    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
+        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+            viewBox="0 0 14 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+        </svg>
+    <span class="sr-only">Close menu</span>
+    </button>`,
+  content: `
+    <p class=" text-md text-gray-500 dark:text-gray-400">
+    The To-Do List project is a simple, web-based application designed to help users manage their tasks.
+    </p>
+    <p class="mb-6 text-md text-gray-500 dark:text-gray-400">
+    It provides an intuitive interface where users
+    can add, update, and delete tasks and notes, helping them to stay organized and productive.
+    </p>
+    
+    <h2 class="text-xl text-gray-500 dark:text-gray-300">
+    Key Features:
+    </h2>
+    
+    <ul class="mt-4">
+    <li class="mb-6 indent-2 text-base text-gray-500 dark:text-gray-400">
+        Task Management: Users can add new tasks to their list, providing a task name and optionally a due
+        date or priority level.
+        Tasks can be marked as completed when done, and can be edited or deleted at any time.
+    </li>
+    <li class="mb-6 indent-2 text-base text-gray-500 dark:text-gray-400">
+        Task Sorting and Filtering: Tasks can be sorted by All tasks, Active tasks, or Completed tasks,
+        making it easy for users to prioritize their work. Users can also filter their tasks to view only
+        completed or incomplete tasks.
+    </li>
+    <li class="mb-6 indent-2 text-base text-gray-500 dark:text-gray-400">
+        Persistent Storage: Tasks are stored in the user's browser using local storage, so they persist even
+        when the user closes and reopens the browser.
+    </li>
+    <li class="mb-6 indent-2 text-base text-gray-500 dark:text-gray-400">
+        Responsive Design: The application is designed to work well on both desktop and mobile devices, so
+        users can manage their tasks wherever they are.
+    </li>
+    </ul>
+    <p class="mb-6 indent-2 text-base text-gray-500 dark:text-gray-400">
+    This project is built using
+    <span class="hover:underline hover:text-black hover:dark:text-white cursor-pointer">HTML</span>,
+    <span class="hover:underline hover:text-black hover:dark:text-white cursor-pointer">TailwindCSS</span>,
+    and
+    <span class="hover:underline hover:text-black hover:dark:text-white cursor-pointer">JavaScript</span>,
+    and demonstrates skills in DOM manipulation,
+    event handling, and local storage.
+    </p>
+    `,
+};
+let privacy = {
+  title: `<span id="drawer-right-label"
+    class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400">
+        <svg class="w-6 h-6 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+            viewBox="0 0 20 20">
+            <path
+                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+        </svg>
+    <p class="text-2xl text-gray-700 dark:text-gray-300">Privacy Policy</p>
+    </span>
+
+    <button type="button" data-drawer-hide="drawer-right-example" aria-controls="drawer-right-example"
+    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
+        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+            viewBox="0 0 14 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+        </svg>
+    <span class="sr-only">Close menu</span>
+    </button>`,
+  content: `
+    <h2 class="text-xl text-gray-500 dark:text-gray-300">
+    This privacy policy governs your use of the software application To-Do List ("Application") for mobile
+    devices and web browsers.
+    </h2>
+    <ul class="mt-4">
+    <p class="text-[1.1rem] text-black dark:text-white">What information does the Application obtain and
+        how is it used?
+    </p>
+    <li class="mb-6 indent-2 text-base text-gray-500 dark:text-gray-400">
+        The Application does not collect or transmit any personally identifiable information about you, such
+        as your name, address, phone number or email address.
+    
+        The Application does store certain types of data on your device. This data includes the tasks that
+        you add to your to-do list, along with any associated information such as due dates or priority
+        levels. This data is stored locally on your device and is not transmitted to us or any third
+        parties.
+    </li>
+    
+    <p class="text-[1.1rem] text-black dark:text-white">Can users see their personal data?
+    </p>
+    <li class="mb-6 indent-2 text-base text-gray-500 dark:text-gray-400">
+        The Application itself does not collect, transmit, or maintain user data. As a result, you can not
+        directly view your personal data. However, you can access and view the tasks that you have added to
+        the Application at any time.
+    </li>
+    
+    <p class="text-[1.1rem] text-black dark:text-white">Do you share personal information?
+    </p>
+    <li class="mb-6 indent-2 text-base text-gray-500 dark:text-gray-400">
+        No. The Application is a standalone application. It does not use any third party services, analytics
+        providers, or vendors.
+    </li>
+    
+    <p class="text-[1.1rem] text-black dark:text-white">Do you use vendors or analytics providers?
+    </p>
+    <li class="mb-6 indent-2 text-base text-gray-500 dark:text-gray-400">
+        No. The Application is a standalone application. It does not use any third party services, analytics
+        providers, or vendors.
+    </li>
+    
+    <p class="text-[1.1rem] text-black dark:text-white">Compliance with Children's Online Privacy Protection
+        Act
+    </p>
+    <li class="mb-6 indent-2 text-base text-gray-500 dark:text-gray-400">
+        As we do not collect any personal information, we do not knowingly solicit data from or market to
+        children under the age of 13.
+    </li>
+    
+    <p class="text-[1.1rem] text-black dark:text-white">Changes
+    </p>
+    <li class="mb-6 indent-2 text-base text-gray-500 dark:text-gray-400">
+        This Privacy Policy may be updated from time to time for any reason. We will notify you of any
+        changes to our Privacy Policy by posting the new Privacy Policy here. You are advised to consult
+        this Privacy Policy regularly for any changes.
+    </li>
+    
+    <p class="text-[1.1rem] text-black dark:text-white">Contact us
+    </p>
+    <li class="mb-6 indent-2 text-base text-gray-500 dark:text-gray-400">
+        If you have any questions regarding privacy while using the Application, or have questions about our
+        practices, please contact us via email at
+        <span
+            class="hover:cursor-pointer hover:text-black hover:dark:text-white hover:underlined">doNotContact@doNot@dont.com</span>
+    </li>
+    </ul>`,
+};
+
+let licencing = {
+  title: `<span id="drawer-right-label"
+    class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400">
+        <svg class="w-6 h-6 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+            viewBox="0 0 20 20">
+            <path
+                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+        </svg>
+    <p class="text-2xl text-gray-700 dark:text-gray-300">Licencing</p>
+    </span>
+
+    <button type="button" data-drawer-hide="drawer-right-example" aria-controls="drawer-right-example"
+    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
+        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+            viewBox="0 0 14 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+        </svg>
+    <span class="sr-only">Close menu</span>
+    </button>`,
+  content: `
+            <ul class="mt-4">
+                <p class="text-[1.1rem] text-black dark:text-white">Grant of License
+                </p>
+                <li class="mb-6 indent-2 text-base text-gray-500 dark:text-gray-400">
+                    This Agreement permits you to use one copy of the software included in this package ("Software"), on
+                    any single computer, provided the Software is in use on only one computer at any time.
+                </li>
+
+                <p class="text-[1.1rem] text-black dark:text-white">Copyright
+                </p>
+                <li class="mb-6 indent-2 text-base text-gray-500 dark:text-gray-400">
+                    The Software is owned by
+                    <span class="text-black dark:text-white hover:underline cursor-pointer">lilVoid</span> and is
+                    protected by
+                    copyright law. Therefore,
+                    you must treat the Software like any other copyrighted material.
+                </li>
+
+                <p class="text-[1.1rem] text-black dark:text-white">Restrictions on Use
+                </p>
+                <li class="mb-6 indent-2 text-base text-gray-500 dark:text-gray-400">
+                    You may not distribute copies of the Software to others or electronically transfer the Software from
+                    one computer to another over a network. The Software contains trade secrets and to protect them you
+                    may not decompile, reverse engineer, disassemble, or otherwise reduce the Software to a
+                    human-perceivable form.
+                </li>
+
+                <p class="text-[1.1rem] text-black dark:text-white">Termination
+                </p>
+                <li class="mb-6 indent-2 text-base text-gray-500 dark:text-gray-400">
+                    This license is effective until terminated. You may terminate it at any point by destroying the
+                    Software together with all copies of the Software. It will also terminate if you fail to comply with
+                    any term or condition of this Agreement.
+                </li>
+
+                <p class="text-[1.1rem] text-black dark:text-white">No Warranty
+                </p>
+                <li class="mb-6 indent-2 text-base text-gray-500 dark:text-gray-400">
+                    The Software is being delivered to you AS IS and
+                    <span class="text-black dark:text-white hover:underline cursor-pointer">lilVoid</span> makes no
+                    warranty as to
+                    its use or performance.
+                </li>
+            </ul>
+`,
+};
+let contact = {
+  title: `<span id="drawer-right-label"
+    class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400">
+        <svg class="w-6 h-6 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+            viewBox="0 0 20 20">
+            <path
+                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+        </svg>
+    <p class="text-2xl text-gray-700 dark:text-gray-300">Contact</p>
+    </span>
+
+    <button type="button" data-drawer-hide="drawer-right-example" aria-controls="drawer-right-example"
+    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
+        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+            viewBox="0 0 14 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+        </svg>
+    <span class="sr-only">Close menu</span>
+    </button>`,
+  content: `
+            <div class="flex flex-col justify-center items-center h-full">
+                <h1 class="text-2xl text-center text-black dark:text-white">Don't</h1>
+                <h1 class="text-2xl text-center text-black dark:text-white">contact</h1>
+                <h1 class="text-2xl text-center text-black dark:text-white">us</h1>
+            </div>
+`,
+};
+
+
+/***/ }),
+
 /***/ "./src/home.js":
 /*!*********************!*\
   !*** ./src/home.js ***!
@@ -8838,7 +9326,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 function home() {
   let home = document.createElement("div");
-  home.className = "container mx-auto rounded-2xl font-josefin m-4";
+  home.className = "container mx-auto rounded-2xl m-4";
   home.id = "homePage";
   home.innerHTML = `
 <h1 class="text-center text-4xl text-black dark:text-white">Your easiest to do app</h1>
@@ -9077,12 +9565,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 function allProjects() {
   let ele = document.createElement("div");
-  ele.className = "flex flex-col font-josefin text-white container mx-auto m-4";
+  ele.className =
+    //? might have to add padding bot
+    "flex flex-col font-josefin text-white container mx-auto m-4 min-h-screen ";
   ele.id = "allProjectsPage";
   ele.innerHTML = `
     <h1 class="text-center text-4xl m-4 text-gray-500 dark:text-white">Notes</h1>
   
-              <div class="flex flex-wrap justify-center items-start gap-4 p-5 overflow-y-auto scrollbar-hide w-full">
+              <div class="flex flex-wrap justify-center items-start gap-4 p-5">
                   <div
                       class="bg-white dark:bg-gray-800 shadow-lg  shadow-rose-500 dark:shadow-rose-600 dark:shadow-sm rounded-lg p-4 flex flex-col justify-between items-center relative max-w-96">
                         <span class="absolute top-4 right-4 cursor-pointer hover:scale-105 text-gray-400 dark:hover:text-white hover:text-black">
@@ -9142,7 +9632,8 @@ function allProjects() {
                       <p class="text-gray-500">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur
                           repellendus mollitia quo rerum fuga! In?</p>
                       <p class="text-sm text-gray-500 italic m-4 self-end">Due: <span>25.02.2024</span></p>
-              </div>
+                     </div>
+                </div>
     `;
 
   return ele;
@@ -12939,6 +13430,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _activeProjects__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./activeProjects */ "./src/activeProjects.js");
 /* harmony import */ var _completedProjects__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./completedProjects */ "./src/completedProjects.js");
 /* harmony import */ var _notes__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./notes */ "./src/notes.js");
+/* harmony import */ var _footer__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./footer */ "./src/footer.js");
 
 
 
@@ -12956,9 +13448,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 //! IIFE
 
-(function () {
+(async function () {
   const TOGGLE_SELECTOR = "#toggle";
 
   //> Content Page
@@ -12968,10 +13461,11 @@ __webpack_require__.r(__webpack_exports__);
   parentElement.appendChild((0,_nav__WEBPACK_IMPORTED_MODULE_6__["default"])());
   parentElement.appendChild((0,_drawer__WEBPACK_IMPORTED_MODULE_5__["default"])());
   parentElement.appendChild((0,_home__WEBPACK_IMPORTED_MODULE_7__["default"])());
-  parentElement.appendChild((0,_allProjects__WEBPACK_IMPORTED_MODULE_8__["default"])());
-  parentElement.appendChild((0,_activeProjects__WEBPACK_IMPORTED_MODULE_9__["default"])());
-  parentElement.appendChild((0,_completedProjects__WEBPACK_IMPORTED_MODULE_10__["default"])());
-  parentElement.appendChild((0,_notes__WEBPACK_IMPORTED_MODULE_11__["default"])());
+  // parentElement.appendChild(projectsPage());
+  // parentElement.appendChild(activeProjectsPage());
+  // parentElement.appendChild(completedProjectsPage());
+  // parentElement.appendChild(notesPage());
+  parentElement.appendChild(await (0,_footer__WEBPACK_IMPORTED_MODULE_12__["default"])());
 
   //> DOM elements
   let darkModeToggle = (0,_utilis__WEBPACK_IMPORTED_MODULE_3__.getElement)(TOGGLE_SELECTOR);
