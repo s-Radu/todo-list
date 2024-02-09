@@ -3879,6 +3879,12 @@ input[type="range"]::-ms-fill-lower {
 .z-40 {
   z-index: 40;
 }
+.z-50 {
+  z-index: 50;
+}
+.col-span-2 {
+  grid-column: span 2 / span 2;
+}
 .m-4 {
   margin: 1rem;
 }
@@ -3886,11 +3892,20 @@ input[type="range"]::-ms-fill-lower {
   margin-left: auto;
   margin-right: auto;
 }
+.-ms-1 {
+  margin-left: -0.25rem;
+}
+.mb-2 {
+  margin-bottom: 0.5rem;
+}
 .mb-4 {
   margin-bottom: 1rem;
 }
 .mb-6 {
   margin-bottom: 1.5rem;
+}
+.me-1 {
+  margin-right: 0.25rem;
 }
 .me-2 {
   margin-right: 0.5rem;
@@ -3904,6 +3919,9 @@ input[type="range"]::-ms-fill-lower {
 .ms-3 {
   margin-left: 0.75rem;
 }
+.ms-auto {
+  margin-left: auto;
+}
 .mt-3 {
   margin-top: 0.75rem;
 }
@@ -3916,6 +3934,9 @@ input[type="range"]::-ms-fill-lower {
 .mt-\\[\\.2rem\\] {
   margin-top: .2rem;
 }
+.block {
+  display: block;
+}
 .inline {
   display: inline;
 }
@@ -3924,6 +3945,9 @@ input[type="range"]::-ms-fill-lower {
 }
 .inline-flex {
   display: inline-flex;
+}
+.grid {
+  display: grid;
 }
 .hidden {
   display: none;
@@ -3949,11 +3973,17 @@ input[type="range"]::-ms-fill-lower {
 .h-9 {
   height: 2.25rem;
 }
+.h-\\[calc\\(100\\%-1rem\\)\\] {
+  height: calc(100% - 1rem);
+}
 .h-full {
   height: 100%;
 }
 .h-screen {
   height: 100vh;
+}
+.max-h-full {
+  max-height: 100%;
 }
 .min-h-screen {
   min-height: 100vh;
@@ -4003,6 +4033,9 @@ input[type="range"]::-ms-fill-lower {
 .max-w-\\[30rem\\] {
   max-width: 30rem;
 }
+.max-w-md {
+  max-width: 28rem;
+}
 .flex-1 {
   flex: 1 1 0%;
 }
@@ -4026,6 +4059,9 @@ input[type="range"]::-ms-fill-lower {
 }
 .cursor-pointer {
   cursor: pointer;
+}
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 .grid-cols-4 {
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -4108,9 +4144,19 @@ input[type="range"]::-ms-fill-lower {
   border-top-left-radius: 0.5rem;
   border-bottom-left-radius: 0.5rem;
 }
+.rounded-t {
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+}
 .rounded-t-xl {
   border-top-left-radius: 0.75rem;
   border-top-right-radius: 0.75rem;
+}
+.border {
+  border-width: 1px;
+}
+.border-b {
+  border-bottom-width: 1px;
 }
 .border-b-2 {
   border-bottom-width: 2px;
@@ -4134,6 +4180,11 @@ input[type="range"]::-ms-fill-lower {
   border-color: rgba(229, 231, 235, 1);
   border-color: rgba(229, 231, 235, var(--tw-border-opacity));
 }
+.border-gray-300 {
+  --tw-border-opacity: 1;
+  border-color: rgba(209, 213, 219, 1);
+  border-color: rgba(209, 213, 219, var(--tw-border-opacity));
+}
 .border-gray-600 {
   --tw-border-opacity: 1;
   border-color: rgba(75, 85, 99, 1);
@@ -4153,6 +4204,11 @@ input[type="range"]::-ms-fill-lower {
   --tw-bg-opacity: 1;
   background-color: rgba(229, 231, 235, 1);
   background-color: rgba(229, 231, 235, var(--tw-bg-opacity));
+}
+.bg-gray-50 {
+  --tw-bg-opacity: 1;
+  background-color: rgba(249, 250, 251, 1);
+  background-color: rgba(249, 250, 251, var(--tw-bg-opacity));
 }
 .bg-gray-600 {
   --tw-bg-opacity: 1;
@@ -4179,6 +4235,9 @@ input[type="range"]::-ms-fill-lower {
 .p-2 {
   padding: 0.5rem;
 }
+.p-2\\.5 {
+  padding: 0.625rem;
+}
 .p-3 {
   padding: 0.75rem;
 }
@@ -4192,6 +4251,10 @@ input[type="range"]::-ms-fill-lower {
   padding-left: 0.5rem;
   padding-right: 0.5rem;
 }
+.px-5 {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
 .py-1 {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
@@ -4199,6 +4262,10 @@ input[type="range"]::-ms-fill-lower {
 .py-2 {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
+}
+.py-2\\.5 {
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
 }
 .py-4 {
   padding-top: 1rem;
@@ -4422,10 +4489,27 @@ input[type="range"]::-ms-fill-lower {
   text-decoration-line: underline;
 }
 
+.focus\\:border-blue-500:focus {
+  --tw-border-opacity: 1;
+  border-color: rgba(63, 131, 248, 1);
+  border-color: rgba(63, 131, 248, var(--tw-border-opacity));
+}
+
 .focus\\:bg-gray-700:focus {
   --tw-bg-opacity: 1;
   background-color: rgba(55, 65, 81, 1);
   background-color: rgba(55, 65, 81, var(--tw-bg-opacity));
+}
+
+.focus\\:ring-blue-500:focus {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgba(63, 131, 248, var(--tw-ring-opacity));
+}
+
+.dark .dark\\:border-gray-500 {
+  --tw-border-opacity: 1;
+  border-color: rgba(107, 114, 128, 1);
+  border-color: rgba(107, 114, 128, var(--tw-border-opacity));
 }
 
 .dark .dark\\:border-gray-600 {
@@ -4450,6 +4534,12 @@ input[type="range"]::-ms-fill-lower {
   --tw-bg-opacity: 1;
   background-color: rgba(75, 85, 99, 1);
   background-color: rgba(75, 85, 99, var(--tw-bg-opacity));
+}
+
+.dark .dark\\:bg-gray-700 {
+  --tw-bg-opacity: 1;
+  background-color: rgba(55, 65, 81, 1);
+  background-color: rgba(55, 65, 81, var(--tw-bg-opacity));
 }
 
 .dark .dark\\:bg-gray-800 {
@@ -4502,6 +4592,18 @@ input[type="range"]::-ms-fill-lower {
   color: rgba(255, 255, 255, var(--tw-text-opacity));
 }
 
+.dark .dark\\:placeholder-gray-400::-moz-placeholder {
+  --tw-placeholder-opacity: 1;
+  color: rgba(156, 163, 175, 1);
+  color: rgba(156, 163, 175, var(--tw-placeholder-opacity));
+}
+
+.dark .dark\\:placeholder-gray-400::placeholder {
+  --tw-placeholder-opacity: 1;
+  color: rgba(156, 163, 175, 1);
+  color: rgba(156, 163, 175, var(--tw-placeholder-opacity));
+}
+
 .dark .dark\\:shadow-sm {
   --tw-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
@@ -4535,6 +4637,12 @@ input[type="range"]::-ms-fill-lower {
   background-color: rgba(30, 66, 159, var(--tw-bg-opacity));
 }
 
+.dark .dark\\:hover\\:bg-gray-500:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgba(107, 114, 128, 1);
+  background-color: rgba(107, 114, 128, var(--tw-bg-opacity));
+}
+
 .dark .dark\\:hover\\:bg-gray-600:hover {
   --tw-bg-opacity: 1;
   background-color: rgba(75, 85, 99, 1);
@@ -4559,7 +4667,22 @@ input[type="range"]::-ms-fill-lower {
   color: rgba(255, 255, 255, var(--tw-text-opacity));
 }
 
+.dark .dark\\:focus\\:border-blue-500:focus {
+  --tw-border-opacity: 1;
+  border-color: rgba(63, 131, 248, 1);
+  border-color: rgba(63, 131, 248, var(--tw-border-opacity));
+}
+
+.dark .dark\\:focus\\:ring-blue-500:focus {
+  --tw-ring-opacity: 1;
+  --tw-ring-color: rgba(63, 131, 248, var(--tw-ring-opacity));
+}
+
 @media (min-width: 640px) {
+
+  .sm\\:col-span-1 {
+    grid-column: span 1 / span 1;
+  }
 
   .sm\\:mt-0 {
     margin-top: 0px;
@@ -4571,6 +4694,13 @@ input[type="range"]::-ms-fill-lower {
 }
 
 @media (min-width: 768px) {
+
+  .md\\:inset-0 {
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+  }
 
   .md\\:me-6 {
     margin-right: 1.5rem;
@@ -4588,6 +4718,10 @@ input[type="range"]::-ms-fill-lower {
     flex-direction: row;
   }
 
+  .md\\:p-5 {
+    padding: 1.25rem;
+  }
+
   .md\\:p-6 {
     padding: 1.5rem;
   }
@@ -4596,7 +4730,7 @@ input[type="range"]::-ms-fill-lower {
 .rtl\\:text-right:where([dir="rtl"], [dir="rtl"] *) {
   text-align: right;
 }
-`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"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","sourcesContent":["@import \"tailwindcss/base\";\n@import \"tailwindcss/components\";\n@import \"tailwindcss/utilities\";\n\n@import url(\"https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:ital,wght@0,300;0,400;1,300;1,400&family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;1,6..12,300;1,6..12,400&display=swap\");\n"],"sourceRoot":""}]);
+`, "",{"version":3,"sources":["webpack://./src/style.css"],"names":[],"mappings":"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","sourcesContent":["@import \"tailwindcss/base\";\n@import \"tailwindcss/components\";\n@import \"tailwindcss/utilities\";\n\n@import url(\"https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:ital,wght@0,300;0,400;1,300;1,400&family=Nunito+Sans:ital,opsz,wght@0,6..12,300;0,6..12,400;1,6..12,300;1,6..12,400&display=swap\");\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -8768,7 +8902,7 @@ function drawer() {
                                     </span>
                                     </div>
                             </li>
-                            <li id="newProject">
+                            <li id="newProject" data-modal-target="crud-modal" data-modal-toggle="crud-modal" data-newProject>
                                 <div
                                     class="cursor-pointer flex items-center justify-between w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 focus:bg-gray-700">
                                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="20"
@@ -9341,7 +9475,7 @@ function nav() {
                     </a>
                 </div>
 
-                <div class="flex justify-between items-center w-32 md:mr-4">
+                <div class="flex justify-between items-center w-32 md:mr-4" data-modal-target="crud-modal" data-modal-toggle="crud-modal" data-newProject>
                         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="40" height="40" class="cursor-pointer hover:scale-105">
                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                             <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -9365,6 +9499,104 @@ function nav() {
     `;
 
   return nav;
+}
+
+
+/***/ }),
+
+/***/ "./src/newProjectModal.js":
+/*!********************************!*\
+  !*** ./src/newProjectModal.js ***!
+  \********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ modal)
+/* harmony export */ });
+function modal() {
+  let modal = document.createElement("div");
+  modal.id = "crud-modal";
+  modal.setAttribute = ("tabindex", "0");
+  modal.setAttribute = ("aria-hidden", "true");
+  modal.className =
+    "hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full";
+  modal.innerHTML = `
+    <div class="relative p-4 w-full max-w-md max-h-full">
+
+                <div class="relative bg-white rounded-lg shadow shadow-black dark:shadow-white dark:bg-gray-700">
+
+                    <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                        <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+                            New Item
+                        </h3>
+                        <button type="button"
+                            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                            data-modal-toggle="crud-modal">
+                            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                viewBox="0 0 14 14">
+                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                            </svg>
+                            <span class="sr-only">Close modal</span>
+                        </button>
+                    </div>
+                    <!-- Modal body -->
+                    <form class="p-4 md:p-5">
+                        <div class="grid gap-4 mb-4 grid-cols-2">
+                            <div class="col-span-2">
+                                <label for="name"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+                                <input type="text" name="name" id="name"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                    placeholder="eg: groceries" required>
+                            </div>
+                            <div class="col-span-2 sm:col-span-1">
+                                <label for="date"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Due
+                                    Date</label>
+                                <input type="date" name="date" id="date"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                    required>
+                            </div>
+                            <div class="col-span-2 sm:col-span-1">
+                                <label for="category"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
+                                <select id="category"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                                    required>
+                                    <option value="urgent">Urgent</option>
+                                    <option value="mild">Mild</option>
+                                    <option value="meh">Meh</option>
+                                </select>
+                            </div>
+                            <div class="col-span-2">
+                                <label for="description"
+                                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Additional
+                                    information</label>
+                                <textarea id="description" rows="4"
+                                    class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="Do not forget to add any aditional information for the task"></textarea>
+                            </div>
+                        </div>
+                        <div class="flex w-full items-center justify-center">
+                            <button type="submit"
+                                class="dark:text-white text-gray-900 inline-flex items-center rounded-lg text-sm px-5 py-2.5 text-center shadow shadow-black dark:shadow-white dark:bg-gray-600 dark:hover:bg-gray-500">
+                                <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                        clip-rule="evenodd"></path>
+                                </svg>
+                                Add new product
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+    `;
+
+  return modal;
 }
 
 
@@ -13377,17 +13609,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _newProjects__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./newProjects */ "./src/newProjects.js");
 /* harmony import */ var _drawer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./drawer */ "./src/drawer.js");
 /* harmony import */ var _nav__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./nav */ "./src/nav.js");
-/* harmony import */ var _home__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./home */ "./src/home.js");
-/* harmony import */ var _allProjects__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./allProjects */ "./src/allProjects.js");
-/* harmony import */ var _activeProjects__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./activeProjects */ "./src/activeProjects.js");
-/* harmony import */ var _completedProjects__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./completedProjects */ "./src/completedProjects.js");
-/* harmony import */ var _notes__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./notes */ "./src/notes.js");
-/* harmony import */ var _footer__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./footer */ "./src/footer.js");
+/* harmony import */ var _newProjectModal__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./newProjectModal */ "./src/newProjectModal.js");
+/* harmony import */ var _home__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./home */ "./src/home.js");
+/* harmony import */ var _allProjects__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./allProjects */ "./src/allProjects.js");
+/* harmony import */ var _activeProjects__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./activeProjects */ "./src/activeProjects.js");
+/* harmony import */ var _completedProjects__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./completedProjects */ "./src/completedProjects.js");
+/* harmony import */ var _notes__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./notes */ "./src/notes.js");
+/* harmony import */ var _footer__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./footer */ "./src/footer.js");
 
 
 
 
 //> module imports
+
 
 
 
@@ -13412,12 +13646,13 @@ __webpack_require__.r(__webpack_exports__);
   //> Append elements
   parentElement.appendChild((0,_nav__WEBPACK_IMPORTED_MODULE_6__["default"])());
   parentElement.appendChild((0,_drawer__WEBPACK_IMPORTED_MODULE_5__["default"])());
-  parentElement.appendChild((0,_home__WEBPACK_IMPORTED_MODULE_7__["default"])());
+  parentElement.appendChild((0,_home__WEBPACK_IMPORTED_MODULE_8__["default"])());
   // parentElement.appendChild(projectsPage());
   // parentElement.appendChild(activeProjectsPage());
   // parentElement.appendChild(completedProjectsPage());
   // parentElement.appendChild(notesPage());
-  parentElement.appendChild(await (0,_footer__WEBPACK_IMPORTED_MODULE_12__["default"])());
+  parentElement.appendChild((0,_newProjectModal__WEBPACK_IMPORTED_MODULE_7__["default"])());
+  parentElement.appendChild(await (0,_footer__WEBPACK_IMPORTED_MODULE_13__["default"])());
 
   //> DOM elements
   let darkModeToggle = (0,_utilis__WEBPACK_IMPORTED_MODULE_3__.getElement)(TOGGLE_SELECTOR);
