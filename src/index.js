@@ -9,6 +9,7 @@ import * as newProjects from "./newProjects";
 import { getUserName } from "./drawer";
 import nav from "./nav";
 import navDrawer from "./drawer";
+import newProjectModal from "./newProjectModal";
 import homePage from "./home";
 import projectsPage from "./allProjects";
 import activeProjectsPage from "./activeProjects";
@@ -32,6 +33,7 @@ import footer from "./footer";
   // parentElement.appendChild(activeProjectsPage());
   // parentElement.appendChild(completedProjectsPage());
   // parentElement.appendChild(notesPage());
+  parentElement.appendChild(newProjectModal());
   parentElement.appendChild(await footer());
 
   //> DOM elements
