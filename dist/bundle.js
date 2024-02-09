@@ -9032,13 +9032,16 @@ function footer() {
             `;
 
   let drawerContents = {
-    navAbout: { title: about.title, content: about.content },
-    navPrivacy: { title: privacy.title, content: privacy.content },
-    navLicencing: { title: licencing.title, content: licencing.content },
-    navContact: { title: contact.title, content: contact.content },
+    navAbout: { title: "About", content: about.content },
+    navPrivacy: { title: "Privacy policy", content: privacy.content },
+    navLicencing: { title: "Licencing", content: licencing.content },
+    navContact: { title: "Contact us", content: contact.content },
   };
 
-  let drawer = createDrawer(drawerContents["navAbout"].content);
+  let drawer = createDrawer(
+    drawerContents["navAbout"].title,
+    drawerContents["navAbout"].content
+  );
   footer.appendChild(drawer);
 
   let listItems = footer.querySelectorAll("li");
@@ -9046,7 +9049,8 @@ function footer() {
     item.addEventListener("click", () => {
       let content = drawerContents[item.id];
       if (content) {
-        drawer.innerHTML = content.title + content.content;
+        drawer.querySelector("#drawer-title").textContent = content.title;
+        drawer.querySelector("#drawer-content").innerHTML = content.content;
       }
     });
   });
@@ -9060,18 +9064,15 @@ function createDrawer(title, content) {
   ele.setAttribute("aria-labelledby", "drawer-right-label");
   ele.className =
     "fixed top-0 bottom-0 right-0 z-40 min-h-screen p-4 overflow-y-auto rounded-l-xl border-l-2 border-black dark:border-white transition-transform translate-x-full bg-white w-80 dark:bg-gray-600";
-  return ele;
-}
-
-let about = {
-  title: `<span id="drawer-right-label"
+  ele.innerHTML = `
+  <span id="drawer-right-label"
     class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400">
         <svg class="w-6 h-6 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
             viewBox="0 0 20 20">
             <path
                 d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
         </svg>
-    <p class="text-2xl text-gray-700 dark:text-gray-300">About</p>
+    <p class="text-2xl text-gray-700 dark:text-gray-300" id="drawer-title">${title}</p>
     </span>
 
     <button type="button" data-drawer-hide="drawer-right-example" aria-controls="drawer-right-example"
@@ -9082,7 +9083,14 @@ let about = {
                 d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
         </svg>
     <span class="sr-only">Close menu</span>
-    </button>`,
+    </button>
+
+    <div class="flex flex-col h-full" id="drawer-content">${content}</div>
+  `;
+  return ele;
+}
+
+let about = {
   content: `
     <p class=" text-md text-gray-500 dark:text-gray-400">
     The To-Do List project is a simple, web-based application designed to help users manage their tasks.
@@ -9127,26 +9135,8 @@ let about = {
     </p>
     `,
 };
-let privacy = {
-  title: `<span id="drawer-right-label"
-    class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400">
-        <svg class="w-6 h-6 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-            viewBox="0 0 20 20">
-            <path
-                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
-        </svg>
-    <p class="text-2xl text-gray-700 dark:text-gray-300">Privacy Policy</p>
-    </span>
 
-    <button type="button" data-drawer-hide="drawer-right-example" aria-controls="drawer-right-example"
-    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
-        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-            viewBox="0 0 14 14">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-        </svg>
-    <span class="sr-only">Close menu</span>
-    </button>`,
+let privacy = {
   content: `
     <h2 class="text-xl text-gray-500 dark:text-gray-300">
     This privacy policy governs your use of the software application To-Do List ("Application") for mobile
@@ -9216,25 +9206,6 @@ let privacy = {
 };
 
 let licencing = {
-  title: `<span id="drawer-right-label"
-    class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400">
-        <svg class="w-6 h-6 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-            viewBox="0 0 20 20">
-            <path
-                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
-        </svg>
-    <p class="text-2xl text-gray-700 dark:text-gray-300">Licencing</p>
-    </span>
-
-    <button type="button" data-drawer-hide="drawer-right-example" aria-controls="drawer-right-example"
-    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
-        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-            viewBox="0 0 14 14">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-        </svg>
-    <span class="sr-only">Close menu</span>
-    </button>`,
   content: `
             <ul class="mt-4">
                 <p class="text-[1.1rem] text-black dark:text-white">Grant of License
@@ -9283,25 +9254,6 @@ let licencing = {
 `,
 };
 let contact = {
-  title: `<span id="drawer-right-label"
-    class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400">
-        <svg class="w-6 h-6 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-            viewBox="0 0 20 20">
-            <path
-                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
-        </svg>
-    <p class="text-2xl text-gray-700 dark:text-gray-300">Contact</p>
-    </span>
-
-    <button type="button" data-drawer-hide="drawer-right-example" aria-controls="drawer-right-example"
-    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
-        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-            viewBox="0 0 14 14">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-        </svg>
-    <span class="sr-only">Close menu</span>
-    </button>`,
   content: `
             <div class="flex flex-col justify-center items-center h-full">
                 <h1 class="text-2xl text-center text-black dark:text-white">Don't</h1>
