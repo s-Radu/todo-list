@@ -38,6 +38,11 @@ import footer from "./footer";
 
   //> DOM elements
   let darkModeToggle = getElement(TOGGLE_SELECTOR);
+  const newProjectElements = getElement("[data-newProject]", true);
+
+  newProjectElements.forEach((element) => {
+    element.addEventListener("click", newProjects.addNewProjectIfClicked);
+  });
 
   //> Event listeners
   darkModeToggle.addEventListener("click", toggleDarkMode);

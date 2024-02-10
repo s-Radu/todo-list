@@ -82,3 +82,5 @@ export default function modal() {
 
   return modal;
 }
+
+//? Might have to get rid of submit button and add a click event listener to the modal to add the new project

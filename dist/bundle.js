@@ -9475,8 +9475,8 @@ function nav() {
                     </a>
                 </div>
 
-                <div class="flex justify-between items-center w-32 md:mr-4" data-modal-target="crud-modal" data-modal-toggle="crud-modal" data-newProject>
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="40" height="40" class="cursor-pointer hover:scale-105">
+                <div class="flex justify-between items-center w-32 md:mr-4" data-newProject>
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="40" height="40" class="cursor-pointer hover:scale-105" data-modal-target="crud-modal" data-modal-toggle="crud-modal">
                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                             <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                             <g id="SVGRepo_iconCarrier">
@@ -9517,8 +9517,8 @@ __webpack_require__.r(__webpack_exports__);
 function modal() {
   let modal = document.createElement("div");
   modal.id = "crud-modal";
-  modal.setAttribute = ("tabindex", "0");
-  modal.setAttribute = ("aria-hidden", "true");
+  modal.setAttribute("tabindex", "-1");
+  modal.setAttribute("aria-hidden", "true");
   modal.className =
     "hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full";
   modal.innerHTML = `
@@ -9599,6 +9599,8 @@ function modal() {
   return modal;
 }
 
+//? Might have to get rid of submit button and add a click event listener to the modal to add the new project
+
 
 /***/ }),
 
@@ -9672,7 +9674,8 @@ function handleDropdownClick(e) {
 function addNewProjectIfClicked(e) {
   e.stopPropagation();
 
-  const ele = e.target.closest(NEW_PROJECT_SELECTOR);
+  //> Modified so we can make use of both buttons to add new projects
+  const ele = e.target.closest("[data-newProject]");
   if (ele) {
     createNewProject();
   }
@@ -9836,9 +9839,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   getElement: () => (/* binding */ getElement)
 /* harmony export */ });
-function getElement(selector) {
-  const content = document.getElementById("content");
-  return content.querySelector(selector);
+function getElement(selector, all = false) {
+  const parentElement = document.getElementById("content");
+  return all
+    ? parentElement.querySelectorAll(selector)
+    : parentElement.querySelector(selector);
 }
 
 
@@ -13656,6 +13661,11 @@ __webpack_require__.r(__webpack_exports__);
 
   //> DOM elements
   let darkModeToggle = (0,_utilis__WEBPACK_IMPORTED_MODULE_3__.getElement)(TOGGLE_SELECTOR);
+  const newProjectElements = (0,_utilis__WEBPACK_IMPORTED_MODULE_3__.getElement)("[data-newProject]", true);
+
+  newProjectElements.forEach((element) => {
+    element.addEventListener("click", _newProjects__WEBPACK_IMPORTED_MODULE_4__.addNewProjectIfClicked);
+  });
 
   //> Event listeners
   darkModeToggle.addEventListener("click", _darkMode_js__WEBPACK_IMPORTED_MODULE_2__.toggleDarkMode);

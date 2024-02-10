@@ -54,7 +54,8 @@ function handleDropdownClick(e) {
 export function addNewProjectIfClicked(e) {
   e.stopPropagation();
 
-  const ele = e.target.closest(NEW_PROJECT_SELECTOR);
+  //> Modified so we can make use of both buttons to add new projects
+  const ele = e.target.closest("[data-newProject]");
   if (ele) {
     createNewProject();
   }
