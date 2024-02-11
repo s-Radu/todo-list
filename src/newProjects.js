@@ -117,6 +117,14 @@ function getFormData() {
   const category = form.querySelector("#category");
   const description = form.querySelector("#description");
   const submitButton = form.querySelector("button[type='submit']");
+  const closeModal = getElement("[data-modal-toggle]");
+
+  closeModal.addEventListener("click", (e) => {
+    e.preventDefault();
+    const modalEle = getElement(MODAL);
+    const modal = new Modal(modalEle);
+    modal.hide();
+  });
 
   submitButton.addEventListener("click", (e) => {
     e.preventDefault();
