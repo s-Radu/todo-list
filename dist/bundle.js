@@ -9541,8 +9541,7 @@ function modal() {
                             <span class="sr-only">Close modal</span>
                         </button>
                     </div>
-                    <!-- Modal body -->
-                    <form class="p-4 md:p-5">
+                    <form class="p-4 md:p-5" data-newProjectForm>
                         <div class="grid gap-4 mb-4 grid-cols-2">
                             <div class="col-span-2">
                                 <label for="name"
@@ -9580,7 +9579,7 @@ function modal() {
                             </div>
                         </div>
                         <div class="flex w-full items-center justify-center">
-                            <button type="submit"
+                            <button type="submit" data-submit
                                 class="dark:text-white text-gray-900 inline-flex items-center rounded-lg text-sm px-5 py-2.5 text-center shadow shadow-black dark:shadow-white dark:bg-gray-600 dark:hover:bg-gray-500">
                                 <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -9618,10 +9617,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   getNewProjectsIds: () => (/* binding */ getNewProjectsIds)
 /* harmony export */ });
 /* harmony import */ var _utilis__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utilis */ "./src/utilis.js");
+/* harmony import */ var flowbite__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flowbite */ "./node_modules/flowbite/lib/esm/index.js");
+
 
 
 const DROPDOWN_SELECTOR = "#dropdown-example";
 const NEW_PROJECT_SELECTOR = "#newProject";
+const MODAL = "#crud-modal";
 
 let ids = [
   "home",
@@ -9638,6 +9640,8 @@ let newProjectsIds = [
   "newProject-test",
   "newProject-dummy",
 ];
+
+let projects = [];
 
 //? Returns a spread out array of ids
 function getIds() {
@@ -9679,6 +9683,10 @@ function addNewProjectIfClicked(e) {
   if (ele) {
     createNewProject();
   }
+  const modalEle = (0,_utilis__WEBPACK_IMPORTED_MODULE_0__.getElement)(MODAL);
+  const modal = new flowbite__WEBPACK_IMPORTED_MODULE_1__.Modal(modalEle);
+  modal.show();
+  getFormData();
 }
 
 //? Removes the new project from the list
@@ -9689,24 +9697,8 @@ function removeNewProject(e) {
   element.remove();
 }
 
-//? Creates a new project and adds it to the ids array
-function createNewProject() {
-  const newId = generateNewProjectId();
-  const newElement = createNewElement(newId);
-
-  insertNewElement(newElement);
-  newProjectsIds.push(newId);
-}
-
-//? Generates a new project id [ will later be changed into adding the id by the title of the project added by the user]
-function generateNewProjectId() {
-  const randomNumber = Math.floor(Math.random() * 1000);
-  return `newProject-${randomNumber}`;
-}
-
 //? Creates a new list item element with an id provided by the above function
-function createNewElement(newId) {
-  const newTitle = generateNewProjectId();
+function createNewElement(newId, newTitle) {
   const newElement = document.createElement("li");
   newElement.id = newId;
   newElement.innerHTML = generateNewProjectElement(newTitle);
@@ -9735,6 +9727,52 @@ function insertNewElement(newElement) {
   const newProjectLi = (0,_utilis__WEBPACK_IMPORTED_MODULE_0__.getElement)(NEW_PROJECT_SELECTOR);
 
   parentUl.insertBefore(newElement, newProjectLi);
+}
+
+//? get data from the form
+function getFormData() {
+  const form = (0,_utilis__WEBPACK_IMPORTED_MODULE_0__.getElement)("[data-newProjectForm]");
+  const name = form.querySelector("#name");
+  const date = form.querySelector("#date");
+  const category = form.querySelector("#category");
+  const description = form.querySelector("#description");
+  const submitButton = form.querySelector("button[type='submit']");
+
+  submitButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (!name.value || !date.value) {
+      return;
+    }
+    projects.push({
+      name: name.value,
+      date: date.value,
+      category: category.value,
+      description: description.value,
+    });
+
+    //? Create and append the new project here, after the form data has been added to 'projects'
+    createNewProject(name.value);
+
+    console.log(name.value, date.value, category.value, description.value);
+    const modalEle = (0,_utilis__WEBPACK_IMPORTED_MODULE_0__.getElement)(MODAL);
+    const modal = new flowbite__WEBPACK_IMPORTED_MODULE_1__.Modal(modalEle);
+    modal.hide();
+    form.reset();
+    console.log(projects);
+  });
+}
+
+//? Creates a new project and adds it to the ids array
+function createNewProject(projectName) {
+  const newId = generateNewProjectId(projectName);
+  const newElement = createNewElement(newId, projectName);
+
+  insertNewElement(newElement);
+  newProjectsIds.push(newId);
+}
+
+function generateNewProjectId(projectName) {
+  return `project-${projectName}`;
 }
 
 
@@ -9825,6 +9863,8 @@ function allProjects() {
 
   return ele;
 }
+
+//? Add funcitonality to handle the adding, deleting, editing, sorting and storing in the local storage of new notes.
 
 
 /***/ }),
@@ -13663,15 +13703,18 @@ __webpack_require__.r(__webpack_exports__);
   let darkModeToggle = (0,_utilis__WEBPACK_IMPORTED_MODULE_3__.getElement)(TOGGLE_SELECTOR);
   const newProjectElements = (0,_utilis__WEBPACK_IMPORTED_MODULE_3__.getElement)("[data-newProject]", true);
 
+  //> Event listeners
+  darkModeToggle.addEventListener("click", _darkMode_js__WEBPACK_IMPORTED_MODULE_2__.toggleDarkMode);
+
+  //? Adds the event listener to both our buttons
   newProjectElements.forEach((element) => {
     element.addEventListener("click", _newProjects__WEBPACK_IMPORTED_MODULE_4__.addNewProjectIfClicked);
   });
 
-  //> Event listeners
-  darkModeToggle.addEventListener("click", _darkMode_js__WEBPACK_IMPORTED_MODULE_2__.toggleDarkMode);
-
   //> Functions
   // getUserName(); //> Will be put back to work as soon as we got things moving better
+
+  //? It's a function that attaches an event listener, so we can't have it anywhere else, we keep it below so it can be easier to read
 
   _newProjects__WEBPACK_IMPORTED_MODULE_4__.getIds().forEach((id) => {
     const element = (0,_utilis__WEBPACK_IMPORTED_MODULE_3__.getElement)(`#${id}`);
@@ -13682,6 +13725,7 @@ __webpack_require__.r(__webpack_exports__);
   });
 
   _newProjects__WEBPACK_IMPORTED_MODULE_4__.addEventListenerToDropdown();
+
 })();
 
 })();
