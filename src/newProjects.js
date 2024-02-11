@@ -1,7 +1,9 @@
 import { getElement } from "./utilis";
+import { Modal } from "flowbite";
 
 const DROPDOWN_SELECTOR = "#dropdown-example";
 const NEW_PROJECT_SELECTOR = "#newProject";
+const MODAL = "#crud-modal";
 
 let ids = [
   "home",
@@ -18,6 +20,8 @@ let newProjectsIds = [
   "newProject-test",
   "newProject-dummy",
 ];
+
+let projects = [];
 
 //? Returns a spread out array of ids
 export function getIds() {
@@ -59,6 +63,10 @@ export function addNewProjectIfClicked(e) {
   if (ele) {
     createNewProject();
   }
+  const modalEle = getElement(MODAL);
+  const modal = new Modal(modalEle);
+  modal.show();
+  getFormData();
 }
 
 //? Removes the new project from the list
@@ -69,24 +77,8 @@ function removeNewProject(e) {
   element.remove();
 }
 
-//? Creates a new project and adds it to the ids array
-function createNewProject() {
-  const newId = generateNewProjectId();
-  const newElement = createNewElement(newId);
-
-  insertNewElement(newElement);
-  newProjectsIds.push(newId);
-}
-
-//? Generates a new project id [ will later be changed into adding the id by the title of the project added by the user]
-function generateNewProjectId() {
-  const randomNumber = Math.floor(Math.random() * 1000);
-  return `newProject-${randomNumber}`;
-}
-
 //? Creates a new list item element with an id provided by the above function
-function createNewElement(newId) {
-  const newTitle = generateNewProjectId();
+function createNewElement(newId, newTitle) {
   const newElement = document.createElement("li");
   newElement.id = newId;
   newElement.innerHTML = generateNewProjectElement(newTitle);
@@ -115,4 +107,50 @@ function insertNewElement(newElement) {
   const newProjectLi = getElement(NEW_PROJECT_SELECTOR);
 
   parentUl.insertBefore(newElement, newProjectLi);
+}
+
+//? get data from the form
+function getFormData() {
+  const form = getElement("[data-newProjectForm]");
+  const name = form.querySelector("#name");
+  const date = form.querySelector("#date");
+  const category = form.querySelector("#category");
+  const description = form.querySelector("#description");
+  const submitButton = form.querySelector("button[type='submit']");
+
+  submitButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    if (!name.value || !date.value) {
+      return;
+    }
+    projects.push({
+      name: name.value,
+      date: date.value,
+      category: category.value,
+      description: description.value,
+    });
+
+    //? Create and append the new project here, after the form data has been added to 'projects'
+    createNewProject(name.value);
+
+    console.log(name.value, date.value, category.value, description.value);
+    const modalEle = getElement(MODAL);
+    const modal = new Modal(modalEle);
+    modal.hide();
+    form.reset();
+    console.log(projects);
+  });
+}
+
+//? Creates a new project and adds it to the ids array
+function createNewProject(projectName) {
+  const newId = generateNewProjectId(projectName);
+  const newElement = createNewElement(newId, projectName);
+
+  insertNewElement(newElement);
+  newProjectsIds.push(newId);
+}
+
+function generateNewProjectId(projectName) {
+  return `project-${projectName}`;
 }

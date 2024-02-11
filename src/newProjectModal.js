@@ -25,8 +25,7 @@ export default function modal() {
                             <span class="sr-only">Close modal</span>
                         </button>
                     </div>
-                    <!-- Modal body -->
-                    <form class="p-4 md:p-5">
+                    <form class="p-4 md:p-5" data-newProjectForm>
                         <div class="grid gap-4 mb-4 grid-cols-2">
                             <div class="col-span-2">
                                 <label for="name"
@@ -64,7 +63,7 @@ export default function modal() {
                             </div>
                         </div>
                         <div class="flex w-full items-center justify-center">
-                            <button type="submit"
+                            <button type="submit" data-submit
                                 class="dark:text-white text-gray-900 inline-flex items-center rounded-lg text-sm px-5 py-2.5 text-center shadow shadow-black dark:shadow-white dark:bg-gray-600 dark:hover:bg-gray-500">
                                 <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                                     xmlns="http://www.w3.org/2000/svg">
