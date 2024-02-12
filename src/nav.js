@@ -37,7 +37,7 @@ export default function nav() {
                 </div>
 
                 <div class="flex justify-between items-center w-32 md:mr-4" data-newProject>
-                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="40" height="40" class="cursor-pointer hover:scale-105" data-modal-target="crud-modal" data-modal-toggle="crud-modal">
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="40" height="40" class="cursor-pointer hover:scale-105">
                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                             <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
                             <g id="SVGRepo_iconCarrier">
