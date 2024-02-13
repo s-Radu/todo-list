@@ -1,5 +1,3 @@
-import { getElement } from "./utilis";
-
 export default function newProjectModal() {
   let modal = document.createElement("div");
   modal.id = "crud-modal";

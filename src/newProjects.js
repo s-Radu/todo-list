@@ -137,6 +137,7 @@ function getFormData(e) {
   console.log(
     `Name: ${naem}, Date: ${date}, Category: ${category}, Description: ${description}`
   );
+
   form.reset();
 }
 
