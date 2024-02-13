@@ -116,7 +116,7 @@ export default function drawer() {
                                     </span>
                                     </div>
                             </li>
-                            <li id="newProject" data-modal-target="crud-modal" data-modal-toggle="crud-modal" data-newProject>
+                            <li id="newProject" data-newProject data-modal-target="crud-modal" data-modal-toggle="crud-modal">
                                 <div
                                     class="cursor-pointer flex items-center justify-between w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 focus:bg-gray-700">
                                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="20"
@@ -139,7 +139,7 @@ export default function drawer() {
 
                     <li id="allProjects">
                         <div
-                            class="cursor-pointer flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-700">
+                            class="cursor-pointer flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-700" >
                             <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="fill-black dark:fill-white" width="24"
                                 height="24">
                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
