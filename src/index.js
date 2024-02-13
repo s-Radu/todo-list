@@ -19,7 +19,7 @@ import footer from "./footer";
 
 //! IIFE
 
-(async function () {
+(function () {
   const TOGGLE_SELECTOR = "#toggle";
 
   //> Content Page
@@ -34,7 +34,7 @@ import footer from "./footer";
   // parentElement.appendChild(completedProjectsPage());
   // parentElement.appendChild(notesPage());
   parentElement.appendChild(newProjectModal());
-  parentElement.appendChild(await footer());
+  parentElement.appendChild(footer());
 
   //> DOM elements
   let darkModeToggle = getElement(TOGGLE_SELECTOR);

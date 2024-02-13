@@ -1,9 +1,8 @@
 import { getElement } from "./utilis";
-import { Modal } from "flowbite";
 
 const DROPDOWN_SELECTOR = "#dropdown-example";
 const NEW_PROJECT_SELECTOR = "#newProject";
-const MODAL = "#crud-modal";
+const DATA_NEW_PROJECT = "[data-newProject]";
 
 let ids = [
   "home",
@@ -20,8 +19,6 @@ let newProjectsIds = [
   "newProject-test",
   "newProject-dummy",
 ];
-
-let projects = [];
 
 //? Returns a spread out array of ids
 export function getIds() {
@@ -59,14 +56,10 @@ export function addNewProjectIfClicked(e) {
   e.stopPropagation();
 
   //> Modified so we can make use of both buttons to add new projects
-  const ele = e.target.closest("[data-newProject]");
+  const ele = e.target.closest(DATA_NEW_PROJECT);
   if (ele) {
     createNewProject();
   }
-  const modalEle = getElement(MODAL);
-  const modal = new Modal(modalEle);
-  modal.show();
-  getFormData();
 }
 
 //? Removes the new project from the list
@@ -77,8 +70,25 @@ function removeNewProject(e) {
   element.remove();
 }
 
+//? Creates a new project and adds it to the ids array
+function createNewProject() {
+  const newId = generateNewProjectId();
+  const newElement = createNewElement(newId);
+
+  insertNewElement(newElement);
+  newProjectsIds.push(newId);
+}
+
+//? Generates a new project id [ will later be changed into adding the id by the title of the project added by the user]
+function generateNewProjectId() {
+  //> might dispose of it because we need to get the title of the project as the id, or we can modify it to get the title of the project
+  const randomNumber = Math.floor(Math.random() * 1000);
+  return `newProject-${randomNumber}`;
+}
+
 //? Creates a new list item element with an id provided by the above function
-function createNewElement(newId, newTitle) {
+function createNewElement(newId) {
+  const newTitle = generateNewProjectId();
   const newElement = document.createElement("li");
   newElement.id = newId;
   newElement.innerHTML = generateNewProjectElement(newTitle);
@@ -110,55 +120,28 @@ function insertNewElement(newElement) {
 }
 
 //? get data from the form
-function getFormData() {
-  const form = getElement("[data-newProjectForm]");
-  const name = form.querySelector("#name");
-  const date = form.querySelector("#date");
-  const category = form.querySelector("#category");
-  const description = form.querySelector("#description");
-  const submitButton = form.querySelector("button[type='submit']");
-  const closeModal = getElement("[data-modal-toggle]");
 
-  closeModal.addEventListener("click", (e) => {
-    e.preventDefault();
-    const modalEle = getElement(MODAL);
-    const modal = new Modal(modalEle);
-    modal.hide();
-  });
+//> The modal works properly now, but something from below is causing it to bug out
 
-  submitButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    if (!name.value || !date.value) {
-      return;
-    }
-    projects.push({
-      name: name.value,
-      date: date.value,
-      category: category.value,
-      description: description.value,
-    });
+let projects = [];
 
-    //? Create and append the new project here, after the form data has been added to 'projects'
-    createNewProject(name.value);
+function getFormData(e) {
+  e.preventDefault();
+  let modal = getElement("#crud-modal");
+  let form = modal.querySelector("form");
+  let naem = form.querySelector("#name").value;
+  let date = form.querySelector("#date").value;
+  let category = form.querySelector("#category").value;
+  let description = form.querySelector("#description").value;
 
-    console.log(name.value, date.value, category.value, description.value);
-    const modalEle = getElement(MODAL);
-    const modal = new Modal(modalEle);
-    modal.hide();
-    form.reset();
-    console.log(projects);
-  });
+  console.log(
+    `Name: ${naem}, Date: ${date}, Category: ${category}, Description: ${description}`
+  );
+  form.reset();
 }
 
-//? Creates a new project and adds it to the ids array
-function createNewProject(projectName) {
-  const newId = generateNewProjectId(projectName);
-  const newElement = createNewElement(newId, projectName);
-
-  insertNewElement(newElement);
-  newProjectsIds.push(newId);
-}
-
-function generateNewProjectId(projectName) {
-  return `project-${projectName}`;
-}
+setTimeout(() => {
+  const submitButton = getElement("[data-submit");
+  submitButton.addEventListener("click", getFormData);
+  console.log("event added");
+}, 100);
