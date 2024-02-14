@@ -141,8 +141,35 @@ function getFormData(e) {
   form.reset();
 }
 
-setTimeout(() => {
-  const submitButton = getElement("[data-submit");
-  submitButton.addEventListener("click", getFormData);
-  console.log("event added");
-}, 100);
+// setTimeout(() => {
+//   const submitButton = getElement("[data-submit");
+//   submitButton.addEventListener("click", getFormData);
+//   console.log("event added");
+// }, 100);
+
+//? Insted of using the setTimeout we can use a mutation observer to observe the content div and add the event listener to the submit button, observing means it will watch for changes in the content div and once the submit button is added to the content div it will add the event listener to it
+
+const parentElement = document.getElementById("content");
+
+//> Options for the observer (which mutations to observe)
+const config = { childList: true, subtree: true };
+
+//> Callback function to execute when mutations are observed
+const callback = function (mutationsList, observer) {
+  for (let mutation of mutationsList) {
+    if (mutation.type === "childList") {
+      const submitButton = getElement("[data-submit");
+      if (submitButton) {
+        submitButton.addEventListener("click", getFormData);
+        console.log("event added");
+        observer.disconnect(); //> Stop observing once the element is found
+      }
+    }
+  }
+};
+
+//> Create an observer instance linked to the callback function
+const observer = new MutationObserver(callback);
+
+//> Start observing the target node for configured mutations
+observer.observe(parentElement, config);
