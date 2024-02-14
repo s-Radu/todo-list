@@ -9668,6 +9668,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   getNewProjectsIds: () => (/* binding */ getNewProjectsIds)
 /* harmony export */ });
 /* harmony import */ var _utilis__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utilis */ "./src/utilis.js");
+/* harmony import */ var flowbite__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! flowbite */ "./node_modules/flowbite/lib/esm/index.js");
+
 
 
 const DROPDOWN_SELECTOR = "#dropdown-example";
@@ -9724,6 +9726,10 @@ function handleDropdownClick(e) {
 //? the event listener that will get added to the new project list item elements
 function addNewProjectIfClicked(e) {
   e.stopPropagation();
+
+  const modalEl = (0,_utilis__WEBPACK_IMPORTED_MODULE_0__.getElement)("#crud-modal");
+  const modal = new flowbite__WEBPACK_IMPORTED_MODULE_1__.Modal(modalEl);
+  modal.show();
 
   //> Modified so we can make use of both buttons to add new projects
   const ele = e.target.closest(DATA_NEW_PROJECT);
@@ -9797,25 +9803,56 @@ let projects = [];
 
 function getFormData(e) {
   e.preventDefault();
-  let modal = (0,_utilis__WEBPACK_IMPORTED_MODULE_0__.getElement)("#crud-modal");
-  let form = modal.querySelector("form");
-  let naem = form.querySelector("#name").value;
-  let date = form.querySelector("#date").value;
-  let category = form.querySelector("#category").value;
-  let description = form.querySelector("#description").value;
+
+  const modalEl = (0,_utilis__WEBPACK_IMPORTED_MODULE_0__.getElement)("#crud-modal");
+  const modal = new flowbite__WEBPACK_IMPORTED_MODULE_1__.Modal(modalEl);
+  const form = modalEl.querySelector("form");
+  const naem = form.querySelector("#name").value;
+  const date = form.querySelector("#date").value;
+  const category = form.querySelector("#category").value;
+  const description = form.querySelector("#description").value;
 
   console.log(
     `Name: ${naem}, Date: ${date}, Category: ${category}, Description: ${description}`
   );
 
   form.reset();
+  modal.hide();
+  console.log("modal hidden");
 }
 
-setTimeout(() => {
-  const submitButton = (0,_utilis__WEBPACK_IMPORTED_MODULE_0__.getElement)("[data-submit");
-  submitButton.addEventListener("click", getFormData);
-  console.log("event added");
-}, 100);
+// setTimeout(() => {
+//   const submitButton = getElement("[data-submit");
+//   submitButton.addEventListener("click", getFormData);
+//   console.log("event added");
+// }, 100);
+
+//? Insted of using the setTimeout we can use a mutation observer to observe the content div and add the event listener to the submit button, observing means it will watch for changes in the content div and once the submit button is added to the content div it will add the event listener to it
+
+const parentElement = document.getElementById("content");
+
+//> Options for the observer (which mutations to observe)
+const config = { childList: true, subtree: true };
+
+//> Callback function to execute when mutations are observed
+const callback = function (mutationsList, observer) {
+  for (let mutation of mutationsList) {
+    if (mutation.type === "childList") {
+      const submitButton = (0,_utilis__WEBPACK_IMPORTED_MODULE_0__.getElement)("[data-submit");
+      if (submitButton) {
+        submitButton.addEventListener("click", getFormData);
+        console.log("event added");
+        observer.disconnect(); //> Stop observing once the element is found
+      }
+    }
+  }
+};
+
+//> Create an observer instance linked to the callback function
+const observer = new MutationObserver(callback);
+
+//> Start observing the target node for configured mutations
+observer.observe(parentElement, config);
 
 
 /***/ }),
