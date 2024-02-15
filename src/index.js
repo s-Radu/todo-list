@@ -44,22 +44,7 @@ import footer from "./footer";
   darkModeToggle.addEventListener("click", toggleDarkMode);
 
   //? Adds the event listener to both our buttons
-  newProjectElements.forEach((element) => {
-    element.addEventListener("click", newProjects.addNewProjectIfClicked);
-  });
 
   //> Functions
   // getUserName(); //> Will be put back to work as soon as we got things moving better
-
-  //? It's a function that attaches an event listener, so we can't have it anywhere else, we keep it below so it can be easier to read
-
-  newProjects.getIds().forEach((id) => {
-    const element = getElement(`#${id}`);
-
-    if (element) {
-      element.addEventListener("click", newProjects.addNewProjectIfClicked);
-    }
-  });
-
-  newProjects.addEventListenerToDropdown();
 })();
