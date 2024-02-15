@@ -127,18 +127,30 @@ let projects = [];
 
 function getFormData(e) {
   e.preventDefault();
-  let modal = getElement("#crud-modal");
-  let form = modal.querySelector("form");
-  let naem = form.querySelector("#name").value;
-  let date = form.querySelector("#date").value;
-  let category = form.querySelector("#category").value;
-  let description = form.querySelector("#description").value;
 
-  console.log(
-    `Name: ${naem}, Date: ${date}, Category: ${category}, Description: ${description}`
-  );
+  const modalEl = getElement("#crud-modal");
+  const modal = FlowbiteInstances.getInstance("Modal", "crud-modal");
+  const form = modalEl.querySelector("form");
+  const name = form.querySelector("#name").value;
+  const date = form.querySelector("#date").value;
+  const category = form.querySelector("#category").value;
+  const description = form.querySelector("#description").value;
 
-  form.reset();
+  if (name === "" || date === "" || category === "") {
+    alert("Please fill in all the fields");
+  } else {
+    projects.push({ name, date, category, description });
+    console.log(...projects);
+    const lastProject = projects[projects.length - 1];
+    console.log(
+      lastProject.name,
+      lastProject.date,
+      lastProject.category,
+      lastProject.description
+    );
+    form.reset();
+    modal.hide();
+  }
 }
 
 // setTimeout(() => {
