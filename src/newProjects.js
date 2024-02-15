@@ -2,7 +2,6 @@ import { getElement } from "./utilis";
 
 const DROPDOWN_SELECTOR = "#dropdown-example";
 const NEW_PROJECT_SELECTOR = "#newProject";
-const DATA_NEW_PROJECT = "[data-newProject]";
 
 let ids = [
   "home",
@@ -14,81 +13,27 @@ let ids = [
   "newProject",
 ];
 
-let newProjectsIds = [
-  "newProject-something",
-  "newProject-test",
-  "newProject-dummy",
-];
-
-//? Returns a spread out array of ids
-export function getIds() {
-  return [...ids];
-}
-
-//? Returns a spread out array of newProjectsIds
-export function getNewProjectsIds() {
-  return [...newProjectsIds];
-}
-
-//? Adds delegated event listener to the dropdown so we can have enevt listeners on newly added projects
-export function addEventListenerToDropdown() {
-  const parentElement = getElement(DROPDOWN_SELECTOR);
-
-  if (parentElement) {
-    parentElement.addEventListener("click", handleDropdownClick);
-  }
-}
-
-//? the event listener that will get added to the dropdown list item elements
-function handleDropdownClick(e) {
-  let ele = e.target.closest("li");
-  if (ele) {
-    newProjectsIds.forEach((id) => {
-      if (ele.id === id) {
-        removeNewProject(e);
-      }
-    });
-  }
-}
-
-//? the event listener that will get added to the new project list item elements
-export function addNewProjectIfClicked(e) {
-  e.stopPropagation();
-
-  //> Modified so we can make use of both buttons to add new projects
-  const ele = e.target.closest(DATA_NEW_PROJECT);
-  if (ele) {
-    createNewProject();
-  }
-}
-
 //? Removes the new project from the list
 function removeNewProject(e) {
   let element = e.target.closest("li");
-  newProjectsIds = newProjectsIds.filter((id) => id !== element.id);
 
+  //* Remove the project from the projects array
+  projects = projects.filter((project) => {
+    //* Convert the project name to a URL-friendly format
+    const projectId = generateNewProjectId(project.name);
+    return projectId !== element.id;
+  });
+  console.log(...projects);
   element.remove();
 }
 
-//? Creates a new project and adds it to the ids array
-function createNewProject() {
-  const newId = generateNewProjectId();
-  const newElement = createNewElement(newId);
-
-  insertNewElement(newElement);
-  newProjectsIds.push(newId);
+//? Generates a new project id based on the name provided in the form
+function generateNewProjectId(name) {
+  return `${name.replace(/\s+/g, "-").toLowerCase()}`;
 }
 
-//? Generates a new project id [ will later be changed into adding the id by the title of the project added by the user]
-function generateNewProjectId() {
-  //> might dispose of it because we need to get the title of the project as the id, or we can modify it to get the title of the project
-  const randomNumber = Math.floor(Math.random() * 1000);
-  return `newProject-${randomNumber}`;
-}
-
-//? Creates a new list item element with an id provided by the above function
-function createNewElement(newId) {
-  const newTitle = generateNewProjectId();
+//? Creates a new list item element with an id and title provided by the form
+function createNewElement(newId, newTitle) {
   const newElement = document.createElement("li");
   newElement.id = newId;
   newElement.innerHTML = generateNewProjectElement(newTitle);
@@ -118,10 +63,20 @@ function insertNewElement(newElement) {
 
   parentUl.insertBefore(newElement, newProjectLi);
 }
+function createNewProjectElement(project) {
+  const newId = generateNewProjectId(project.name);
+  const newElement = createNewElement(newId, project.name);
+
+  //! Add an event listener to the new project element
+  newElement.addEventListener("click", removeNewProject);
+
+  return newElement;
+}
+function appendNewProjectElement(newElement) {
+  insertNewElement(newElement);
+}
 
 //? get data from the form
-
-//> The modal works properly now, but something from below is causing it to bug out
 
 let projects = [];
 
@@ -139,17 +94,17 @@ function getFormData(e) {
   if (name === "" || date === "" || category === "") {
     alert("Please fill in all the fields");
   } else {
-    projects.push({ name, date, category, description });
+    const newProject = { name, date, category, description };
+    projects.push(newProject);
     console.log(...projects);
-    const lastProject = projects[projects.length - 1];
-    console.log(
-      lastProject.name,
-      lastProject.date,
-      lastProject.category,
-      lastProject.description
-    );
     form.reset();
     modal.hide();
+
+    //? Create a new project element with the data provided in the form
+    const newElement = createNewProjectElement(newProject);
+
+    //* Append the new project element to the DOM
+    appendNewProjectElement(newElement);
   }
 }
 
