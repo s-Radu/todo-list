@@ -140,3 +140,8 @@ const observer = new MutationObserver(callback);
 
 //> Start observing the target node for configured mutations
 observer.observe(parentElement, config);
+
+//! new additions, save data to local storage, make sure you can use the date when you retrive it from the local storage, make use of date-fnc library to format the date
+//* create elements for the todo item to be apended to the DOM on the right pages
+//? modify the code so the user can also delete or mark the todo as complete and move it to the right page
+//< make sure the todo is saved to the local storage
