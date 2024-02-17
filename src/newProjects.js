@@ -63,6 +63,7 @@ function insertNewElement(newElement) {
 
   parentUl.insertBefore(newElement, newProjectLi);
 }
+
 function createNewProjectElement(project) {
   const newId = generateNewProjectId(project.name);
   const newElement = createNewElement(newId, project.name);
@@ -105,6 +106,16 @@ function getFormData(e) {
 
     //* Append the new project element to the DOM
     appendNewProjectElement(newElement);
+
+    const homePage = getElement("#homePage");
+    const newProjectCard = createTodoElement(
+      name,
+      description,
+      date,
+      category,
+      name //? Use the name as the id for the todo
+    );
+    homePage.appendChild(newProjectCard);
   }
 }
 
@@ -145,3 +156,38 @@ observer.observe(parentElement, config);
 //* create elements for the todo item to be apended to the DOM on the right pages
 //? modify the code so the user can also delete or mark the todo as complete and move it to the right page
 //< make sure the todo is saved to the local storage
+
+function createTodoElement(name, description, date, category, id) {
+  let element = document.createElement("div");
+  element.id = id;
+  element.dataset.category = category;
+  element.className =
+    "max-w-sm  mx-auto  m-8 p-6 bg-white  rounded-xl shadow-sm shadow-black dark:shadow-white dark:bg-gray-800 dark:border-gray-700";
+  element.innerHTML = `
+    <div class="flex items-center justify-between mb-4">
+    <h5 class="text-2xl font-bold text-gray-900 dark:text-white">${name}</h5>
+    <span>
+        <svg class="w-3 h-3 text-gray-600 dark:text-white" aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+        </svg>
+    </span>
+</div>
+<div class="flex flex-col items-center">
+  <p class=" text-gray-800 dark:text-gray-300">${description}</p>
+  <p class=" m-4 text-sm text-gray-800 dark:text-gray-300">${date}</p>
+</div>
+<div class="flex justify-around items-center mt-6">
+    <button data-complete
+        class="text-white bg-gray-600 shadow-sm shadow-gray-700 dark:shadow-gray-400 hover:bg-gray-500 inline-flex items-center rounded-lg text-sm px-5 py-2.5 text-center">
+        Completed
+    </button>
+    <button data-edit
+        class="text-white bg-gray-600 shadow-sm shadow-gray-700 dark:shadow-gray-400 hover:bg-gray-500 inline-flex items-center rounded-lg text-sm px-5 py-2.5 text-center">
+        Edit
+    </button>
+</div>
+    `;
+  return element;
+}
