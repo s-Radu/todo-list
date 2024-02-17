@@ -13,8 +13,8 @@ export default function home() {
   If you have a task in mind, quickly add it using the 'Quick Add' button on the right.
    Start organizing your life with ToDoMaster today!</p>
 <div class="flex justify-between w-full ">
-<img src="${arrowLeft}" alt="arrow left" class="absolute hidden md:block left-10 -top-40 w-44 h-44 cursor-pointer">
-<img src="${arrowRight}" alt="arrow right" class="absolute hidden md:block right-28 -top-40 w-44 h-44 cursor-pointer">
+<img src="${arrowLeft}" alt="arrow left" class="absolute hidden md:block left-10 -top-40 w-44 h-44">
+<img src="${arrowRight}" alt="arrow right" class="absolute hidden md:block right-28 -top-40 w-44 h-44">
 `;
 
   return home;
