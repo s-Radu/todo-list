@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { getElement } from "./utilis";
+import pubsub, { getElement } from "./utilis";
 
 export default function drawer() {
   const drawer = document.createElement("div");
@@ -119,8 +119,8 @@ export default function drawer() {
                                 </g>
                             </svg>
                             <span class="flex-1 ms-3 whitespace-nowrap">All</span>
-                            <span
-                                class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-white bg-black rounded-full dark:bg-white dark:text-black">25</span>
+                            <span id="allProjectsCount"
+                                class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-white bg-black rounded-full dark:bg-white dark:text-black">0</span>
                             </div>
                         </li>
 
@@ -293,3 +293,13 @@ function todaysDate() {
 }
 
 setInterval(todaysDate, 1000);
+
+// Subscribe to the 'projectsUpdated' event
+pubsub.subscribe("projectsUpdated", updateProjectCount);
+
+function updateProjectCount(projectCount) {
+  const projectCountElement = getElement("#allProjectsCount");
+  if (projectCountElement) {
+    projectCountElement.textContent = projectCount;
+  }
+}
