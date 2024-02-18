@@ -82,8 +82,8 @@ export default function drawer() {
                                     stroke-width="2" d="m1 1 4 4 4-4" />
                             </svg>
                         </button>
-                        <ul id="dropdown-example" class="hidden py-2 space-y-2">
-                            <li id="newProject" data-modal-target="crud-modal" data-modal-toggle="crud-modal">
+                        <div id="dropdown-example" class="hidden py-2 space-y-2">
+                            <div id="newProject" data-modal-target="crud-modal" data-modal-toggle="crud-modal">
                                 <div
                                     class="cursor-pointer flex items-center justify-between w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 focus:bg-gray-700">
                                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="20"
@@ -100,8 +100,8 @@ export default function drawer() {
                                     </svg>
                                     <p class="text-center w-full text-xs mt-[.2rem] italic text-gray-300">New project</p>
                                 </div>
-                            </li>
-                        </ul>
+                            </div>
+                        </div>
                     </li>
 
                     <li id="allProjects">
