@@ -9811,6 +9811,7 @@ function createTODOCardElement(name, description, date, category, id) {
     <div class="flex flex-col items-center">
       <p class=" text-gray-800 dark:text-gray-300">${description}</p>
       <p class=" m-4 text-sm text-gray-800 dark:text-gray-300">Due: ${date}</p>
+      <p class=" text-sm text-gray-800 dark:text-gray-300">Category: ${category}</p>
     </div>
     <div class="flex justify-around items-center mt-6">
         <button data-complete
@@ -9829,7 +9830,6 @@ function createTODOCardElement(name, description, date, category, id) {
 function addNewProjectToDOM(name, description, date, category, id) {
   const pages = [
     //> they are data elements, so use data when selecting them
-    "completedProjectsPage",
     "allProjectsPage",
     "activeProjectsPage",
   ];
