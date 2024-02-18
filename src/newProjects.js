@@ -19,6 +19,9 @@ function removeNewProject(e) {
     projects = projects.filter((project) => {
       return generateNewProjectId(project.name) !== projectId;
     });
+    //? Update local storage
+    localStorage.setItem("projects", JSON.stringify(projects));
+    //? Publish the updated number of projects
     pubsub.publish("projectsUpdated", projects.length);
 
     //* Remove the project from the navbar and the page
@@ -77,7 +80,24 @@ function appendNewProjectElementToNav(newElement) {
 
 //? get data from the form
 
-let projects = [];
+let projects = JSON.parse(localStorage.getItem("projects")) || [];
+
+//* Display the projects on the page from local storage
+document.addEventListener("DOMContentLoaded", () => {
+  projects.forEach((project) => {
+    const newElement = createNewProjectElement(project);
+    appendNewProjectElementToNav(newElement);
+    const str = format(project.date, "EEEE, d MMMM yyyy");
+    addNewProjectToDOM(
+      project.name,
+      project.description,
+      str,
+      project.category,
+      project.name
+    );
+  });
+  pubsub.publish("projectsUpdated", projects.length);
+});
 
 export function getFormData(e) {
   e.preventDefault();
@@ -95,6 +115,10 @@ export function getFormData(e) {
   } else {
     const newProject = { name, date, category, description };
     projects.push(newProject);
+
+    //* Save the projects to local storage
+    localStorage.setItem("projects", JSON.stringify(projects));
+
     pubsub.publish("projectsUpdated", projects.length);
     form.reset();
     modal.hide();
