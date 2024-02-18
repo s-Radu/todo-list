@@ -30,16 +30,17 @@ import footer from "./footer";
   parentElement.appendChild(nav());
   parentElement.appendChild(navDrawer());
   parentElement.appendChild(homePage());
-  // parentElement.appendChild(projectsPage());
-  // parentElement.appendChild(activeProjectsPage());
-  // parentElement.appendChild(completedProjectsPage());
-  // parentElement.appendChild(notesPage());
+  parentElement.appendChild(projectsPage());
+  parentElement.appendChild(activeProjectsPage());
+  parentElement.appendChild(completedProjectsPage());
+  parentElement.appendChild(notesPage());
   parentElement.appendChild(newProjectModal());
   parentElement.appendChild(footer());
 
   //> DOM elements
   let darkModeToggle = getElement(TOGGLE_SELECTOR);
-  const newProjectElements = getElement("[data-newProject]", true);
+
+  let ids = ["home", "allProjects", "active", "completed", "notes"];
 
   //> Event listeners
   darkModeToggle.addEventListener("click", toggleDarkMode);
@@ -48,6 +49,27 @@ import footer from "./footer";
 
   //> Functions
   // getUserName(); //> Will be put back to work as soon as we got things moving better
+
+  ids.forEach((id) => {
+    getElement(`#${id}`).addEventListener("click", (e) => {
+      console.log(`#${id} clicked`);
+      const pages = [
+        "homePage",
+        "allProjectsPage",
+        "activePage",
+        "completedPage",
+        "notesPage",
+      ];
+
+      pages.forEach((page) => {
+        if (page === `${id}Page`) {
+          getElement(`#${page}`).classList.remove("hidden");
+        } else {
+          getElement(`#${page}`).classList.add("hidden");
+        }
+      });
+    });
+  });
 
   //* Add event listener to the new project button
 

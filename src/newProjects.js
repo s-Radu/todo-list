@@ -4,16 +4,6 @@ import { format } from "date-fns";
 const DROPDOWN_SELECTOR = "#dropdown-example";
 const NEW_PROJECT_SELECTOR = "#newProject";
 
-let ids = [
-  "home",
-  "projects",
-  "allProjects",
-  "active",
-  "completed",
-  "notes",
-  "newProject",
-];
-
 //? Removes the new project from the list
 function removeNewProject(e) {
   let element = e.target.closest("li");

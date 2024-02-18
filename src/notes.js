@@ -2,8 +2,8 @@ export default function allProjects() {
   let ele = document.createElement("div");
   ele.className =
     //? might have to add padding bot
-    "flex flex-col font-josefin text-white container mx-auto m-4 min-h-screen ";
-  ele.id = "allProjectsPage";
+    "hidden flex flex-col font-josefin text-white container mx-auto m-4 min-h-screen ";
+  ele.id = "notesPage";
   ele.innerHTML = `
     <h1 class="text-center text-4xl m-4 text-gray-500 dark:text-white">Notes</h1>
   
@@ -73,3 +73,5 @@ export default function allProjects() {
 
   return ele;
 }
+
+//? Add funcitonality to handle the adding, deleting, editing, sorting and storing in the local storage of new notes.
