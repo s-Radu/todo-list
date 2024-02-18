@@ -232,14 +232,17 @@ export default function drawer() {
 
   return drawer;
 }
+export let userName;
 
 export function getUserName() {
-  let userName = prompt("Name? ");
-  const userNameDisplay = document.querySelector("#drawer-navigation-label");
-  if (userName === null || userName === "") {
-    userName = "new user";
-  }
-  userNameDisplay.textContent = userName;
+  setTimeout(() => {
+    userName = prompt("Name? ");
+    const userNameDisplay = document.querySelector("#drawer-navigation-label");
+    if (userName === null || userName === "") {
+      userName = "new user";
+    }
+    userNameDisplay.textContent = userName;
+  }, 500);
 }
 
 // function todaysDate() {

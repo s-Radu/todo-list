@@ -1,4 +1,5 @@
 import { getElement } from "./utilis";
+import { userName } from "./drawer";
 import { add, format } from "date-fns";
 import pubsub from "./utilis.js";
 
@@ -10,7 +11,9 @@ function removeNewProject(e) {
   let projectId = e.target.closest("div.project-item").dataset.projectId;
 
   //! Ask the user to confirm the deletion
-  let userResponse = confirm("Are you sure you want to delete this project?");
+  let userResponse = confirm(
+    `${userName}, are you sure you want to delete this project?`
+  );
   if (userResponse) {
     //* Remove the project from the projects array
     projects = projects.filter((project) => {
