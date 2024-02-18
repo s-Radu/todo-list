@@ -60,6 +60,7 @@ export default function footer() {
       if (content) {
         drawer.querySelector("#drawer-title").textContent = content.title;
         drawer.querySelector("#drawer-content").innerHTML = content.content;
+        window.scrollTo({ top: 0, behavior: "smooth" });
       }
     });
   });
