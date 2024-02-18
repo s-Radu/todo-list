@@ -82,7 +82,7 @@ function appendNewProjectElement(newElement) {
 
 let projects = [];
 
-function getFormData(e) {
+export function getFormData(e) {
   e.preventDefault();
 
   const modalEl = getElement("#crud-modal");
@@ -128,31 +128,6 @@ function getFormData(e) {
 // }, 100);
 
 //? Insted of using the setTimeout we can use a mutation observer to observe the content div and add the event listener to the submit button, observing means it will watch for changes in the content div and once the submit button is added to the content div it will add the event listener to it
-
-const parentElement = document.getElementById("content");
-
-//> Options for the observer (which mutations to observe)
-const config = { childList: true, subtree: true };
-
-//> Callback function to execute when mutations are observed
-const callback = function (mutationsList, observer) {
-  for (let mutation of mutationsList) {
-    if (mutation.type === "childList") {
-      const submitButton = getElement("[data-submit");
-      if (submitButton) {
-        submitButton.addEventListener("click", getFormData);
-        console.log("event added");
-        observer.disconnect(); //> Stop observing once the element is found
-      }
-    }
-  }
-};
-
-//> Create an observer instance linked to the callback function
-const observer = new MutationObserver(callback);
-
-//> Start observing the target node for configured mutations
-observer.observe(parentElement, config);
 
 //! new additions, save data to local storage, make sure you can use the date when you retrive it from the local storage, make use of date-fnc library to format the date
 //* create elements for the todo item to be apended to the DOM on the right pages
