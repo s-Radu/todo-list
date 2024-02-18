@@ -17,8 +17,8 @@ export default function home() {
     </p>
     <p id="projectsCount" class="text-center text-lg m-4 text-gray-500 dark:text-gray-300 w-3/4 mx-auto"></p>
     <div class="flex justify-between w-full ">
-      <img src="${arrowLeft}" alt="arrow left" class="absolute hidden md:block left-10 -top-40 w-44 h-44">
-      <img src="${arrowRight}" alt="arrow right" class="absolute hidden md:block right-28 -top-40 w-44 h-44">
+      <img src="${arrowLeft}" alt="arrow left" class="absolute hidden md:block left-10 top-0 w-44 h-44">
+      <img src="${arrowRight}" alt="arrow right" class="absolute hidden md:block right-28 top-0 w-44 h-44">
     </div>
 `;
 

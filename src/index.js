@@ -53,7 +53,6 @@ import footer from "./footer";
 
   ids.forEach((id) => {
     getElement(`#${id}`).addEventListener("click", (e) => {
-      console.log(`#${id} clicked`);
       const pages = [
         "homePage",
         "allProjectsPage",
@@ -84,7 +83,6 @@ import footer from "./footer";
         const submitButton = getElement("[data-submit");
         if (submitButton) {
           submitButton.addEventListener("click", getFormData);
-          console.log("event added");
           observer.disconnect(); //> Stop observing once the element is found
         }
       }
