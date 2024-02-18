@@ -5,7 +5,6 @@ import "./darkMode.js";
 //> module imports
 import { getElement } from "./utilis";
 import { toggleDarkMode } from "./darkMode";
-//TODO if we delete import newProjects the code will not work because webpack will not bundle the file, so we need to bring the final function here in order to add it to an event listener so it will work
 import { getFormData } from "./newProjects";
 import { getUserName } from "./drawer";
 import nav from "./nav";
@@ -30,7 +29,6 @@ import footer from "./footer";
   parentElement.appendChild(nav());
   parentElement.appendChild(navDrawer());
   parentElement.appendChild(homePage());
-  // setupSubscriptions();
   parentElement.appendChild(projectsPage());
   parentElement.appendChild(activeProjectsPage());
   parentElement.appendChild(completedProjectsPage());
