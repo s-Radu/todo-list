@@ -5,7 +5,7 @@ export function getElement(selector, all = false) {
     : parentElement.querySelector(selector);
 }
 
-export default class PubSub {
+class PubSub {
   constructor() {
     this.events = {};
   }
@@ -36,3 +36,5 @@ export default class PubSub {
     );
   }
 }
+
+export default new PubSub();

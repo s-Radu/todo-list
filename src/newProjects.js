@@ -1,5 +1,6 @@
 import { getElement } from "./utilis";
 import { format } from "date-fns";
+import pubsub from "./utilis.js";
 
 const DROPDOWN_SELECTOR = "#dropdown-example";
 const NEW_PROJECT_SELECTOR = "#newProject";
@@ -14,7 +15,7 @@ function removeNewProject(e) {
     const projectId = generateNewProjectId(project.name);
     return projectId !== element.id;
   });
-  console.log(...projects);
+  pubsub.publish("projectsUpdated", projects.length);
   element.remove();
 }
 
@@ -88,7 +89,7 @@ export function getFormData(e) {
   } else {
     const newProject = { name, date, category, description };
     projects.push(newProject);
-    console.log(...projects);
+    pubsub.publish("projectsUpdated", projects.length);
     form.reset();
     modal.hide();
 
