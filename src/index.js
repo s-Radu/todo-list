@@ -30,7 +30,7 @@ import footer from "./footer";
   parentElement.appendChild(nav());
   parentElement.appendChild(navDrawer());
   parentElement.appendChild(homePage());
-  setupSubscriptions();
+  // setupSubscriptions();
   parentElement.appendChild(projectsPage());
   parentElement.appendChild(activeProjectsPage());
   parentElement.appendChild(completedProjectsPage());

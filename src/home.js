@@ -24,12 +24,10 @@ export default function home() {
   return home;
 }
 
-export function setupSubscriptions() {
-  //* Subscribe to 'projectsUpdated' event
-  pubsub.subscribe("projectsUpdated", (newProjectsCount) => {
-    const projectsCountElement = getElement("#projectsCount");
-    if (projectsCountElement) {
-      projectsCountElement.textContent = `You have ${newProjectsCount} open tasks at the moment`;
-    }
-  });
-}
+//* Subscribe to 'projectsUpdated' event
+pubsub.subscribe("projectsUpdated", (newProjectsCount) => {
+  const projectsCountElement = getElement("#projectsCount");
+  if (projectsCountElement) {
+    projectsCountElement.textContent = `You have ${newProjectsCount} open tasks at the moment`;
+  }
+});
