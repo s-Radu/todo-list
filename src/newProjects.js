@@ -1,4 +1,5 @@
 import { getElement } from "./utilis";
+import { format } from "date-fns";
 
 const DROPDOWN_SELECTOR = "#dropdown-example";
 const NEW_PROJECT_SELECTOR = "#newProject";
@@ -108,10 +109,11 @@ function getFormData(e) {
     appendNewProjectElement(newElement);
 
     const homePage = getElement("#homePage");
+    const str = format(date, "EEEE, d MMMM yyyy");
     const newProjectCard = createTodoElement(
       name,
       description,
-      date,
+      str,
       category,
       name //? Use the name as the id for the todo
     );
@@ -166,7 +168,7 @@ function createTodoElement(name, description, date, category, id) {
   element.innerHTML = `
     <div class="flex items-center justify-between mb-4">
     <h5 class="text-2xl font-bold text-gray-900 dark:text-white">${name}</h5>
-    <span>
+    <span class="cursor-pointer" data-delete>
         <svg class="w-3 h-3 text-gray-600 dark:text-white" aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -176,7 +178,7 @@ function createTodoElement(name, description, date, category, id) {
 </div>
 <div class="flex flex-col items-center">
   <p class=" text-gray-800 dark:text-gray-300">${description}</p>
-  <p class=" m-4 text-sm text-gray-800 dark:text-gray-300">${date}</p>
+  <p class=" m-4 text-sm text-gray-800 dark:text-gray-300">Due: ${date}</p>
 </div>
 <div class="flex justify-around items-center mt-6">
     <button data-complete
