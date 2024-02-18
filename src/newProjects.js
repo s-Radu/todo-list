@@ -9,19 +9,23 @@ const NEW_PROJECT_SELECTOR = "#newProject";
 function removeNewProject(e) {
   let projectId = e.target.closest("div.project-item").dataset.projectId;
 
-  // Remove the project from the projects array
-  projects = projects.filter((project) => {
-    return generateNewProjectId(project.name) !== projectId;
-  });
-  pubsub.publish("projectsUpdated", projects.length);
+  //! Ask the user to confirm the deletion
+  let userResponse = confirm("Are you sure you want to delete this project?");
+  if (userResponse) {
+    //* Remove the project from the projects array
+    projects = projects.filter((project) => {
+      return generateNewProjectId(project.name) !== projectId;
+    });
+    pubsub.publish("projectsUpdated", projects.length);
 
-  // Remove the project from the navbar and the page
-  const projectElements = document.querySelectorAll(
-    `[data-project-id="${projectId}"]`
-  );
-  projectElements.forEach((element) => {
-    element.remove();
-  });
+    //* Remove the project from the navbar and the page
+    const projectElements = document.querySelectorAll(
+      `[data-project-id="${projectId}"]`
+    );
+    projectElements.forEach((element) => {
+      element.remove();
+    });
+  }
 }
 
 //? Generates a new project id based on the name provided in the form
