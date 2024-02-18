@@ -1,5 +1,5 @@
 import { getElement } from "./utilis";
-import { format } from "date-fns";
+import { add, format } from "date-fns";
 import pubsub from "./utilis.js";
 
 const DROPDOWN_SELECTOR = "#dropdown-example";
@@ -65,7 +65,7 @@ function createNewProjectElement(project) {
 
   return newElement;
 }
-function appendNewProjectElement(newElement) {
+function appendNewProjectElementToNav(newElement) {
   insertNewElement(newElement);
 }
 
@@ -97,18 +97,10 @@ export function getFormData(e) {
     const newElement = createNewProjectElement(newProject);
 
     //* Append the new project element to the DOM
-    appendNewProjectElement(newElement);
+    appendNewProjectElementToNav(newElement);
 
-    const homePage = getElement("#homePage");
     const str = format(date, "EEEE, d MMMM yyyy");
-    const newProjectCard = createTodoElement(
-      name,
-      description,
-      str,
-      category,
-      name //? Use the name as the id for the todo
-    );
-    homePage.appendChild(newProjectCard);
+    addNewProjectToDOM(name, description, str, category, name);
   }
 }
 
@@ -158,4 +150,24 @@ function createTodoElement(name, description, date, category, id) {
 </div>
     `;
   return element;
+}
+
+function addNewProjectToDOM(name, description, date, category, id) {
+  const pages = [
+    //> they are data elements, so use data when selecting them
+    "completedProjectsPage",
+    "allProjectsPage",
+    "activeProjectsPage",
+  ];
+  pages.forEach((page) => {
+    const newProjectCard = createTodoElement(
+      name,
+      description,
+      date,
+      category,
+      id
+    );
+    const pageElement = getElement(`[data-${page}]`);
+    pageElement.appendChild(newProjectCard);
+  });
 }
