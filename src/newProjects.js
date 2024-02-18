@@ -25,8 +25,9 @@ function removeNewProject(e) {
     pubsub.publish("projectsUpdated", projects.length);
 
     //* Remove the project from the navbar and the page
-    const projectElements = document.querySelectorAll(
-      `[data-project-id="${projectId}"]`
+    const projectElements = getElement(
+      `[data-project-id="${projectId}"]`,
+      true
     );
     projectElements.forEach((element) => {
       element.remove();
@@ -142,7 +143,6 @@ export function getFormData(e) {
 
 //? Insted of using the setTimeout we can use a mutation observer to observe the content div and add the event listener to the submit button, observing means it will watch for changes in the content div and once the submit button is added to the content div it will add the event listener to it
 
-//! new additions, save data to local storage, make sure you can use the date when you retrive it from the local storage, make use of date-fnc library to format the date
 //? modify the code so the user can also delete or mark the todo as complete and move it to the right page
 //< make sure the todo is saved to the local storage
 
@@ -179,7 +179,12 @@ function createTODOCardElement(name, description, date, category, id) {
         </button>
     </div>
     `;
+
   return element;
+}
+
+function checkClick(e) {
+  console.log(e.target);
 }
 
 function addNewProjectToDOM(name, description, date, category, id) {
@@ -200,6 +205,11 @@ function addNewProjectToDOM(name, description, date, category, id) {
     let deleteButton = newProjectCard.querySelector("[data-delete]");
     deleteButton.addEventListener("click", removeNewProject);
 
+    //? Add event listener to the complete button
+    const completeBtn = newProjectCard.querySelector("[data-complete]");
+    completeBtn.addEventListener("click", checkClick);
+
+    //? Add the new project card to the page
     const pageElement = getElement(`[data-${page}]`);
     pageElement.appendChild(newProjectCard);
   });
