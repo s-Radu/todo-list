@@ -6,32 +6,38 @@ import pubsub from "./utilis.js";
 const DROPDOWN_SELECTOR = "#dropdown-example";
 const NEW_PROJECT_SELECTOR = "#newProject";
 
+//? get the project id
+function getProjectIdFromEvent(e) {
+  return e.target.closest("div.project-item").dataset.projectId;
+}
+
 //? Removes the new project from the list
+function deleteProject(projectId) {
+  //* Remove the project from the projects array
+  projects = projects.filter((project) => {
+    return generateNewProjectId(project.name) !== projectId;
+  });
+  //? Update local storage
+  localStorage.setItem("projects", JSON.stringify(projects));
+  //? Publish the updated number of projects
+  pubsub.publish("projectsUpdated", projects.length);
+
+  //* Remove the project from the navbar and the page
+  const projectElements = getElement(`[data-project-id="${projectId}"]`, true);
+  projectElements.forEach((element) => {
+    element.remove();
+  });
+}
+
 function removeNewProject(e) {
-  let projectId = e.target.closest("div.project-item").dataset.projectId;
+  let projectId = getProjectIdFromEvent(e);
 
   //! Ask the user to confirm the deletion
   let userResponse = confirm(
     `${userName}, are you sure you want to delete this project?`
   );
   if (userResponse) {
-    //* Remove the project from the projects array
-    projects = projects.filter((project) => {
-      return generateNewProjectId(project.name) !== projectId;
-    });
-    //? Update local storage
-    localStorage.setItem("projects", JSON.stringify(projects));
-    //? Publish the updated number of projects
-    pubsub.publish("projectsUpdated", projects.length);
-
-    //* Remove the project from the navbar and the page
-    const projectElements = getElement(
-      `[data-project-id="${projectId}"]`,
-      true
-    );
-    projectElements.forEach((element) => {
-      element.remove();
-    });
+    deleteProject(projectId);
   }
 }
 
@@ -183,8 +189,9 @@ function createTODOCardElement(name, description, date, category, id) {
   return element;
 }
 
-function checkClick(e) {
-  console.log(e.target);
+function moveToComplete(e) {
+  let projectId = getProjectIdFromEvent(e);
+  deleteProject(projectId);
 }
 
 function addNewProjectToDOM(name, description, date, category, id) {
@@ -207,7 +214,7 @@ function addNewProjectToDOM(name, description, date, category, id) {
 
     //? Add event listener to the complete button
     const completeBtn = newProjectCard.querySelector("[data-complete]");
-    completeBtn.addEventListener("click", checkClick);
+    completeBtn.addEventListener("click", moveToComplete);
 
     //? Add the new project card to the page
     const pageElement = getElement(`[data-${page}]`);
