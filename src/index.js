@@ -10,7 +10,7 @@ import { getUserName } from "./drawer";
 import nav from "./nav";
 import navDrawer from "./drawer";
 import newProjectModal from "./newProjectModal";
-import homePage, { setupSubscriptions } from "./home";
+import homePage from "./home";
 import projectsPage from "./allProjects";
 import activeProjectsPage from "./activeProjects";
 import completedProjectsPage from "./completedProjects";
@@ -47,7 +47,7 @@ import footer from "./footer";
   //? Adds the event listener to both our buttons
 
   //> Functions
-  // getUserName(); //> Will be put back to work as soon as we got things moving better
+  getUserName(); //> Will be put back to work as soon as we got things moving better
 
   ids.forEach((id) => {
     getElement(`#${id}`).addEventListener("click", (e) => {

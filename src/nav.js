@@ -49,9 +49,9 @@ export default function nav() {
                             </g>
                         </svg>  
                     <div id="toggle"
-                        class="w-12 h-6 flex items-center bg-black rounded-full p-1 cursor-pointer transform duration-200 ease-in-expo hover:scale-105">
+                        class="w-12 h-6 flex items-center bg-gray-800 dark:bg-gray-300 rounded-full p-1 cursor-pointer transform duration-200 ease-in-expo hover:scale-105">
                         <div id="circle"
-                            class="w-5 h-5 bg-white rounded-full shadow-md shadow-black duration-500 translate-x-5  ease-in-expo">
+                            class="w-5 h-5 bg-gray-300 dark:bg-gray-800 rounded-full shadow-md shadow-black duration-500 translate-x-5  ease-in-expo">
                         </div>
                     </div>
                 </div>
