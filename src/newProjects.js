@@ -200,29 +200,24 @@ function moveToComplete(e) {
 }
 
 function addNewProjectToDOM(name, description, date, category, id) {
-  const pages = [
-    //> they are data elements, so use data when selecting them
-    "allProjectsPage",
-    "activeProjectsPage",
-  ];
-  pages.forEach((page) => {
-    const newProjectCard = createTODOCardElement(
-      name,
-      description,
-      date,
-      category,
-      id
-    );
-    //? Add event listener to the delete button
-    let deleteButton = newProjectCard.querySelector("[data-delete]");
-    deleteButton.addEventListener("click", removeNewProject);
+  const page = "activeProjectsPage";
+  const newProjectCard = createTODOCardElement(
+    name,
+    description,
+    date,
+    category,
+    id
+  );
 
-    //? Add event listener to the complete button
-    const completeBtn = newProjectCard.querySelector("[data-complete]");
-    completeBtn.addEventListener("click", moveToComplete);
+  //? Add event listener to the delete button
+  let deleteButton = newProjectCard.querySelector("[data-delete]");
+  deleteButton.addEventListener("click", removeNewProject);
 
-    //? Add the new project card to the page
-    const pageElement = getElement(`[data-${page}]`);
-    pageElement.appendChild(newProjectCard);
-  });
+  //? Add event listener to the complete button
+  const completeBtn = newProjectCard.querySelector("[data-complete]");
+  completeBtn.addEventListener("click", moveToComplete);
+
+  //? Add the new project card to the page
+  const pageElement = getElement(`[data-${page}]`);
+  pageElement.appendChild(newProjectCard);
 }

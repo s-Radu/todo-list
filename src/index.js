@@ -11,7 +11,6 @@ import nav from "./nav";
 import navDrawer from "./drawer";
 import newProjectModal from "./newProjectModal";
 import homePage from "./home";
-import projectsPage from "./allProjects";
 import activeProjectsPage from "./activeProjects";
 import completedProjectsPage from "./completedProjects";
 import notesPage from "./notes";
@@ -29,7 +28,6 @@ import footer from "./footer";
   parentElement.appendChild(nav());
   parentElement.appendChild(navDrawer());
   parentElement.appendChild(homePage());
-  parentElement.appendChild(projectsPage());
   parentElement.appendChild(activeProjectsPage());
   parentElement.appendChild(completedProjectsPage());
   parentElement.appendChild(notesPage());
@@ -39,7 +37,7 @@ import footer from "./footer";
   //> DOM elements
   let darkModeToggle = getElement(TOGGLE_SELECTOR);
 
-  let ids = ["mainHome", "home", "allProjects", "active", "completed", "notes"];
+  let ids = ["mainHome", "home", "active", "completed", "notes"];
 
   //> Event listeners
   darkModeToggle.addEventListener("click", toggleDarkMode);
@@ -51,13 +49,7 @@ import footer from "./footer";
 
   ids.forEach((id) => {
     getElement(`#${id}`).addEventListener("click", (e) => {
-      const pages = [
-        "homePage",
-        "allProjectsPage",
-        "activePage",
-        "completedPage",
-        "notesPage",
-      ];
+      const pages = ["homePage", "activePage", "completedPage", "notesPage"];
 
       pages.forEach((page) => {
         if (id === "mainHome" && page === "homePage") {

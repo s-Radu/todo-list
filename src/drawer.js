@@ -44,7 +44,7 @@ export default function drawer() {
                         </div>
                     </li>
 
-                    <li id="projects">
+                    <li id="tasks">
                         <button type="button" 
                             class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 focus:bg-gray-700"
                             aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
@@ -75,7 +75,7 @@ export default function drawer() {
                                     </g>
                                 </g>
                             </svg>
-                            <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Projects</span>
+                            <span class="flex-1 ms-3 text-left rtl:text-right whitespace-nowrap">Tasks</span>
                             <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
                                 viewBox="0 0 10 6">
                                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
@@ -104,25 +104,6 @@ export default function drawer() {
                         </div>
                     </li>
 
-                    <li id="allProjects">
-                        <div
-                            class="cursor-pointer flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-700" >
-                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="fill-black dark:fill-white" width="24"
-                                height="24">
-                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                                <g id="SVGRepo_iconCarrier">
-                                    <path
-                                        d="M9 12v1h1v-1H9zm-2 0v1h1v-1H7zm-2 0v1h1v-1H5zm4-4v1h1V8H9zM7 8v1h1V8H7zM5 8v1h1V8H5zm4-4v1h1V4H9zM7 5h1V4H7v1zM5 5h1V4H5v1zm4 3v1h1V8H9zM7 9h1V8H7v1zM5 9h1V8H5v1zm4 3v1h1v-1H9zm-2 1h1v-1H7v1zm-2 0h1v-1H5v1zm17 2V2H2v13h13v3h-2v1H4v1h9v1h5v-1h2v-1h-2v-1h-2v-3h6zM3 3h18v3H3V3zm0 4h18v3H3V7zm14 12v1h-3v-1h3zM3 14v-3h18v3H3zm6-1h1v-1H9v1zm0-4h1V8H9v1zm0-4h1V4H9v1zm-2 8h1v-1H7v1zm0-4h1V8H7v1zm0-4h1V4H7v1zm-2 8h1v-1H5v1zm0-4h1V8H5v1zm0-4h1V4H5v1zm4-1v1h1V4H9zM7 4v1h1V4H7zM5 4v1h1V4H5z">
-                                    </path>
-                                    <path fill="none" d="M0 0h24v24H0z"></path>
-                                </g>
-                            </svg>
-                            <span class="flex-1 ms-3 whitespace-nowrap">All</span>
-                            <span id="allProjectsCount"
-                                class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-white bg-black rounded-full dark:bg-white dark:text-black">0</span>
-                            </div>
-                        </li>
 
                     <li id="active">
                         <div
@@ -171,8 +152,8 @@ export default function drawer() {
                                 </g>
                             </svg>
                             <span class="flex-1 ms-3 whitespace-nowrap">Active</span>
-                            <span
-                                class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-white bg-black rounded-full dark:bg-white dark:text-black">13</span>
+                            <span id="activeProjectsCount"
+                                class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-white bg-black rounded-full dark:bg-white dark:text-black">0</span>
                             </div>
                         </li>
 
@@ -298,7 +279,7 @@ setInterval(todaysDate, 1000);
 pubsub.subscribe("projectsUpdated", updateProjectCount);
 
 function updateProjectCount(projectCount) {
-  const projectCountElement = getElement("#allProjectsCount");
+  const projectCountElement = getElement("#activeProjectsCount");
   if (projectCountElement) {
     projectCountElement.textContent = projectCount;
   }
