@@ -9541,7 +9541,7 @@ function nav() {
                             </svg>
                         </button>
 
-                    <a href="#" class="hover:scale-105">
+                    <a href="#" class="hover:scale-105" id="mainHome">
                         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="40"
                             hight="40">
                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -13920,7 +13920,7 @@ __webpack_require__.r(__webpack_exports__);
   //> DOM elements
   let darkModeToggle = (0,_utilis__WEBPACK_IMPORTED_MODULE_3__.getElement)(TOGGLE_SELECTOR);
 
-  let ids = ["home", "allProjects", "active", "completed", "notes"];
+  let ids = ["mainHome", "home", "allProjects", "active", "completed", "notes"];
 
   //> Event listeners
   darkModeToggle.addEventListener("click", _darkMode_js__WEBPACK_IMPORTED_MODULE_2__.toggleDarkMode);
@@ -13941,7 +13941,9 @@ __webpack_require__.r(__webpack_exports__);
       ];
 
       pages.forEach((page) => {
-        if (page === `${id}Page`) {
+        if (id === "mainHome" && page === "homePage") {
+          (0,_utilis__WEBPACK_IMPORTED_MODULE_3__.getElement)(`#${page}`).classList.remove("hidden");
+        } else if (page === `${id}Page`) {
           (0,_utilis__WEBPACK_IMPORTED_MODULE_3__.getElement)(`#${page}`).classList.remove("hidden");
         } else {
           (0,_utilis__WEBPACK_IMPORTED_MODULE_3__.getElement)(`#${page}`).classList.add("hidden");
