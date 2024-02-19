@@ -15,8 +15,9 @@ function getProjectIdFromEvent(e) {
 function deleteProject(projectId) {
   //* Remove the project from the projects array
   projects = projects.filter((project) => {
-    return generateNewProjectId(project.name) !== projectId;
+    return project.id !== projectId;
   });
+
   //? Update local storage
   localStorage.setItem("projects", JSON.stringify(projects));
   //? Publish the updated number of projects
@@ -41,9 +42,9 @@ function removeNewProject(e) {
   }
 }
 
-//? Generates a new project id based on the name provided in the form
-function generateNewProjectId(name) {
-  return `${name.replace(/\s+/g, "-").toLowerCase()}`;
+//? Generates a new project id using the crypto.randomUUID method
+function generateNewProjectId() {
+  return crypto.randomUUID();
 }
 
 //? Creates a new list item element with an id and title provided by the form
@@ -73,14 +74,14 @@ function insertNewElement(newElement) {
 }
 
 function createNewProjectElement(project) {
-  const newId = generateNewProjectId(project.name);
-  const newElement = createNewNavProject(newId, project.name);
+  const newElement = createNewNavProject(project.id, project.name);
 
   //! Add an event listener to the new project element
   newElement.addEventListener("click", removeNewProject);
 
   return newElement;
 }
+
 function appendNewProjectElementToNav(newElement) {
   insertNewElement(newElement);
 }
@@ -100,7 +101,7 @@ document.addEventListener("DOMContentLoaded", () => {
       project.description,
       str,
       project.category,
-      project.name
+      project.id
     );
   });
   pubsub.publish("projectsUpdated", projects.length);
@@ -120,13 +121,16 @@ export function getFormData(e) {
   if (name === "" || date === "" || category === "") {
     alert("Please fill in all the fields");
   } else {
-    const newProject = { name, date, category, description };
+    const id = generateNewProjectId();
+    const newProject = { id, name, date, category, description };
     projects.push(newProject);
 
     //* Save the projects to local storage
     localStorage.setItem("projects", JSON.stringify(projects));
 
+    //? update the pubsub
     pubsub.publish("projectsUpdated", projects.length);
+    //? Reset the form and hide the modal
     form.reset();
     modal.hide();
 
@@ -136,8 +140,9 @@ export function getFormData(e) {
     //* Append the new project element to the DOM
     appendNewProjectElementToNav(newElement);
 
+    //? Make use of date-fns to update the date on the new project card
     const str = format(date, "EEEE, d MMMM yyyy");
-    addNewProjectToDOM(name, description, str, category, name);
+    addNewProjectToDOM(name, description, str, category, id);
   }
 }
 
@@ -149,7 +154,7 @@ export function getFormData(e) {
 
 //? Insted of using the setTimeout we can use a mutation observer to observe the content div and add the event listener to the submit button, observing means it will watch for changes in the content div and once the submit button is added to the content div it will add the event listener to it
 
-//? modify the code so the user can also delete or mark the todo as complete and move it to the right page
+//* modify the code so the user can also delete or mark the todo as complete and move it to the right page
 //< make sure the todo is saved to the local storage
 
 function createTODOCardElement(name, description, date, category, id) {
@@ -161,7 +166,7 @@ function createTODOCardElement(name, description, date, category, id) {
   element.innerHTML = `
     <div class="flex items-center justify-between mb-4">
     <h5 class="text-2xl font-bold text-gray-900 dark:text-white">${name}</h5>
-    <span class="cursor-pointer" data-delete="${id}">
+    <span class="cursor-pointer hover:scale-110" data-delete="${id}">
         <svg class="w-3 h-3 text-gray-600 dark:text-white" aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -170,7 +175,7 @@ function createTODOCardElement(name, description, date, category, id) {
     </span>
     </div>
     <div class="flex flex-col items-center">
-      <p class=" text-gray-800 dark:text-gray-300">${description}</p>
+      <p class="text-xl text-gray-800 dark:text-gray-300">${description}</p>
       <p class=" m-4 text-sm text-gray-800 dark:text-gray-300">Due: ${date}</p>
       <p class=" text-sm text-gray-800 dark:text-gray-300">Category: ${category}</p>
     </div>
