@@ -19,7 +19,7 @@ export default function nav() {
                             </svg>
                         </button>
 
-                    <a href="#" class="hover:scale-105">
+                    <a href="#" class="hover:scale-105" id="mainHome">
                         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="40"
                             hight="40">
                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>

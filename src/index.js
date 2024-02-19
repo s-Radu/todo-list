@@ -39,7 +39,7 @@ import footer from "./footer";
   //> DOM elements
   let darkModeToggle = getElement(TOGGLE_SELECTOR);
 
-  let ids = ["home", "allProjects", "active", "completed", "notes"];
+  let ids = ["mainHome", "home", "allProjects", "active", "completed", "notes"];
 
   //> Event listeners
   darkModeToggle.addEventListener("click", toggleDarkMode);
@@ -60,7 +60,9 @@ import footer from "./footer";
       ];
 
       pages.forEach((page) => {
-        if (page === `${id}Page`) {
+        if (id === "mainHome" && page === "homePage") {
+          getElement(`#${page}`).classList.remove("hidden");
+        } else if (page === `${id}Page`) {
           getElement(`#${page}`).classList.remove("hidden");
         } else {
           getElement(`#${page}`).classList.add("hidden");
