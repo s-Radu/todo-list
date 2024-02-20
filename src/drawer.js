@@ -25,7 +25,7 @@ export default function drawer() {
                 <ul class="space-y-2 font-medium">
                     <li id="home">
                         <div
-                            class="cursor-pointer flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-700">
+                            class="cursor-pointer flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24"
                                 hight="24">
                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -46,7 +46,7 @@ export default function drawer() {
 
                     <li id="tasks">
                         <button type="button" 
-                            class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 focus:bg-gray-700"
+                            class="flex items-center w-full p-2 text-base text-gray-900 transition duration-75 rounded-lg group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 "
                             aria-controls="dropdown-example" data-collapse-toggle="dropdown-example">
                             <svg class="dark:fill-white fill-black" version="1.1" id="Layer_1"
                                 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -85,7 +85,7 @@ export default function drawer() {
                         <div id="dropdown-example" class="hidden py-2 space-y-2">
                             <div id="newTask" data-modal-target="crud-modal" data-modal-toggle="crud-modal">
                                 <div
-                                    class="cursor-pointer flex items-center justify-between w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 focus:bg-gray-700">
+                                    class="cursor-pointer flex items-center justify-between w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700">
                                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="20"
                                         height="20">
                                         <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -107,7 +107,7 @@ export default function drawer() {
 
                     <li id="active">
                         <div
-                            class="cursor-pointer flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-700">
+                            class="cursor-pointer flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                             <svg class="fill-black dark:fill-white" viewBox="0 0 512 512" enable-background="new 0 0 512 512"
                                 id="Daily_x5F_active_x5F_user" version="1.1" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"
                                 xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24">
@@ -159,7 +159,7 @@ export default function drawer() {
 
                     <li id="completed">
                         <div
-                            class="cursor-pointer flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-700">
+                            class="cursor-pointer flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                             <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" width="24"
                                 height=24>
                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -181,7 +181,7 @@ export default function drawer() {
 
                     <li id="notes">
                         <div
-                            class="cursor-pointer flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 focus:bg-gray-700">
+                            class="cursor-pointer flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24"
                                 height=24>
                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
