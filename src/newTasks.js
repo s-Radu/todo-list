@@ -101,7 +101,8 @@ document.addEventListener("DOMContentLoaded", () => {
       task.description,
       str,
       task.category,
-      task.id
+      task.id,
+      "activeTasksPage"
     );
   });
   pubsub.publish("tasksUpdated", activeTasks.length);
@@ -142,7 +143,14 @@ export function getFormData(e) {
 
     //? Make use of date-fns to update the date on the new task card
     const str = format(date, "EEEE, d MMMM yyyy");
-    addNewTaskCardToDOM(name, description, str, category, id);
+    addNewTaskCardToDOM(
+      name,
+      description,
+      str,
+      category,
+      id,
+      "activeTasksPage"
+    );
   }
 }
 
@@ -196,15 +204,46 @@ function createTODOCardElement(name, description, date, category, id) {
 
 let completedTasks = JSON.parse(localStorage.getItem("completedTasks")) || [];
 
-function moveTaskstoComplete(taskId) {}
+function completeTesk(taskId) {
+  //* Find the project in the projects array
+  const task = activeTasks.find((task) => task.id === taskId);
+
+  //* Remove the task from the tasks array
+  activeTasks = activeTasks.filter((task) => task.id !== taskId);
+
+  //* Add the task to the completedTasks array
+  completedTasks.push(task);
+
+  //? Update local storage
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+  localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
+
+  //* Remove the task from the navbar and the page
+  const taskElements = getElement(`[data-task-id="${taskId}"]`, true);
+  taskElements.forEach((element) => {
+    element.remove();
+  });
+
+  //* Add the task to the completed page
+  const str = format(task.date, "EEEE, d MMMM yyyy");
+
+  addNewTaskCardToDOM(
+    task.name,
+    task.description,
+    str,
+    task.category,
+    task.id,
+    "completedTasksPage"
+  );
+}
 
 function moveToComplete(e) {
   let taskId = getTaskId(e);
-  deleteTask(taskId);
+  completeTesk(taskId);
 }
 
-function addNewTaskCardToDOM(name, description, date, category, id) {
-  const page = "activeTasksPage";
+function addNewTaskCardToDOM(name, description, date, category, id, page) {
+  // const page = "activeTasksPage";
   const newTaskCard = createTODOCardElement(
     name,
     description,
