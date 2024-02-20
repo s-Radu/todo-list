@@ -83,7 +83,7 @@ export default function drawer() {
                             </svg>
                         </button>
                         <div id="dropdown-example" class="hidden py-2 space-y-2">
-                            <div id="newProject" data-modal-target="crud-modal" data-modal-toggle="crud-modal">
+                            <div id="newTask" data-modal-target="crud-modal" data-modal-toggle="crud-modal">
                                 <div
                                     class="cursor-pointer flex items-center justify-between w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 focus:bg-gray-700">
                                     <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="20"
@@ -98,7 +98,7 @@ export default function drawer() {
                                                 stroke-linecap="round" stroke-linejoin="round"></path>
                                         </g>
                                     </svg>
-                                    <p class="text-center w-full text-xs mt-[.2rem] italic text-gray-300">New project</p>
+                                    <p class="text-center w-full text-xs mt-[.2rem] italic text-gray-300">New Task</p>
                                 </div>
                             </div>
                         </div>
@@ -152,7 +152,7 @@ export default function drawer() {
                                 </g>
                             </svg>
                             <span class="flex-1 ms-3 whitespace-nowrap">Active</span>
-                            <span id="activeProjectsCount"
+                            <span id="activeTasksCount"
                                 class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-white bg-black rounded-full dark:bg-white dark:text-black">0</span>
                             </div>
                         </li>
@@ -275,12 +275,12 @@ function todaysDate() {
 
 setInterval(todaysDate, 1000);
 
-// Subscribe to the 'projectsUpdated' event
-pubsub.subscribe("projectsUpdated", updateProjectCount);
+// Subscribe to the 'tasksUpdated' event
+pubsub.subscribe("tasksUpdated", updateTasksCount);
 
-function updateProjectCount(projectCount) {
-  const projectCountElement = getElement("#activeProjectsCount");
-  if (projectCountElement) {
-    projectCountElement.textContent = projectCount;
+function updateTasksCount(tasksCount) {
+  const tasksCountElement = getElement("#activeTasksCount");
+  if (tasksCountElement) {
+    tasksCountElement.textContent = tasksCount;
   }
 }

@@ -1,4 +1,4 @@
-export default function allProjects() {
+export default function allTasks() {
   let ele = document.createElement("div");
   ele.className =
     //? might have to add padding bot

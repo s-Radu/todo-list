@@ -104,7 +104,7 @@ function createDrawer(title, content) {
 let about = {
   content: `
     <p class=" text-md text-gray-500 dark:text-gray-400">
-    The To-Do List project is a simple, web-based application designed to help users manage their tasks.
+    The To-Do List task is a simple, web-based application designed to help users manage their tasks.
     </p>
     <p class="mb-6 text-md text-gray-500 dark:text-gray-400">
     It provides an intuitive interface where users
@@ -136,7 +136,7 @@ let about = {
     </li>
     </ul>
     <p class="mb-6 indent-2 text-base text-gray-500 dark:text-gray-400">
-    This project is built using
+    This task is built using
     <span class="hover:underline hover:text-black hover:dark:text-white cursor-pointer">HTML</span>,
     <span class="hover:underline hover:text-black hover:dark:text-white cursor-pointer">TailwindCSS</span>,
     and

@@ -1,4 +1,4 @@
-export default function newProjectModal() {
+export default function newTaskModal() {
   let modal = document.createElement("div");
   modal.id = "crud-modal";
   modal.setAttribute("tabindex", "-1");
@@ -77,4 +77,4 @@ export default function newProjectModal() {
 
   return modal;
 }
-//? Might have to get rid of submit button and add a click event listener to the modal to add the new project
+//? Might have to get rid of submit button and add a click event listener to the modal to add the new Task

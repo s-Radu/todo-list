@@ -5,14 +5,14 @@ import "./darkMode.js";
 //> module imports
 import { getElement } from "./utilis";
 import { toggleDarkMode } from "./darkMode";
-import { getFormData } from "./newProjects";
+import { getFormData } from "./newTasks.js";
 import { getUserName } from "./drawer";
 import nav from "./nav";
 import navDrawer from "./drawer";
-import newProjectModal from "./newProjectModal";
+import newTaskModal from "./newTaskModal";
 import homePage from "./home";
-import activeProjectsPage from "./activeProjects";
-import completedProjectsPage from "./completedProjects";
+import activeTasksPage from "./activeTasks.js";
+import completedTasksPage from "./completedTasks.js";
 import notesPage from "./notes";
 import footer from "./footer";
 
@@ -28,10 +28,10 @@ import footer from "./footer";
   parentElement.appendChild(nav());
   parentElement.appendChild(navDrawer());
   parentElement.appendChild(homePage());
-  parentElement.appendChild(activeProjectsPage());
-  parentElement.appendChild(completedProjectsPage());
+  parentElement.appendChild(activeTasksPage());
+  parentElement.appendChild(completedTasksPage());
   parentElement.appendChild(notesPage());
-  parentElement.appendChild(newProjectModal());
+  parentElement.appendChild(newTaskModal());
   parentElement.appendChild(footer());
 
   //> DOM elements
@@ -45,7 +45,7 @@ import footer from "./footer";
   //? Adds the event listener to both our buttons
 
   //> Functions
-  getUserName(); //> Will be put back to work as soon as we got things moving better
+  // getUserName(); //> Will be put back to work as soon as we got things moving better
 
   ids.forEach((id) => {
     getElement(`#${id}`).addEventListener("click", (e) => {
@@ -63,7 +63,7 @@ import footer from "./footer";
     });
   });
 
-  //* Add event listener to the new project button
+  //* Add event listener to the new task button
 
   //> Options for the observer (which mutations to observe)
   const config = { childList: true, subtree: true };

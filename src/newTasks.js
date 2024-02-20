@@ -4,54 +4,54 @@ import { add, format } from "date-fns";
 import pubsub from "./utilis.js";
 
 const DROPDOWN_SELECTOR = "#dropdown-example";
-const NEW_PROJECT_SELECTOR = "#newProject";
+const NEW_TASK_SELECTOR = "#newTask";
 
-//? get the project id
-function getProjectIdFromEvent(e) {
-  return e.target.closest("div.project-item").dataset.projectId;
+//? get the task id
+function getTaskId(e) {
+  return e.target.closest("div.task-item").dataset.taskId;
 }
 
-//? Removes the new project from the list
-function deleteProject(projectId) {
-  //* Remove the project from the projects array
-  activeTasks = activeTasks.filter((project) => {
-    return project.id !== projectId;
+//? Removes the new task from the list
+function deleteTask(taskId) {
+  //* Remove the task from the tasks array
+  activeTasks = activeTasks.filter((task) => {
+    return task.id !== taskId;
   });
 
   //? Update local storage
   localStorage.setItem("activeTasks", JSON.stringify(activeTasks));
-  //? Publish the updated number of projects
-  pubsub.publish("projectsUpdated", activeTasks.length);
+  //? Publish the updated number of tasks
+  pubsub.publish("tasksUpdated", activeTasks.length);
 
-  //* Remove the project from the navbar and the page
-  const projectElements = getElement(`[data-project-id="${projectId}"]`, true);
-  projectElements.forEach((element) => {
+  //* Remove the task from the navbar and the page
+  const taskElements = getElement(`[data-task-id="${taskId}"]`, true);
+  taskElements.forEach((element) => {
     element.remove();
   });
 }
 
-function removeNewProject(e) {
-  let projectId = getProjectIdFromEvent(e);
+function removeTask(e) {
+  let taskId = getTaskId(e);
 
   //! Ask the user to confirm the deletion
   let userResponse = confirm(
-    `${userName}, are you sure you want to delete this project?`
+    `${userName}, are you sure you want to delete this task?`
   );
   if (userResponse) {
-    deleteProject(projectId);
+    deleteTask(taskId);
   }
 }
 
-//? Generates a new project id using the crypto.randomUUID method
-function generateNewProjectId() {
+//? Generates a new task id using the crypto.randomUUID method
+function generateNewTaskId() {
   return crypto.randomUUID();
 }
 
 //? Creates a new list item element with an id and title provided by the form
-function createNewNavProject(newId, newTitle) {
+function createNewNavTask(newId, newTitle) {
   const newElement = document.createElement("div");
-  newElement.dataset.projectId = newId;
-  newElement.className = `project-item cursor-pointer flex items-center justify-between w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group
+  newElement.dataset.taskId = newId;
+  newElement.className = `task-item cursor-pointer flex items-center justify-between w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group
   hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 focus:bg-gray-700`;
   newElement.innerHTML = `${newTitle}
           <span>
@@ -68,21 +68,21 @@ function createNewNavProject(newId, newTitle) {
 //? Inserts the new element into the dropdown list
 function insertNewElement(newElement) {
   const parentUl = getElement(DROPDOWN_SELECTOR);
-  const newProjectLi = getElement(NEW_PROJECT_SELECTOR);
+  const newTaskEle = getElement(NEW_TASK_SELECTOR);
 
-  parentUl.insertBefore(newElement, newProjectLi);
+  parentUl.insertBefore(newElement, newTaskEle);
 }
 
-function createNewProjectElement(project) {
-  const newElement = createNewNavProject(project.id, project.name);
+function createNewTaskElement(task) {
+  const newElement = createNewNavTask(task.id, task.name);
 
-  //! Add an event listener to the new project element
-  newElement.addEventListener("click", removeNewProject);
+  //! Add an event listener to the new task element
+  newElement.addEventListener("click", removeTask);
 
   return newElement;
 }
 
-function appendNewProjectElementToNav(newElement) {
+function appendNewTaskElementToNav(newElement) {
   insertNewElement(newElement);
 }
 
@@ -90,21 +90,21 @@ function appendNewProjectElementToNav(newElement) {
 
 let activeTasks = JSON.parse(localStorage.getItem("activeTasks")) || [];
 
-//* Display the projects on the page from local storage
+//* Display the tasks on the page from local storage
 document.addEventListener("DOMContentLoaded", () => {
-  activeTasks.forEach((project) => {
-    const newElement = createNewProjectElement(project);
-    appendNewProjectElementToNav(newElement);
-    const str = format(project.date, "EEEE, d MMMM yyyy");
-    addNewProjectToDOM(
-      project.name,
-      project.description,
+  activeTasks.forEach((task) => {
+    const newElement = createNewTaskElement(task);
+    appendNewTaskElementToNav(newElement);
+    const str = format(task.date, "EEEE, d MMMM yyyy");
+    addNewTaskCardToDOM(
+      task.name,
+      task.description,
       str,
-      project.category,
-      project.id
+      task.category,
+      task.id
     );
   });
-  pubsub.publish("projectsUpdated", activeTasks.length);
+  pubsub.publish("tasksUpdated", activeTasks.length);
 });
 
 export function getFormData(e) {
@@ -121,28 +121,28 @@ export function getFormData(e) {
   if (name === "" || date === "" || category === "") {
     alert("Please fill in all the fields");
   } else {
-    const id = generateNewProjectId();
-    const newProject = { id, name, date, category, description };
-    activeTasks.push(newProject);
+    const id = generateNewTaskId();
+    const newTask = { id, name, date, category, description };
+    activeTasks.push(newTask);
 
-    //* Save the projects to local storage
+    //* Save the tasks to local storage
     localStorage.setItem("activeTasks", JSON.stringify(activeTasks));
 
     //? update the pubsub
-    pubsub.publish("projectsUpdated", activeTasks.length);
+    pubsub.publish("tasksUpdated", activeTasks.length);
     //? Reset the form and hide the modal
     form.reset();
     modal.hide();
 
-    //? Create a new project element with the data provided in the form
-    const newElement = createNewProjectElement(newProject);
+    //? Create a new task element with the data provided in the form
+    const newElement = createNewTaskElement(newTask);
 
-    //* Append the new project element to the DOM
-    appendNewProjectElementToNav(newElement);
+    //* Append the new task element to the DOM
+    appendNewTaskElementToNav(newElement);
 
-    //? Make use of date-fns to update the date on the new project card
+    //? Make use of date-fns to update the date on the new task card
     const str = format(date, "EEEE, d MMMM yyyy");
-    addNewProjectToDOM(name, description, str, category, id);
+    addNewTaskCardToDOM(name, description, str, category, id);
   }
 }
 
@@ -159,10 +159,10 @@ export function getFormData(e) {
 
 function createTODOCardElement(name, description, date, category, id) {
   let element = document.createElement("div");
-  element.dataset.projectId = id;
+  element.dataset.taskId = id;
   element.dataset.category = category;
   element.className =
-    "project-item max-w-sm m-4 p-6 bg-white rounded-xl shadow-md shadow-green-400 dark:bg-gray-800 dark:border-gray-700";
+    "task-item max-w-sm m-4 p-6 bg-white rounded-xl shadow-md shadow-green-400 dark:bg-gray-800 dark:border-gray-700";
   element.innerHTML = `
     <div class="flex items-center justify-between mb-4">
     <h5 class="text-2xl font-bold text-gray-900 dark:text-white">${name}</h5>
@@ -194,14 +194,18 @@ function createTODOCardElement(name, description, date, category, id) {
   return element;
 }
 
+let completedTasks = JSON.parse(localStorage.getItem("completedTasks")) || [];
+
+function moveTaskstoComplete(taskId) {}
+
 function moveToComplete(e) {
-  let projectId = getProjectIdFromEvent(e);
-  deleteProject(projectId);
+  let taskId = getTaskId(e);
+  deleteTask(taskId);
 }
 
-function addNewProjectToDOM(name, description, date, category, id) {
-  const page = "activeProjectsPage";
-  const newProjectCard = createTODOCardElement(
+function addNewTaskCardToDOM(name, description, date, category, id) {
+  const page = "activeTasksPage";
+  const newTaskCard = createTODOCardElement(
     name,
     description,
     date,
@@ -210,14 +214,14 @@ function addNewProjectToDOM(name, description, date, category, id) {
   );
 
   //? Add event listener to the delete button
-  let deleteButton = newProjectCard.querySelector("[data-delete]");
-  deleteButton.addEventListener("click", removeNewProject);
+  let deleteButton = newTaskCard.querySelector("[data-delete]");
+  deleteButton.addEventListener("click", removeTask);
 
   //? Add event listener to the complete button
-  const completeBtn = newProjectCard.querySelector("[data-complete]");
+  const completeBtn = newTaskCard.querySelector("[data-complete]");
   completeBtn.addEventListener("click", moveToComplete);
 
-  //? Add the new project card to the page
+  //? Add the new task card to the page
   const pageElement = getElement(`[data-${page}]`);
-  pageElement.appendChild(newProjectCard);
+  pageElement.appendChild(newTaskCard);
 }

@@ -1,4 +1,4 @@
-export default function completedProjects() {
+export default function completedTasks() {
   let ele = document.createElement("div");
   ele.className =
     "hidden flex flex-col font-josefin text-white container mx-auto m-4 min-h-screen";
