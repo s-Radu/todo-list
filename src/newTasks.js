@@ -292,7 +292,16 @@ function moveToComplete(e) {
   completeTesk(taskId);
 }
 
-function addNewTaskCardToDOM(name, description, date, category, id, page) {
+function addNewTaskCardToDOM(
+  name,
+  description,
+  date,
+  category,
+  id,
+  page,
+  showCompleteButton = true,
+  showEditButton = true
+) {
   // const page = "activeTasksPage";
   const newTaskCard = createTODOCardElement(
     name,
@@ -300,8 +309,8 @@ function addNewTaskCardToDOM(name, description, date, category, id, page) {
     date,
     category,
     id,
-    true,
-    true
+    showCompleteButton,
+    showEditButton
   );
 
   //? Add event listener to the delete button
@@ -309,8 +318,10 @@ function addNewTaskCardToDOM(name, description, date, category, id, page) {
   deleteButton.addEventListener("click", removeTask);
 
   //? Add event listener to the complete button
-  const completeBtn = newTaskCard.querySelector("[data-complete]");
-  completeBtn.addEventListener("click", moveToComplete);
+  if (showCompleteButton) {
+    const completeBtn = newTaskCard.querySelector("[data-complete]");
+    completeBtn.addEventListener("click", moveToComplete);
+  }
 
   //? Add the new task card to the page
   const pageElement = getElement(`[data-${page}]`);
