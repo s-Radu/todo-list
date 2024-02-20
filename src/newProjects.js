@@ -14,14 +14,14 @@ function getProjectIdFromEvent(e) {
 //? Removes the new project from the list
 function deleteProject(projectId) {
   //* Remove the project from the projects array
-  projects = projects.filter((project) => {
+  activeTasks = activeTasks.filter((project) => {
     return project.id !== projectId;
   });
 
   //? Update local storage
-  localStorage.setItem("projects", JSON.stringify(projects));
+  localStorage.setItem("activeTasks", JSON.stringify(activeTasks));
   //? Publish the updated number of projects
-  pubsub.publish("projectsUpdated", projects.length);
+  pubsub.publish("projectsUpdated", activeTasks.length);
 
   //* Remove the project from the navbar and the page
   const projectElements = getElement(`[data-project-id="${projectId}"]`, true);
@@ -88,11 +88,11 @@ function appendNewProjectElementToNav(newElement) {
 
 //? get data from the form
 
-let projects = JSON.parse(localStorage.getItem("projects")) || [];
+let activeTasks = JSON.parse(localStorage.getItem("activeTasks")) || [];
 
 //* Display the projects on the page from local storage
 document.addEventListener("DOMContentLoaded", () => {
-  projects.forEach((project) => {
+  activeTasks.forEach((project) => {
     const newElement = createNewProjectElement(project);
     appendNewProjectElementToNav(newElement);
     const str = format(project.date, "EEEE, d MMMM yyyy");
@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
       project.id
     );
   });
-  pubsub.publish("projectsUpdated", projects.length);
+  pubsub.publish("projectsUpdated", activeTasks.length);
 });
 
 export function getFormData(e) {
@@ -123,13 +123,13 @@ export function getFormData(e) {
   } else {
     const id = generateNewProjectId();
     const newProject = { id, name, date, category, description };
-    projects.push(newProject);
+    activeTasks.push(newProject);
 
     //* Save the projects to local storage
-    localStorage.setItem("projects", JSON.stringify(projects));
+    localStorage.setItem("activeTasks", JSON.stringify(activeTasks));
 
     //? update the pubsub
-    pubsub.publish("projectsUpdated", projects.length);
+    pubsub.publish("projectsUpdated", activeTasks.length);
     //? Reset the form and hide the modal
     form.reset();
     modal.hide();
@@ -162,7 +162,7 @@ function createTODOCardElement(name, description, date, category, id) {
   element.dataset.projectId = id;
   element.dataset.category = category;
   element.className =
-    "project-item max-w-sm  mx-auto  m-8 p-6 bg-white  rounded-xl shadow-sm shadow-black dark:shadow-white dark:bg-gray-800 dark:border-gray-700";
+    "project-item max-w-sm m-4 p-6 bg-white rounded-xl shadow-md shadow-green-400 dark:bg-gray-800 dark:border-gray-700";
   element.innerHTML = `
     <div class="flex items-center justify-between mb-4">
     <h5 class="text-2xl font-bold text-gray-900 dark:text-white">${name}</h5>
