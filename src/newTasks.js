@@ -27,8 +27,10 @@ function deleteTask(taskId) {
   //? Update local storage
   localStorage.setItem("activeTasks", JSON.stringify(activeTasks));
   localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
+
   //? Publish the updated number of tasks
   pubsub.publish("tasksUpdated", activeTasks.length);
+  pubsub.publish("completedTasksUpdated", completedTasks.length);
 
   //* Remove the task from the navbar and the page
   const taskElements = getElement(`[data-task-id="${taskId}"]`, true);
@@ -127,6 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
       "completedTasksPage"
     );
   });
+  pubsub.publish("completedTasksUpdated", completedTasks.length);
 });
 
 export function getFormData(e) {
@@ -255,6 +258,9 @@ function completeTesk(taskId) {
     task.id,
     "completedTasksPage"
   );
+
+  //? Publish the updated number of tasks
+  pubsub.publish("completedTasksUpdated", completedTasks.length);
 }
 
 function moveToComplete(e) {

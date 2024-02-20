@@ -174,8 +174,8 @@ export default function drawer() {
                                 </g>
                             </svg>
                             <span class="flex-1 ms-3 whitespace-nowrap">Completed</span>
-                            <span
-                                class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-white bg-black rounded-full dark:bg-white dark:text-black">12</span>
+                            <span id="completedTasksCount"
+                                class="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-white bg-black rounded-full dark:bg-white dark:text-black">0</span>
                             </div>
                         </li>
 
@@ -275,12 +275,20 @@ function todaysDate() {
 
 setInterval(todaysDate, 1000);
 
-// Subscribe to the 'tasksUpdated' event
+//! Subscribe to the 'tasksUpdated' and 'completedTasksUpdated' events
 pubsub.subscribe("tasksUpdated", updateTasksCount);
+pubsub.subscribe("completedTasksUpdated", updateCompletedTasksCount);
 
 function updateTasksCount(tasksCount) {
   const tasksCountElement = getElement("#activeTasksCount");
   if (tasksCountElement) {
     tasksCountElement.textContent = tasksCount;
+  }
+}
+
+function updateCompletedTasksCount(tasksCount) {
+  const taskCountElement = getElement("#completedTasksCount");
+  if (taskCountElement) {
+    taskCountElement.textContent = tasksCount;
   }
 }
