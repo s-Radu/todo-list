@@ -9849,11 +9849,36 @@ function getFormData(e) {
 //* modify the code so the user can also delete or mark the todo as complete and move it to the right page
 //< make sure the todo is saved to the local storage
 
-function createTODOCardElement(name, description, date, category, id) {
+function createTODOCardElement(
+  name,
+  description,
+  date,
+  category,
+  id,
+  showCompleteButton = true,
+  showEditButton = true
+) {
   let element = document.createElement("div");
   element.dataset.taskId = id;
   element.dataset.category = category;
   element.className = `task-item max-w-sm m-4 p-6 bg-white rounded-xl shadow-md shadow-green-400 dark:bg-gray-800 dark:border-gray-700`;
+
+  let completeButtonHTML = showCompleteButton
+    ? `
+    <button data-complete
+        class="text-white bg-gray-600 shadow-sm shadow-gray-700 dark:shadow-gray-400 hover:bg-gray-500 inline-flex items-center rounded-lg text-sm px-5 py-2.5 text-center">
+        Completed
+    </button>`
+    : "";
+
+  let editButtonHTML = showEditButton
+    ? `
+    <button data-edit
+        class="text-white bg-gray-600 shadow-sm shadow-gray-700 dark:shadow-gray-400 hover:bg-gray-500 inline-flex items-center rounded-lg text-sm px-5 py-2.5 text-center">
+        Edit
+    </button>`
+    : "";
+
   element.innerHTML = `
     <div class="flex items-center justify-between mb-4">
     <h5 class="text-2xl font-bold text-gray-900 dark:text-white">${name}</h5>
@@ -9871,14 +9896,8 @@ function createTODOCardElement(name, description, date, category, id) {
       <p class=" text-sm text-gray-800 dark:text-gray-300">Category: ${category}</p>
     </div>
     <div class="flex justify-around items-center mt-6">
-        <button data-complete
-            class="text-white bg-gray-600 shadow-sm shadow-gray-700 dark:shadow-gray-400 hover:bg-gray-500 inline-flex items-center rounded-lg text-sm px-5 py-2.5 text-center">
-            Completed
-        </button>
-        <button data-edit
-            class="text-white bg-gray-600 shadow-sm shadow-gray-700 dark:shadow-gray-400 hover:bg-gray-500 inline-flex items-center rounded-lg text-sm px-5 py-2.5 text-center">
-            Edit
-        </button>
+        ${completeButtonHTML}
+        ${editButtonHTML}
     </div>
     `;
 
@@ -9901,6 +9920,9 @@ function completeTesk(taskId) {
   localStorage.setItem("activeTasks", JSON.stringify(activeTasks));
   localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
 
+  //? update pubsub
+  _utilis_js__WEBPACK_IMPORTED_MODULE_0__["default"].publish("tasksUpdated", activeTasks.length);
+
   //* Remove the task from the navbar and the page
   const taskElements = (0,_utilis_js__WEBPACK_IMPORTED_MODULE_0__.getElement)(`[data-task-id="${taskId}"]`, true);
   taskElements.forEach((element) => {
@@ -9916,7 +9938,9 @@ function completeTesk(taskId) {
     str,
     task.category,
     task.id,
-    "completedTasksPage"
+    "completedTasksPage",
+    false,
+    false
   );
 
   //? Publish the updated number of tasks
@@ -9935,7 +9959,9 @@ function addNewTaskCardToDOM(name, description, date, category, id, page) {
     description,
     date,
     category,
-    id
+    id,
+    true,
+    true
   );
 
   //? Add event listener to the delete button
