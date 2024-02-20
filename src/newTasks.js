@@ -126,7 +126,10 @@ document.addEventListener("DOMContentLoaded", () => {
       str,
       task.category,
       task.id,
-      "completedTasksPage"
+      "completedTasksPage",
+      false,
+      false,
+      task.shadowColor
     );
   });
   pubsub.publish("completedTasksUpdated", completedTasks.length);
@@ -196,12 +199,14 @@ function createTODOCardElement(
   category,
   id,
   showCompleteButton = true,
-  showEditButton = true
+  showEditButton = true,
+  shadowColor = "shadow-green-400"
 ) {
   let element = document.createElement("div");
+  let shadow = shadowColor ? shadowColor : "shadow-green-400";
   element.dataset.taskId = id;
   element.dataset.category = category;
-  element.className = `task-item max-w-sm m-4 p-6 bg-white rounded-xl shadow-md shadow-green-400 dark:bg-gray-800 dark:border-gray-700`;
+  element.className = `task-item max-w-sm m-4 p-6 bg-white rounded-xl shadow-md ${shadow} dark:bg-gray-800 dark:border-gray-700`;
 
   let completeButtonHTML = showCompleteButton
     ? `
@@ -254,6 +259,7 @@ function completeTesk(taskId) {
   activeTasks = activeTasks.filter((task) => task.id !== taskId);
 
   //* Add the task to the completedTasks array
+  task.shadowColor = "shadow-blue-400";
   completedTasks.push(task);
 
   //? Update local storage
@@ -280,7 +286,8 @@ function completeTesk(taskId) {
     task.id,
     "completedTasksPage",
     false,
-    false
+    false,
+    task.shadowColor
   );
 
   //? Publish the updated number of tasks
@@ -300,7 +307,8 @@ function addNewTaskCardToDOM(
   id,
   page,
   showCompleteButton = true,
-  showEditButton = true
+  showEditButton = true,
+  shadowColor
 ) {
   // const page = "activeTasksPage";
   const newTaskCard = createTODOCardElement(
@@ -310,7 +318,8 @@ function addNewTaskCardToDOM(
     category,
     id,
     showCompleteButton,
-    showEditButton
+    showEditButton,
+    shadowColor
   );
 
   //? Add event listener to the delete button
