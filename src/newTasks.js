@@ -13,13 +13,20 @@ function getTaskId(e) {
 
 //? Removes the new task from the list
 function deleteTask(taskId) {
-  //* Remove the task from the tasks array
+  //* Remove active task from the tasks array
   activeTasks = activeTasks.filter((task) => {
+    return task.id !== taskId;
+  });
+
+  //? Remove completed task from the tasks array
+
+  completedTasks = completedTasks.filter((task) => {
     return task.id !== taskId;
   });
 
   //? Update local storage
   localStorage.setItem("activeTasks", JSON.stringify(activeTasks));
+  localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
   //? Publish the updated number of tasks
   pubsub.publish("tasksUpdated", activeTasks.length);
 
@@ -108,6 +115,20 @@ document.addEventListener("DOMContentLoaded", () => {
   pubsub.publish("tasksUpdated", activeTasks.length);
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+  completedTasks.forEach((task) => {
+    const str = format(task.date, "EEEE, d MMMM yyyy");
+    addNewTaskCardToDOM(
+      task.name,
+      task.description,
+      str,
+      task.category,
+      task.id,
+      "completedTasksPage"
+    );
+  });
+});
+
 export function getFormData(e) {
   e.preventDefault();
 
@@ -169,8 +190,7 @@ function createTODOCardElement(name, description, date, category, id) {
   let element = document.createElement("div");
   element.dataset.taskId = id;
   element.dataset.category = category;
-  element.className =
-    "task-item max-w-sm m-4 p-6 bg-white rounded-xl shadow-md shadow-green-400 dark:bg-gray-800 dark:border-gray-700";
+  element.className = `task-item max-w-sm m-4 p-6 bg-white rounded-xl shadow-md shadow-green-400 dark:bg-gray-800 dark:border-gray-700`;
   element.innerHTML = `
     <div class="flex items-center justify-between mb-4">
     <h5 class="text-2xl font-bold text-gray-900 dark:text-white">${name}</h5>
@@ -215,7 +235,7 @@ function completeTesk(taskId) {
   completedTasks.push(task);
 
   //? Update local storage
-  localStorage.setItem("tasks", JSON.stringify(tasks));
+  localStorage.setItem("activeTasks", JSON.stringify(activeTasks));
   localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
 
   //* Remove the task from the navbar and the page
