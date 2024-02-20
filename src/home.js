@@ -5,7 +5,7 @@ import pubsub, { getElement } from "./utilis.js";
 export default function home() {
   let home = document.createElement("div");
   home.className =
-    "relative container mx-auto flex flex-col rounded-2xl m-4 h-screen";
+    "relative container mx-auto flex flex-col rounded-2xl min-h-screen";
   home.id = "homePage";
   home.innerHTML = `
 <h1 class="text-center text-4xl text-black dark:text-white mt-6 md:mt-40">Welcome to ToDoMaster!</h1>
@@ -28,6 +28,6 @@ export default function home() {
 pubsub.subscribe("projectsUpdated", (newProjectsCount) => {
   const projectsCountElement = getElement("#projectsCount");
   if (projectsCountElement) {
-    projectsCountElement.textContent = `You have ${newProjectsCount} open tasks at the moment`;
+    projectsCountElement.textContent = `You have ${newProjectsCount} active tasks at the moment`;
   }
 });
