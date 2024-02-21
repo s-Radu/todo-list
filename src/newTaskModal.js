@@ -43,7 +43,7 @@ export default function newTaskModal() {
                                       class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
                                   <select id="category"
                                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-400 focus:border-gray-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-gray-400 dark:focus:border-gray-600">
-                                      <option selected="">Select category</option>
+                                      <option selected="" value="urgent">Select category</option>
                                       <option value="urgent">Urgent</option>
                                       <option value="important">Important</option>
                                       <option value="upcoming">Upcoming</option>
