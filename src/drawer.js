@@ -23,7 +23,7 @@ export default function drawer() {
             </button>
             <div class="py-4 overflow-y-auto flex flex-col justify-between h-full">
                 <ul class="space-y-2 font-medium">
-                    <li id="home">
+                    <li id="home" data-drawer-hide="drawer-navigation" aria-controls="drawer-navigation">
                         <div
                             class="cursor-pointer flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24"
@@ -105,7 +105,7 @@ export default function drawer() {
                     </li>
 
 
-                    <li id="active">
+                    <li id="active" data-drawer-hide="drawer-navigation" aria-controls="drawer-navigation">
                         <div
                             class="cursor-pointer flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                             <svg class="fill-black dark:fill-white" viewBox="0 0 512 512" enable-background="new 0 0 512 512"
@@ -157,7 +157,7 @@ export default function drawer() {
                             </div>
                         </li>
 
-                    <li id="completed">
+                    <li id="completed" data-drawer-hide="drawer-navigation" aria-controls="drawer-navigation">
                         <div
                             class="cursor-pointer flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                             <svg viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" width="24"
@@ -179,7 +179,7 @@ export default function drawer() {
                             </div>
                         </li>
 
-                    <li id="notes">
+                    <li id="notes" data-drawer-hide="drawer-navigation" aria-controls="drawer-navigation">
                         <div
                             class="cursor-pointer flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700">
                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="24"
