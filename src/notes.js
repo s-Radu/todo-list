@@ -2,7 +2,7 @@ export default function allTasks() {
   let ele = document.createElement("div");
   ele.className =
     //? might have to add padding bot
-    "hidden flex flex-col font-josefin text-white container mx-auto m-4 min-h-screen ";
+    "hidden flex flex-col font-josefin text-white container mx-auto m-4 min-h-full ";
   ele.id = "notesPage";
   ele.innerHTML = `
     <h1 class="text-center text-4xl m-4 text-gray-500 dark:text-white">Notes</h1>
