@@ -135,16 +135,22 @@ document.addEventListener("DOMContentLoaded", () => {
   pubsub.publish("completedTasksUpdated", completedTasks.length);
 });
 
+function capitulizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 export function getFormData(e) {
   e.preventDefault();
 
   const modalEl = getElement("#crud-modal");
   const modal = FlowbiteInstances.getInstance("Modal", "crud-modal");
   const form = modalEl.querySelector("form");
-  const name = form.querySelector("#name").value;
+  const name = capitulizeFirstLetter(form.querySelector("#name").value);
   const date = form.querySelector("#date").value;
-  const category = form.querySelector("#category").value;
-  const description = form.querySelector("#description").value;
+  const category = capitulizeFirstLetter(form.querySelector("#category").value);
+  const description = capitulizeFirstLetter(
+    form.querySelector("#description").value
+  );
 
   if (name === "" || date === "" || category === "") {
     alert("Please fill in all the fields");
@@ -310,7 +316,6 @@ function addNewTaskCardToDOM(
   showEditButton = true,
   shadowColor
 ) {
-  // const page = "activeTasksPage";
   const newTaskCard = createTODOCardElement(
     name,
     description,
@@ -323,16 +328,27 @@ function addNewTaskCardToDOM(
   );
 
   //? Add event listener to the delete button
-  let deleteButton = newTaskCard.querySelector("[data-delete]");
+  const deleteButton = newTaskCard.querySelector("[data-delete]");
   deleteButton.addEventListener("click", removeTask);
 
-  //? Add event listener to the complete button
   if (showCompleteButton) {
+    //? Add event listener to the complete button
     const completeBtn = newTaskCard.querySelector("[data-complete]");
     completeBtn.addEventListener("click", moveToComplete);
+
+    //? Add event listener to the edit button
+    const editBtn = newTaskCard.querySelector("[data-edit]");
+    editBtn.addEventListener("click", editTask);
   }
 
   //? Add the new task card to the page
   const pageElement = getElement(`[data-${page}]`);
   pageElement.appendChild(newTaskCard);
+}
+
+function editTask(e) {
+  const taskId = getTaskId(e);
+  let task = activeTasks.find((task) => task.id === taskId);
+
+  console.log(task.name, task.description, task.date, task.category);
 }
