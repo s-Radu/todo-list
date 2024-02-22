@@ -1,6 +1,6 @@
 import { getElement } from "./utilis.js";
 import { userName } from "./drawer.js";
-import { add, format } from "date-fns";
+import { format } from "date-fns";
 import pubsub from "./utilis.js";
 
 const DROPDOWN_SELECTOR = "#dropdown-example";
@@ -104,11 +104,10 @@ document.addEventListener("DOMContentLoaded", () => {
   activeTasks.forEach((task) => {
     const newElement = createNewTaskElement(task);
     appendNewTaskElementToNav(newElement);
-    const str = format(task.date, "EEEE, d MMMM yyyy");
     addNewTaskCardToDOM(
       task.name,
       task.description,
-      str,
+      formatDate(task.date), //? format(task.date, "EEEE, d MMMM yyyy"
       task.category,
       task.id,
       "activeTasksPage"
@@ -119,11 +118,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
 document.addEventListener("DOMContentLoaded", () => {
   completedTasks.forEach((task) => {
-    const str = format(task.date, "EEEE, d MMMM yyyy");
     addNewTaskCardToDOM(
       task.name,
       task.description,
-      str,
+      formatDate(task.date), //? format(task.date, "EEEE, d MMMM yyyy"
       task.category,
       task.id,
       "completedTasksPage",
@@ -174,12 +172,11 @@ export function getFormData(e) {
     //* Append the new task element to the DOM
     appendNewTaskElementToNav(newElement);
 
-    //? Make use of date-fns to update the date on the new task card
-    const str = format(date, "EEEE, d MMMM yyyy");
     addNewTaskCardToDOM(
       name,
       description,
-      str,
+      //? Make use of date-fns to update the date on the new task card
+      formatDate(date), //? format(date, "EEEE, d MMMM yyyy"
       category,
       id,
       "activeTasksPage"
@@ -194,9 +191,6 @@ export function getFormData(e) {
 // }, 100);
 
 //? Insted of using the setTimeout we can use a mutation observer to observe the content div and add the event listener to the submit button, observing means it will watch for changes in the content div and once the submit button is added to the content div it will add the event listener to it
-
-//* modify the code so the user can also delete or mark the todo as complete and move it to the right page
-//< make sure the todo is saved to the local storage
 
 function createTODOCardElement(
   name,
@@ -276,18 +270,12 @@ function completeTesk(taskId) {
   pubsub.publish("tasksUpdated", activeTasks.length);
 
   //* Remove the task from the navbar and the page
-  const taskElements = getElement(`[data-task-id="${taskId}"]`, true);
-  taskElements.forEach((element) => {
-    element.remove();
-  });
-
-  //* Add the task to the completed page
-  const str = format(task.date, "EEEE, d MMMM yyyy");
+  deleteTask(taskId);
 
   addNewTaskCardToDOM(
     task.name,
     task.description,
-    str,
+    formatDate(task.date), //? format(task.date, "EEEE, d MMMM yyyy"
     task.category,
     task.id,
     "completedTasksPage",
@@ -298,6 +286,10 @@ function completeTesk(taskId) {
 
   //? Publish the updated number of tasks
   pubsub.publish("completedTasksUpdated", completedTasks.length);
+}
+
+function formatDate(date) {
+  return format(date, "EEEE, d MMMM yyyy");
 }
 
 function moveToComplete(e) {
@@ -354,8 +346,8 @@ function editTask(e) {
   parentElement.appendChild(
     showEditModal(task.name, task.description, task.date, task.category)
   );
-
-  console.log(task.name, task.description, task.date, task.category);
+  //? to remove the current task, we just uncoment the below function
+  deleteTask(taskId);
 }
 
 function showEditModal(name, description, date, category) {
@@ -452,7 +444,6 @@ function showEditModal(name, description, date, category) {
 function saveChanges(e) {
   e.preventDefault();
   const form = e.target.closest("form");
-  const modal = form.closest("[data-editModal]");
   const name = capitulizeFirstLetter(form.querySelector("#name").value);
   const date = form.querySelector("#date").value;
   const category = capitulizeFirstLetter(form.querySelector("#category").value);
@@ -463,8 +454,15 @@ function saveChanges(e) {
   if (name === "" || date === "") {
     alert("Please fill in all the fields");
   } else {
-    console.log(
-      `name: ${name}, description: ${description}, date: ${date}, category: ${category}`
+    addNewTaskCardToDOM(
+      name,
+      description,
+      formatDate(date), //? format(date, "EEEE, d MMMM yyyy"
+      category,
+      "completedTasksPage",
+      false,
+      false,
+      task.shadowColor
     );
     removeEditModal(e);
     form.reset();
