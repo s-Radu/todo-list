@@ -346,8 +346,56 @@ function editTask(e) {
   parentElement.appendChild(
     showEditModal(task.name, task.description, task.date, task.category)
   );
-  //? to remove the current task, we just uncoment the below function
-  deleteTask(taskId);
+
+  function saveChanges(e) {
+    e.preventDefault();
+    const form = e.target.closest("form");
+    const name = capitulizeFirstLetter(form.querySelector("#name").value);
+    const date = form.querySelector("#date").value;
+    const category = capitulizeFirstLetter(
+      form.querySelector("#category").value
+    );
+    const description = capitulizeFirstLetter(
+      form.querySelector("#description").value
+    );
+
+    if (name === "" || date === "") {
+      alert("Please fill in all the fields");
+    } else {
+      const id = generateNewTaskId();
+      const newTask = { id, name, date, category, description };
+      activeTasks.push(newTask);
+
+      //* Save the tasks to local storage
+      localStorage.setItem("activeTasks", JSON.stringify(activeTasks));
+
+      //? update the pubsub
+      pubsub.publish("tasksUpdated", activeTasks.length);
+
+      //? Create a new task element with the data provided in the form
+      const newElement = createNewTaskElement(newTask);
+
+      //* Append the new task element to the DOM
+      appendNewTaskElementToNav(newElement);
+
+      addNewTaskCardToDOM(
+        name,
+        description,
+        //? Make use of date-fns to update the date on the new task card
+        formatDate(date), //? format(date, "EEEE, d MMMM yyyy"
+        category,
+        id,
+        "activeTasksPage"
+      );
+      //? Reset the form and hide the modal
+      removeEditModal(e);
+      form.reset();
+      //? to remove the current task, we just uncoment the below function
+      deleteTask(taskId);
+    }
+  }
+  const submitButton = getElement("[data-editSubmit]");
+  submitButton.addEventListener("click", saveChanges);
 }
 
 function showEditModal(name, description, date, category) {
@@ -432,57 +480,10 @@ function showEditModal(name, description, date, category) {
             </div>
   `;
 
-  const submitButton = element.querySelector("[data-editSubmit]");
-  submitButton.addEventListener("click", saveChanges);
-
   const closeButton = element.querySelector("[data-closeEditModal");
   closeButton.addEventListener("click", removeEditModal);
 
   return element;
-}
-
-function saveChanges(e) {
-  e.preventDefault();
-  const form = e.target.closest("form");
-  const name = capitulizeFirstLetter(form.querySelector("#name").value);
-  const date = form.querySelector("#date").value;
-  const category = capitulizeFirstLetter(form.querySelector("#category").value);
-  const description = capitulizeFirstLetter(
-    form.querySelector("#description").value
-  );
-
-  if (name === "" || date === "") {
-    alert("Please fill in all the fields");
-  } else {
-    const id = generateNewTaskId();
-    const newTask = { id, name, date, category, description };
-    activeTasks.push(newTask);
-
-    //* Save the tasks to local storage
-    localStorage.setItem("activeTasks", JSON.stringify(activeTasks));
-
-    //? update the pubsub
-    pubsub.publish("tasksUpdated", activeTasks.length);
-
-    //? Create a new task element with the data provided in the form
-    const newElement = createNewTaskElement(newTask);
-
-    //* Append the new task element to the DOM
-    appendNewTaskElementToNav(newElement);
-
-    addNewTaskCardToDOM(
-      name,
-      description,
-      //? Make use of date-fns to update the date on the new task card
-      formatDate(date), //? format(date, "EEEE, d MMMM yyyy"
-      category,
-      id,
-      "activeTasksPage"
-    );
-    //? Reset the form and hide the modal
-    removeEditModal(e);
-    form.reset();
-  }
 }
 
 function removeEditModal(e) {
