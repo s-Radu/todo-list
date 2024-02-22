@@ -360,8 +360,15 @@ function editTask(e) {
 
 function showEditModal(name, description, date, category) {
   let element = document.createElement("div");
+
+  //! Set the position of the modal based on the current scroll position
+  const yAxys = window.scrollY + window.innerHeight / 2;
+  const xAxys = window.scrollX + window.innerWidth / 2;
+
   element.setAttribute("data-editModal", "");
-  element.className = `fixed left-2/4 top-2/4 -translate-x-2/4 -translate-y-2/4 z-20 shadow-md shadow-green-600 rounded-lg p-4 w-full max-w-sm max-h-full`;
+  element.className = `absolute z-20 shadow-md -translate-x-2/4 -translate-y-2/4 shadow-green-600 rounded-lg p-4 w-full max-w-sm max-h-full`;
+  element.style.top = `${yAxys}px`;
+  element.style.left = `${xAxys}px`;
   element.innerHTML = `
   <div class="relative bg-white rounded-lg shadow-button shadow-green-500 dark:bg-gray-700">
 
