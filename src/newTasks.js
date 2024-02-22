@@ -347,8 +347,124 @@ function addNewTaskCardToDOM(
 }
 
 function editTask(e) {
+  const parentElement = getElement("[data-activeTasksPage]");
   const taskId = getTaskId(e);
   let task = activeTasks.find((task) => task.id === taskId);
 
+  parentElement.appendChild(
+    showEditModal(task.name, task.description, task.date, task.category)
+  );
+
   console.log(task.name, task.description, task.date, task.category);
+}
+
+function showEditModal(name, description, date, category) {
+  let element = document.createElement("div");
+  element.setAttribute("data-editModal", "");
+  element.className = `fixed left-2/4 top-2/4 -translate-x-2/4 -translate-y-2/4 z-20 shadow-md shadow-green-600 rounded-lg p-4 w-full max-w-sm max-h-full`;
+  element.innerHTML = `
+  <div class="relative bg-white rounded-lg shadow-button shadow-green-500 dark:bg-gray-700">
+
+                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                        Edit current task
+                    </h3>
+                    <button type="button" data-closeEditModal
+                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                            viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+
+                <form class="p-4 md:p-5">
+                    <div class="grid gap-4 mb-4 grid-cols-2">
+                        <div class="col-span-2">
+                            <label for="name"
+                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+                            <input type="text" name="name" id="name"
+                                class="bg-gray-50 border border-gray-300 text-green-500 text-base rounded-lg focus:ring-gray-600 focus:border-gray-400 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-500 dark:placeholder-green-500 dark:text-green-500 dark:focus:ring-gray-400 dark:focus:border-gray-600"
+                                placeholder="${name}" required="">
+                        </div>
+                        <div class="col-span-2 sm:col-span-1">
+                            <label for="date"
+                                class="block mb-2 text-base font-medium text-gray-900 dark:text-white">Date</label>
+                            <input type="date" name="date" id="date"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-base rounded-lg focus:ring-gray-600 focus:border-gray-400 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-500 dark:placeholder-green-500 dark:text-green-500 dark:focus:ring-gray-400 dark:focus:border-gray-600"
+                                required="" placeholder="${date}">
+                        </div>
+                        <div class="col-span-2 sm:col-span-1">
+                            <label for="category"
+                                class="block mb-2 text-base font-medium text-gray-900 dark:text-white">Category</label>
+                            <select id="category"
+                                class="bg-gray-50 border border-gray-300 text-green-500 text-base rounded-lg focus:ring-gray-400 focus:border-gray-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-500 dark:placeholder-green-500 dark:text-green-500 dark:focus:ring-gray-400 dark:focus:border-gray-600">
+                                <option selected="" value="${category}">${category}</option>
+                                <option value="Urgent">Urgent</option>
+                                <option value="Important">Important</option>
+                                <option value="Upcoming">Upcoming</option>
+                                <option value="Sometimes">Sometimes</option>
+                            </select>
+                        </div>
+                        <div class="col-span-2">
+                            <label for="description"
+                                class="block mb-2 text-base font-medium text-gray-900 dark:text-white">Product
+                                Description</label>
+                            <textarea id="description" rows="4"
+                                class="block p-2.5 w-full text-base text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-gray-400 focus:border-gray-400 dark:bg-gray-700 dark:border-gray-500 dark:placeholder-green-500 dark:text-green-500 dark:focus:ring-gray-400 dark:focus:border-gray-400"
+                                placeholder="${description}"></textarea>
+                        </div>
+                    </div>
+                    <did class="flex w-full justify-center items-center">
+                        <button data-editSubmit type='submit'
+                            class="text-white bg-gray-600 shadow-sm shadow-green-700 dark:shadow-gray-400 hover:bg-gray-500 inline-flex items-center rounded-lg text-sm px-5 py-2.5 text-center">
+                            <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd"
+                                    d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                            Save changes
+                        </button>
+                    </did>
+                </form>
+            </div>
+  `;
+
+  const submitButton = element.querySelector("[data-editSubmit]");
+  submitButton.addEventListener("click", saveChanges);
+
+  const closeButton = element.querySelector("[data-closeEditModal");
+  closeButton.addEventListener("click", removeEditModal);
+
+  return element;
+}
+
+function saveChanges(e) {
+  e.preventDefault();
+  const form = e.target.closest("form");
+  const modal = form.closest("[data-editModal]");
+  const name = capitulizeFirstLetter(form.querySelector("#name").value);
+  const date = form.querySelector("#date").value;
+  const category = capitulizeFirstLetter(form.querySelector("#category").value);
+  const description = capitulizeFirstLetter(
+    form.querySelector("#description").value
+  );
+
+  if (name === "" || date === "") {
+    alert("Please fill in all the fields");
+  } else {
+    console.log(
+      `name: ${name}, description: ${description}, date: ${date}, category: ${category}`
+    );
+    removeEditModal(e);
+    form.reset();
+  }
+}
+
+function removeEditModal(e) {
+  const modal = e.target.closest("[data-editModal]");
+  modal.remove();
 }
