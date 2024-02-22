@@ -454,16 +454,32 @@ function saveChanges(e) {
   if (name === "" || date === "") {
     alert("Please fill in all the fields");
   } else {
+    const id = generateNewTaskId();
+    const newTask = { id, name, date, category, description };
+    activeTasks.push(newTask);
+
+    //* Save the tasks to local storage
+    localStorage.setItem("activeTasks", JSON.stringify(activeTasks));
+
+    //? update the pubsub
+    pubsub.publish("tasksUpdated", activeTasks.length);
+
+    //? Create a new task element with the data provided in the form
+    const newElement = createNewTaskElement(newTask);
+
+    //* Append the new task element to the DOM
+    appendNewTaskElementToNav(newElement);
+
     addNewTaskCardToDOM(
       name,
       description,
+      //? Make use of date-fns to update the date on the new task card
       formatDate(date), //? format(date, "EEEE, d MMMM yyyy"
       category,
-      "completedTasksPage",
-      false,
-      false,
-      task.shadowColor
+      id,
+      "activeTasksPage"
     );
+    //? Reset the form and hide the modal
     removeEditModal(e);
     form.reset();
   }
