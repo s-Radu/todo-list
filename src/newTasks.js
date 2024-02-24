@@ -1,4 +1,4 @@
-import { getElement } from "./utilis.js";
+import { getElement, createElement } from "./utilis.js";
 import { userName } from "./drawer.js";
 import { format } from "date-fns";
 import pubsub from "./utilis.js";
@@ -81,25 +81,28 @@ function askUserForResponse() {
   return confirm(`${userName}, are you sure you want to delete this task?`);
 }
 
-//? Generates a new task id using the crypto.randomUUID method
+//! Generates a new task id using the crypto.randomUUID method
 function generateNewTaskId() {
   return crypto.randomUUID();
 }
 
-//? Creates a new list item element with an id and title provided by the form
+//! Creates a new list item element with an id and title provided by the form
 function createNewNavTask(newId, newTitle) {
-  const newElement = document.createElement("div");
-  newElement.dataset.taskId = newId;
-  newElement.className = `task-item cursor-pointer flex items-center justify-between w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group
-  hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 focus:bg-gray-700`;
-  newElement.innerHTML = `${newTitle}
-          <span>
-              <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-              </svg>
-         </span>
-         `;
+  const newElement = createElement(
+    "div", //? element created
+    {}, //? attributes
+    { taskId: `${newId}` }, //? data attributes
+    `task-item cursor-pointer flex items-center justify-between w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group
+  hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 focus:bg-gray-700`, //? classes
+    `${newTitle}
+      <span>
+          <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+          </svg>
+      </span>
+    ` //? content
+  );
 
   return newElement;
 }
@@ -185,11 +188,7 @@ function createTODOCardElement(
   isCompleted = false,
   shadowColor = "shadow-green-400"
 ) {
-  let element = document.createElement("div");
   let shadow = shadowColor ? shadowColor : "shadow-green-400";
-  element.dataset.taskId = id;
-  element.dataset.category = category;
-  element.className = `task-item max-w-sm m-4 p-6 bg-white rounded-xl shadow-md ${shadow} dark:bg-gray-800 dark:border-gray-700`;
 
   let completeButtonHTML = showCompleteButton
     ? `
@@ -213,27 +212,33 @@ function createTODOCardElement(
 
   const dateLabel = isCompleted ? "Completed: " : "Due: ";
 
-  element.innerHTML = `
-    <div class="flex items-center justify-between mb-4">
-    <h5 class="text-2xl font-bold text-gray-900 dark:text-white">${name}</h5>
-    <span class="cursor-pointer hover:scale-110" data-delete="${id}">
-        <svg class="ml-4 w-3 h-3 text-gray-600 dark:text-white" aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-        </svg>
-    </span>
-    </div>
-    <div class="flex flex-col items-center">
-      <p class="text-xl text-gray-800 dark:text-gray-300">${description}</p>
-      <p class=" m-4 text-sm text-gray-800 dark:text-gray-300">${dateLabel} ${date}</p>
-      ${categoryHTML}
-    </div>
-    <div class="flex justify-around items-center mt-6">
-        ${completeButtonHTML}
-        ${editButtonHTML}
-    </div>
-    `;
+  let element = createElement(
+    "div",
+    {},
+    { taskId: `${id}`, category: `${category}` },
+    `task-item max-w-sm m-4 p-6 bg-white rounded-xl shadow-md ${shadow} dark:bg-gray-800 dark:border-gray-700`,
+    `
+      <div class="flex items-center justify-between mb-4">
+      <h5 class="text-2xl font-bold text-gray-900 dark:text-white">${name}</h5>
+      <span class="cursor-pointer hover:scale-110" data-delete="${id}">
+          <svg class="ml-4 w-3 h-3 text-gray-600 dark:text-white" aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+          </svg>
+      </span>
+      </div>
+      <div class="flex flex-col items-center">
+        <p class="text-xl text-gray-800 dark:text-gray-300">${description}</p>
+        <p class=" m-4 text-sm text-gray-800 dark:text-gray-300">${dateLabel} ${date}</p>
+        ${categoryHTML}
+      </div>
+      <div class="flex justify-around items-center mt-6">
+          ${completeButtonHTML}
+          ${editButtonHTML}
+      </div>
+  `
+  );
 
   return element;
 }
@@ -388,17 +393,12 @@ function editTask(e) {
 }
 
 function showEditModal(name, description, date, category) {
-  let element = document.createElement("div");
-
-  //! Set the position of the modal based on the current scroll position
-  const yAxys = window.scrollY + window.innerHeight / 2;
-  const xAxys = window.scrollX + window.innerWidth / 2;
-
-  element.setAttribute("data-editModal", "");
-  element.className = `absolute z-20 -translate-x-2/4 -translate-y-2/4 shadow-green-600 rounded-lg p-4 w-full max-w-sm max-h-full`;
-  element.style.top = `${yAxys}px`;
-  element.style.left = `${xAxys}px`;
-  element.innerHTML = `
+  let element = createElement(
+    "div",
+    {},
+    { editModal: "" },
+    `absolute z-20 -translate-x-2/4 -translate-y-2/4 shadow-green-600 rounded-lg p-4 w-full max-w-sm max-h-full`,
+    `
   <div class="relative bg-white rounded-lg shadow-button shadow-green-500 dark:bg-gray-700">
 
                 <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
@@ -467,7 +467,15 @@ function showEditModal(name, description, date, category) {
                     </did>
                 </form>
             </div>
-  `;
+  `
+  );
+
+  //! Set the position of the modal based on the current scroll position
+  const yAxys = window.scrollY + window.innerHeight / 2;
+  const xAxys = window.scrollX + window.innerWidth / 2;
+
+  element.style.top = `${yAxys}px`;
+  element.style.left = `${xAxys}px`;
 
   const closeButton = element.querySelector("[data-closeEditModal");
   closeButton.addEventListener("click", removeEditModal);
@@ -476,7 +484,7 @@ function showEditModal(name, description, date, category) {
 }
 
 function removeEditModal(e) {
-  const modal = e.target.closest("[data-editModal]");
+  const modal = e.target.closest("[data-edit-modal]");
   modal.remove();
 }
 
