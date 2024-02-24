@@ -478,7 +478,7 @@ document.addEventListener("DOMContentLoaded", () => {
       "activeTasksPage",
       true,
       true,
-      false,
+      true,
       false,
       task.shadowColor
     );
