@@ -1,3 +1,5 @@
+import { preventUserToSelectOlderDate } from "./utilis.js";
+
 export default function newTaskModal() {
   let modal = document.createElement("div");
   modal.id = "crud-modal";
@@ -74,7 +76,10 @@ export default function newTaskModal() {
                   </div>
               </div>
       `;
+  //! prevent user from selecting a date in the past
+  setTimeout(() => preventUserToSelectOlderDate(modal, "#date"), 0);
 
   return modal;
 }
 //? Might have to get rid of submit button and add a click event listener to the modal to add the new Task
+//TODO make sure the overlay is taking up the whole page, even if the user scrolled

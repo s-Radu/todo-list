@@ -488,7 +488,7 @@ function showEditModal(name, description, date, category) {
             </div>
   `
   );
-
+  //! prevent user from selecting a date in the past
   preventUserToSelectOlderDate(element, "#date");
 
   //! Set the position of the modal based on the current scroll position
