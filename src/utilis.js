@@ -25,7 +25,7 @@ export function createElement(
 
   //! Add classes
   if (classes) {
-    element.className = classes.join(" ");
+    element.className = classes;
   }
 
   //! Add content
