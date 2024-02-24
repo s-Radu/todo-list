@@ -200,6 +200,7 @@ function createTODOCardElement(
   id,
   showCompleteButton = true,
   showEditButton = true,
+  showCategory = true,
   shadowColor = "shadow-green-400"
 ) {
   let element = document.createElement("div");
@@ -224,6 +225,10 @@ function createTODOCardElement(
     </button>`
     : "";
 
+  let categoryHTML = showCategory
+    ? ` <p class=" text-sm text-gray-800 dark:text-gray-300">Category: ${category}</p>`
+    : "";
+
   element.innerHTML = `
     <div class="flex items-center justify-between mb-4">
     <h5 class="text-2xl font-bold text-gray-900 dark:text-white">${name}</h5>
@@ -238,7 +243,7 @@ function createTODOCardElement(
     <div class="flex flex-col items-center">
       <p class="text-xl text-gray-800 dark:text-gray-300">${description}</p>
       <p class=" m-4 text-sm text-gray-800 dark:text-gray-300">Due: ${date}</p>
-      <p class=" text-sm text-gray-800 dark:text-gray-300">Category: ${category}</p>
+      ${categoryHTML}
     </div>
     <div class="flex justify-around items-center mt-6">
         ${completeButtonHTML}
@@ -250,6 +255,8 @@ function createTODOCardElement(
 }
 
 let completedTasks = JSON.parse(localStorage.getItem("completedTasks")) || [];
+
+//! figure out a way to get rid of the category of the task and date complition and just add the day that's been moved to completed
 
 function completeTesk(taskId) {
   //* Find the project in the projects array
@@ -271,14 +278,16 @@ function completeTesk(taskId) {
 
   //* Remove the task from the navbar and the page
   deleteTask(taskId);
+  const todaysDate = new Date(); //? get the current date to add to the completed task
 
   addNewTaskCardToDOM(
     task.name,
     task.description,
-    formatDate(task.date), //? format(task.date, "EEEE, d MMMM yyyy"
-    task.category,
+    formatDate(todaysDate), //? format(task.date, "EEEE, d MMMM yyyy"
+    "", //! remove the category of the task from the completed task
     task.id,
     "completedTasksPage",
+    false,
     false,
     false,
     task.shadowColor
@@ -301,7 +310,7 @@ function addNewTaskCardToDOM(
   name,
   description,
   date,
-  category,
+  category = true,
   id,
   page,
   showCompleteButton = true,
@@ -327,7 +336,8 @@ function addNewTaskCardToDOM(
     //? Add event listener to the complete button
     const completeBtn = newTaskCard.querySelector("[data-complete]");
     completeBtn.addEventListener("click", moveToComplete);
-
+  }
+  if (showEditButton) {
     //? Add event listener to the edit button
     const editBtn = newTaskCard.querySelector("[data-edit]");
     editBtn.addEventListener("click", editTask);
