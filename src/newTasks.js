@@ -25,31 +25,41 @@ function capitulizeFirstLetter(string) {
 }
 
 //? Removes the new task from the list
-function deleteTask(taskId, taskList) {
+function deleteTaskFromList(taskId, taskList) {
   const index = taskList.findIndex((task) => task.id === taskId);
   if (index !== -1) {
     taskList.splice(index, 1);
   }
+  return taskList;
+}
 
-  //? Update local storage
+function updateLocalStorage(taskList, isActiveTaskList) {
   localStorage.setItem(
-    taskList === activeTasks ? "activeTasks" : "completedTasks",
+    isActiveTaskList ? "activeTasks" : "completedTasks",
     JSON.stringify(taskList)
   );
+  publishTaskUpdate(taskList, isActiveTaskList);
+}
 
-  //? Publish the updated number of tasks
+function publishTaskUpdate(taskList, isActiveTaskList) {
   pubsub.publish(
-    taskList === activeTasks ? "tasksUpdated" : "completedTasksUpdated",
+    isActiveTaskList ? "tasksUpdated" : "completedTasksUpdated",
     taskList.length
   );
+}
 
-  //? Remove the task from the navbar and the page
+function removeTaskFromUI(taskId) {
   const taskElements = getElement(`[data-task-id="${taskId}"]`, true);
   taskElements.forEach((element) => {
     element.remove();
   });
+}
 
-  return taskList;
+function deleteTask(taskId, taskList, isActiveTaskList) {
+  const updatedTaskList = deleteTaskFromList(taskId, taskList);
+  updateLocalStorage(updatedTaskList, isActiveTaskList);
+  removeTaskFromUI(taskId);
+  return updatedTaskList;
 }
 
 function removeTask(e) {
@@ -60,8 +70,8 @@ function removeTask(e) {
     `${userName}, are you sure you want to delete this task?`
   );
   if (userResponse) {
-    activeTasks = deleteTask(taskId, activeTasks);
-    completedTasks = deleteTask(taskId, completedTasks);
+    activeTasks = deleteTask(taskId, activeTasks, true);
+    completedTasks = deleteTask(taskId, completedTasks, false);
   }
 }
 
@@ -227,7 +237,7 @@ function moveTaskToCompleted(taskId) {
   const task = activeTasks.find((task) => task.id === taskId);
 
   //* Remove the task from the tasks array
-  activeTasks = deleteTask(taskId, activeTasks);
+  activeTasks = deleteTask(taskId, activeTasks, true);
 
   //? Add the task to the completedTasks array
   const TODAYS_DATE = new Date();
@@ -335,7 +345,7 @@ function editTask(e) {
       alert("Please fill in all the fields");
     } else {
       //? to remove the current task
-      deleteTask(taskId, activeTasks);
+      deleteTask(taskId, activeTasks, true);
 
       const id = generateNewTaskId();
       const newTask = { id, name, date, category, description };
