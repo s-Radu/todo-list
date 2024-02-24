@@ -129,6 +129,7 @@ document.addEventListener("DOMContentLoaded", () => {
       false,
       false,
       false,
+      true,
       task.shadowColor
     );
   });
@@ -195,6 +196,7 @@ function createTODOCardElement(
   showCompleteButton = true,
   showEditButton = true,
   categoryEle = true,
+  isCompleted = false,
   shadowColor = "shadow-green-400"
 ) {
   let element = document.createElement("div");
@@ -223,6 +225,8 @@ function createTODOCardElement(
     ? ` <p class=" text-sm text-gray-800 dark:text-gray-300">Category: ${category}</p>`
     : "";
 
+  const dateLabel = isCompleted ? "Completed: " : "Due: ";
+
   element.innerHTML = `
     <div class="flex items-center justify-between mb-4">
     <h5 class="text-2xl font-bold text-gray-900 dark:text-white">${name}</h5>
@@ -236,7 +240,7 @@ function createTODOCardElement(
     </div>
     <div class="flex flex-col items-center">
       <p class="text-xl text-gray-800 dark:text-gray-300">${description}</p>
-      <p class=" m-4 text-sm text-gray-800 dark:text-gray-300">Due: ${date}</p>
+      <p class=" m-4 text-sm text-gray-800 dark:text-gray-300">${dateLabel} ${date}</p>
       ${categoryHTML}
     </div>
     <div class="flex justify-around items-center mt-6">
@@ -256,7 +260,11 @@ function moveTaskToCompleted(taskId) {
   activeTasks = deleteTask(taskId, activeTasks);
 
   //? Add the task to the completedTasks array
+  const todaysDate = new Date();
+
   task.shadowColor = "shadow-blue-400";
+  task.date = formatDate(todaysDate);
+
   completedTasks.push(task);
 
   //! Update local storage
@@ -266,18 +274,17 @@ function moveTaskToCompleted(taskId) {
   pubsub.publish("tasksUpdated", activeTasks.length);
   pubsub.publish("completedTasksUpdated", completedTasks.length);
 
-  const todaysDate = new Date();
-
   addNewTaskCardToDOM(
     task.name,
     task.description,
-    formatDate(todaysDate), //! format(task.date, "EEEE, d MMMM yyyy"
+    task.date, //? already formated
     "", //? Don't display the category on the completed tasks
     task.id,
     "completedTasksPage",
     false,
     false,
     false,
+    true,
     task.shadowColor
   );
 }
@@ -301,6 +308,7 @@ function addNewTaskCardToDOM(
   showCompleteButton = true,
   showEditButton = true,
   categoryEle = true,
+  dateLabel = false,
   shadowColor
 ) {
   const newTaskCard = createTODOCardElement(
@@ -312,6 +320,7 @@ function addNewTaskCardToDOM(
     showCompleteButton,
     showEditButton,
     categoryEle,
+    dateLabel,
     shadowColor
   );
 
