@@ -12,31 +12,30 @@ function getTaskId(e) {
 }
 
 //? Removes the new task from the list
-function deleteTask(taskId) {
-  //* Remove active task from the tasks array
-  activeTasks = activeTasks.filter((task) => {
-    return task.id !== taskId;
-  });
-
-  //? Remove completed task from the tasks array
-
-  completedTasks = completedTasks.filter((task) => {
+function deleteTask(taskId, taskList) {
+  const updatedTasks = taskList.filter((task) => {
     return task.id !== taskId;
   });
 
   //? Update local storage
-  localStorage.setItem("activeTasks", JSON.stringify(activeTasks));
-  localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
+  localStorage.setItem(
+    taskList === activeTasks ? "activeTasks" : "completedTasks",
+    JSON.stringify(updatedTasks)
+  );
 
   //? Publish the updated number of tasks
-  pubsub.publish("tasksUpdated", activeTasks.length);
-  pubsub.publish("completedTasksUpdated", completedTasks.length);
+  pubsub.publish(
+    taskList === activeTasks ? "tasksUpdated" : "completedTasksUpdated",
+    updatedTasks.length
+  );
 
-  //* Remove the task from the navbar and the page
+  //? Remove the task from the navbar and the page
   const taskElements = getElement(`[data-task-id="${taskId}"]`, true);
   taskElements.forEach((element) => {
     element.remove();
   });
+
+  return updatedTasks;
 }
 
 function removeTask(e) {
@@ -47,7 +46,7 @@ function removeTask(e) {
     `${userName}, are you sure you want to delete this task?`
   );
   if (userResponse) {
-    deleteTask(taskId);
+    activeTasks = deleteTask(taskId, activeTasks);
   }
 }
 
@@ -200,7 +199,6 @@ function createTODOCardElement(
   id,
   showCompleteButton = true,
   showEditButton = true,
-  showCategory = true,
   shadowColor = "shadow-green-400"
 ) {
   let element = document.createElement("div");
@@ -225,10 +223,6 @@ function createTODOCardElement(
     </button>`
     : "";
 
-  let categoryHTML = showCategory
-    ? ` <p class=" text-sm text-gray-800 dark:text-gray-300">Category: ${category}</p>`
-    : "";
-
   element.innerHTML = `
     <div class="flex items-center justify-between mb-4">
     <h5 class="text-2xl font-bold text-gray-900 dark:text-white">${name}</h5>
@@ -243,7 +237,7 @@ function createTODOCardElement(
     <div class="flex flex-col items-center">
       <p class="text-xl text-gray-800 dark:text-gray-300">${description}</p>
       <p class=" m-4 text-sm text-gray-800 dark:text-gray-300">Due: ${date}</p>
-      ${categoryHTML}
+      <p class=" text-sm text-gray-800 dark:text-gray-300">Category: ${category}</p>
     </div>
     <div class="flex justify-around items-center mt-6">
         ${completeButtonHTML}
@@ -256,45 +250,37 @@ function createTODOCardElement(
 
 let completedTasks = JSON.parse(localStorage.getItem("completedTasks")) || [];
 
-//! figure out a way to get rid of the category of the task and date complition and just add the day that's been moved to completed
-
 function completeTesk(taskId) {
   //* Find the project in the projects array
   const task = activeTasks.find((task) => task.id === taskId);
 
   //* Remove the task from the tasks array
-  activeTasks = activeTasks.filter((task) => task.id !== taskId);
+  activeTasks = deleteTask(taskId, activeTasks);
 
-  //* Add the task to the completedTasks array
+  //? Add the task to the completedTasks array
   task.shadowColor = "shadow-blue-400";
   completedTasks.push(task);
 
-  //? Update local storage
-  localStorage.setItem("activeTasks", JSON.stringify(activeTasks));
+  //! Update local storage
   localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
 
   //? update pubsub
   pubsub.publish("tasksUpdated", activeTasks.length);
+  pubsub.publish("completedTasksUpdated", completedTasks.length);
 
-  //* Remove the task from the navbar and the page
-  deleteTask(taskId);
-  const todaysDate = new Date(); //? get the current date to add to the completed task
+  const todaysDate = new Date();
 
   addNewTaskCardToDOM(
     task.name,
     task.description,
-    formatDate(todaysDate), //? format(task.date, "EEEE, d MMMM yyyy"
-    "", //! remove the category of the task from the completed task
+    formatDate(todaysDate), //! format(task.date, "EEEE, d MMMM yyyy"
+    task.category,
     task.id,
     "completedTasksPage",
     false,
     false,
-    false,
     task.shadowColor
   );
-
-  //? Publish the updated number of tasks
-  pubsub.publish("completedTasksUpdated", completedTasks.length);
 }
 
 function formatDate(date) {
@@ -310,7 +296,7 @@ function addNewTaskCardToDOM(
   name,
   description,
   date,
-  category = true,
+  category,
   id,
   page,
   showCompleteButton = true,
