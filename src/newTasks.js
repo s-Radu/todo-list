@@ -130,11 +130,21 @@ function appendNewTaskElementToNav(newElement) {
   insertNewElement(newElement);
 }
 
-function getFormElement(form, selector, capitulized = true) {
+//! Get form element, with or without capitulizing the first letter
+function getFormElementValue(form, selector, capitulized = true) {
   if (capitulized) {
     return capitulizeFirstLetter(form.querySelector(selector).value);
   } else {
     return form.querySelector(selector).value;
+  }
+}
+
+//! Replace the text if the element has empty value
+function replaceTextIfEmptyValue(element, text) {
+  if (element === "") {
+    return text;
+  } else {
+    return element;
   }
 }
 
@@ -145,12 +155,16 @@ export function getFormData(e) {
   const modalEl = getElement("#crud-modal");
   const modal = FlowbiteInstances.getInstance("Modal", "crud-modal");
   const form = modalEl.querySelector("form");
-  const name = getFormElement(form, "#name");
-  const date = getFormElement(form, "#date", false);
-  const category = getFormElement(form, "#category");
-  const description = getFormElement(form, "#description");
+  const name = getFormElementValue(form, "#name");
+  const date = getFormElementValue(form, "#date", false);
+  const category = getFormElementValue(form, "#category");
+  let description = getFormElementValue(form, "#description");
+  description = replaceTextIfEmptyValue(
+    description,
+    "No task description provided"
+  );
 
-  if (name === "" || date === "" || category === "") {
+  if (name === "" || date === "") {
     alert("Please fill in all the fields");
   } else {
     const id = generateNewTaskId();
@@ -158,10 +172,8 @@ export function getFormData(e) {
     activeTasks.push(newTask);
 
     //* Save the tasks to local storage
-    localStorage.setItem("activeTasks", JSON.stringify(activeTasks));
+    updateLocalStorage(activeTasks, true);
 
-    //? update the pubsub
-    pubsub.publish("tasksUpdated", activeTasks.length);
     //? Reset the form and hide the modal
     form.reset();
     modal.hide();
@@ -184,6 +196,7 @@ export function getFormData(e) {
   }
 }
 
+//! Create a new task element with the data provided in the form
 function createTODOCardElement(
   name,
   description,
@@ -251,6 +264,7 @@ function createTODOCardElement(
   return element;
 }
 
+//! Move the task to the completed tasks page
 function moveTaskToCompleted(taskId) {
   //* Find the project in the projects array
   const task = activeTasks.find((task) => task.id === taskId);
@@ -267,11 +281,7 @@ function moveTaskToCompleted(taskId) {
   completedTasks.push(task);
 
   //! Update local storage
-  localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
-
-  //? update pubsub
-  pubsub.publish("tasksUpdated", activeTasks.length);
-  pubsub.publish("completedTasksUpdated", completedTasks.length);
+  updateLocalStorage(completedTasks, false);
 
   addNewTaskCardToDOM(
     task.name,
@@ -288,11 +298,13 @@ function moveTaskToCompleted(taskId) {
   );
 }
 
+//! get element id so it cn be moved to the completed tasks
 function moveToComplete(e) {
   let taskId = getTaskId(e);
   moveTaskToCompleted(taskId);
 }
 
+//! Add a new task card to the DOM
 function addNewTaskCardToDOM(
   name,
   description,
@@ -339,6 +351,7 @@ function addNewTaskCardToDOM(
   pageElement.appendChild(newTaskCard);
 }
 
+//! Edit the task
 function editTask(e) {
   const parentElement = getElement("[data-activeTasksPage]");
   const taskId = getTaskId(e);
@@ -351,10 +364,14 @@ function editTask(e) {
   function saveChanges(e) {
     e.preventDefault();
     const form = e.target.closest("form");
-    const name = getFormElement(form, "#name");
-    const date = getFormElement(form, "#date", false);
-    const category = getFormElement(form, "#category");
-    const description = getFormElement(form, "#description");
+    const name = getFormElementValue(form, "#name");
+    const date = getFormElementValue(form, "#date", false);
+    const category = getFormElementValue(form, "#category");
+    let description = getFormElementValue(form, "#description");
+    description = replaceTextIfEmptyValue(
+      description,
+      "No task description provided"
+    );
 
     if (name === "" || date === "") {
       alert("Please fill in all the fields");
@@ -367,10 +384,7 @@ function editTask(e) {
       activeTasks.push(newTask);
 
       //* Save the tasks to local storage
-      localStorage.setItem("activeTasks", JSON.stringify(activeTasks));
-
-      //? update the pubsub
-      pubsub.publish("tasksUpdated", activeTasks.length);
+      updateLocalStorage(activeTasks, true);
 
       //? Create a new task element with the data provided in the form
       const newElement = createNewTaskElement(newTask);
@@ -396,6 +410,7 @@ function editTask(e) {
   submitButton.addEventListener("click", saveChanges);
 }
 
+//! Show the edit modal
 function showEditModal(name, description, date, category) {
   let element = createElement(
     "div",
@@ -487,12 +502,13 @@ function showEditModal(name, description, date, category) {
   return element;
 }
 
+//! Remove the edit modal
 function removeEditModal(e) {
   const modal = e.target.closest("[data-edit-modal]");
   modal.remove();
 }
 
-//* Display the tasks on the page from local storage
+//! Display the tasks on the page from local storage
 document.addEventListener("DOMContentLoaded", () => {
   activeTasks.forEach((task) => {
     const newElement = createNewTaskElement(task);
@@ -511,7 +527,7 @@ document.addEventListener("DOMContentLoaded", () => {
       task.shadowColor
     );
   });
-  pubsub.publish("tasksUpdated", activeTasks.length);
+  publishTaskUpdate(activeTasks, true);
 });
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -530,5 +546,5 @@ document.addEventListener("DOMContentLoaded", () => {
       task.shadowColor
     );
   });
-  pubsub.publish("completedTasksUpdated", completedTasks.length);
+  publishTaskUpdate(completedTasks, false);
 });
