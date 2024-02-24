@@ -6,6 +6,9 @@ import pubsub from "./utilis.js";
 const DROPDOWN_SELECTOR = "#dropdown-example";
 const NEW_TASK_SELECTOR = "#newTask";
 
+let completedTasks = JSON.parse(localStorage.getItem("completedTasks")) || [];
+let activeTasks = JSON.parse(localStorage.getItem("activeTasks")) || [];
+
 //? get the task id
 function getTaskId(e) {
   return e.target.closest("div.task-item").dataset.taskId;
@@ -97,8 +100,6 @@ function appendNewTaskElementToNav(newElement) {
 
 //? get data from the form
 
-let activeTasks = JSON.parse(localStorage.getItem("activeTasks")) || [];
-
 //* Display the tasks on the page from local storage
 document.addEventListener("DOMContentLoaded", () => {
   activeTasks.forEach((task) => {
@@ -122,9 +123,10 @@ document.addEventListener("DOMContentLoaded", () => {
       task.name,
       task.description,
       formatDate(task.date), //? format(task.date, "EEEE, d MMMM yyyy"
-      task.category,
+      "", //? Don't display the category on the completed tasks
       task.id,
       "completedTasksPage",
+      false,
       false,
       false,
       task.shadowColor
@@ -184,14 +186,6 @@ export function getFormData(e) {
   }
 }
 
-// setTimeout(() => {
-//   const submitButton = getElement("[data-submit");
-//   submitButton.addEventListener("click", getFormData);
-//   console.log("event added");
-// }, 100);
-
-//? Insted of using the setTimeout we can use a mutation observer to observe the content div and add the event listener to the submit button, observing means it will watch for changes in the content div and once the submit button is added to the content div it will add the event listener to it
-
 function createTODOCardElement(
   name,
   description,
@@ -200,6 +194,7 @@ function createTODOCardElement(
   id,
   showCompleteButton = true,
   showEditButton = true,
+  categoryEle = true,
   shadowColor = "shadow-green-400"
 ) {
   let element = document.createElement("div");
@@ -224,6 +219,10 @@ function createTODOCardElement(
     </button>`
     : "";
 
+  let categoryHTML = categoryEle
+    ? ` <p class=" text-sm text-gray-800 dark:text-gray-300">Category: ${category}</p>`
+    : "";
+
   element.innerHTML = `
     <div class="flex items-center justify-between mb-4">
     <h5 class="text-2xl font-bold text-gray-900 dark:text-white">${name}</h5>
@@ -238,7 +237,7 @@ function createTODOCardElement(
     <div class="flex flex-col items-center">
       <p class="text-xl text-gray-800 dark:text-gray-300">${description}</p>
       <p class=" m-4 text-sm text-gray-800 dark:text-gray-300">Due: ${date}</p>
-      <p class=" text-sm text-gray-800 dark:text-gray-300">Category: ${category}</p>
+      ${categoryHTML}
     </div>
     <div class="flex justify-around items-center mt-6">
         ${completeButtonHTML}
@@ -248,8 +247,6 @@ function createTODOCardElement(
 
   return element;
 }
-
-let completedTasks = JSON.parse(localStorage.getItem("completedTasks")) || [];
 
 function moveTaskToCompleted(taskId) {
   //* Find the project in the projects array
@@ -275,9 +272,10 @@ function moveTaskToCompleted(taskId) {
     task.name,
     task.description,
     formatDate(todaysDate), //! format(task.date, "EEEE, d MMMM yyyy"
-    task.category,
+    "", //? Don't display the category on the completed tasks
     task.id,
     "completedTasksPage",
+    false,
     false,
     false,
     task.shadowColor
@@ -302,6 +300,7 @@ function addNewTaskCardToDOM(
   page,
   showCompleteButton = true,
   showEditButton = true,
+  categoryEle = true,
   shadowColor
 ) {
   const newTaskCard = createTODOCardElement(
@@ -312,6 +311,7 @@ function addNewTaskCardToDOM(
     id,
     showCompleteButton,
     showEditButton,
+    categoryEle,
     shadowColor
   );
 
