@@ -47,6 +47,7 @@ function removeTask(e) {
   );
   if (userResponse) {
     activeTasks = deleteTask(taskId, activeTasks);
+    completedTasks = deleteTask(taskId, completedTasks);
   }
 }
 
@@ -250,7 +251,7 @@ function createTODOCardElement(
 
 let completedTasks = JSON.parse(localStorage.getItem("completedTasks")) || [];
 
-function completeTesk(taskId) {
+function moveTaskToCompleted(taskId) {
   //* Find the project in the projects array
   const task = activeTasks.find((task) => task.id === taskId);
 
@@ -289,7 +290,7 @@ function formatDate(date) {
 
 function moveToComplete(e) {
   let taskId = getTaskId(e);
-  completeTesk(taskId);
+  moveTaskToCompleted(taskId);
 }
 
 function addNewTaskCardToDOM(
@@ -387,7 +388,7 @@ function editTask(e) {
       removeEditModal(e);
       form.reset();
       //? to remove the current task, we just uncoment the below function
-      deleteTask(taskId);
+      deleteTask(taskId, activeTasks);
     }
   }
   const submitButton = getElement("[data-editSubmit]");
