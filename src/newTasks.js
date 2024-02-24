@@ -493,7 +493,7 @@ function showEditModal(name, description, date, category) {
   `
   );
   //! prevent user from selecting a date in the past
-  preventUserToSelectOlderDate(element, "#date");
+  setTimeout(() => preventUserToSelectOlderDate(element, "#date"), 0);
 
   //! Set the position of the modal based on the current scroll position
   const yAxys = window.scrollY + window.innerHeight / 2;
