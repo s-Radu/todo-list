@@ -14,13 +14,17 @@ export function createElement(
 ) {
   const element = document.createElement(tag);
   //! Add attributes !
-  for (const key in attributes) {
-    element.setAttribute(key, attributes[key]);
+  if (attributes) {
+    for (const key in attributes) {
+      element.setAttribute(key, attributes[key]);
+    }
   }
 
   //! Add data attributes
-  for (const key in dataAttributes) {
-    element.dataSet[key] = dataAttributes[key];
+  if (dataAttributes) {
+    for (const key in dataAttributes) {
+      element.dataset[key] = dataAttributes[key];
+    }
   }
 
   //! Add classes
