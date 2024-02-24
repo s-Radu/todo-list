@@ -5,11 +5,22 @@ export function getElement(selector, all = false) {
     : parentElement.querySelector(selector);
 }
 
-export function createElement(tag, attributes, classes, content) {
+export function createElement(
+  tag,
+  attributes,
+  dataAttributes,
+  classes,
+  content
+) {
   const element = document.createElement(tag);
   //! Add attributes !
   for (const key in attributes) {
     element.setAttribute(key, attributes[key]);
+  }
+
+  //! Add data attributes
+  for (const key in dataAttributes) {
+    element.dataSet[key] = dataAttributes[key];
   }
 
   //! Add classes
