@@ -14,22 +14,33 @@ function getTaskId(e) {
   return e.target.closest("div.task-item").dataset.taskId;
 }
 
+//? format date using date-fns
+function formatDate(date) {
+  return format(date, "EEEE, d MMMM yyyy");
+}
+
+//? Capitulize first letter of the string
+function capitulizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 //? Removes the new task from the list
 function deleteTask(taskId, taskList) {
-  const updatedTasks = taskList.filter((task) => {
-    return task.id !== taskId;
-  });
+  const index = taskList.findIndex((task) => task.id === taskId);
+  if (index !== -1) {
+    taskList.splice(index, 1);
+  }
 
   //? Update local storage
   localStorage.setItem(
     taskList === activeTasks ? "activeTasks" : "completedTasks",
-    JSON.stringify(updatedTasks)
+    JSON.stringify(taskList)
   );
 
   //? Publish the updated number of tasks
   pubsub.publish(
     taskList === activeTasks ? "tasksUpdated" : "completedTasksUpdated",
-    updatedTasks.length
+    taskList.length
   );
 
   //? Remove the task from the navbar and the page
@@ -38,7 +49,7 @@ function deleteTask(taskId, taskList) {
     element.remove();
   });
 
-  return updatedTasks;
+  return taskList;
 }
 
 function removeTask(e) {
@@ -99,47 +110,6 @@ function appendNewTaskElementToNav(newElement) {
 }
 
 //? get data from the form
-
-//* Display the tasks on the page from local storage
-document.addEventListener("DOMContentLoaded", () => {
-  activeTasks.forEach((task) => {
-    const newElement = createNewTaskElement(task);
-    appendNewTaskElementToNav(newElement);
-    addNewTaskCardToDOM(
-      task.name,
-      task.description,
-      formatDate(task.date), //? format(task.date, "EEEE, d MMMM yyyy"
-      task.category,
-      task.id,
-      "activeTasksPage"
-    );
-  });
-  pubsub.publish("tasksUpdated", activeTasks.length);
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  completedTasks.forEach((task) => {
-    addNewTaskCardToDOM(
-      task.name,
-      task.description,
-      formatDate(task.date), //? format(task.date, "EEEE, d MMMM yyyy"
-      "", //? Don't display the category on the completed tasks
-      task.id,
-      "completedTasksPage",
-      false,
-      false,
-      false,
-      true,
-      task.shadowColor
-    );
-  });
-  pubsub.publish("completedTasksUpdated", completedTasks.length);
-});
-
-function capitulizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
 export function getFormData(e) {
   e.preventDefault();
 
@@ -260,10 +230,10 @@ function moveTaskToCompleted(taskId) {
   activeTasks = deleteTask(taskId, activeTasks);
 
   //? Add the task to the completedTasks array
-  const todaysDate = new Date();
+  const TODAYS_DATE = new Date();
 
   task.shadowColor = "shadow-blue-400";
-  task.date = formatDate(todaysDate);
+  task.date = formatDate(TODAYS_DATE);
 
   completedTasks.push(task);
 
@@ -287,10 +257,6 @@ function moveTaskToCompleted(taskId) {
     true,
     task.shadowColor
   );
-}
-
-function formatDate(date) {
-  return format(date, "EEEE, d MMMM yyyy");
 }
 
 function moveToComplete(e) {
@@ -368,6 +334,9 @@ function editTask(e) {
     if (name === "" || date === "") {
       alert("Please fill in all the fields");
     } else {
+      //? to remove the current task
+      deleteTask(taskId, activeTasks);
+
       const id = generateNewTaskId();
       const newTask = { id, name, date, category, description };
       activeTasks.push(newTask);
@@ -381,7 +350,7 @@ function editTask(e) {
       //? Create a new task element with the data provided in the form
       const newElement = createNewTaskElement(newTask);
 
-      //* Append the new task element to the DOM
+      //* Append the new task element to nav
       appendNewTaskElementToNav(newElement);
 
       addNewTaskCardToDOM(
@@ -396,8 +365,6 @@ function editTask(e) {
       //? Reset the form and hide the modal
       removeEditModal(e);
       form.reset();
-      //? to remove the current task, we just uncoment the below function
-      deleteTask(taskId, activeTasks);
     }
   }
   const submitButton = getElement("[data-editSubmit]");
@@ -412,7 +379,7 @@ function showEditModal(name, description, date, category) {
   const xAxys = window.scrollX + window.innerWidth / 2;
 
   element.setAttribute("data-editModal", "");
-  element.className = `absolute z-20 shadow-md -translate-x-2/4 -translate-y-2/4 shadow-green-600 rounded-lg p-4 w-full max-w-sm max-h-full`;
+  element.className = `absolute z-20 -translate-x-2/4 -translate-y-2/4 shadow-green-600 rounded-lg p-4 w-full max-w-sm max-h-full`;
   element.style.top = `${yAxys}px`;
   element.style.left = `${xAxys}px`;
   element.innerHTML = `
@@ -496,3 +463,44 @@ function removeEditModal(e) {
   const modal = e.target.closest("[data-editModal]");
   modal.remove();
 }
+
+//* Display the tasks on the page from local storage
+document.addEventListener("DOMContentLoaded", () => {
+  activeTasks.forEach((task) => {
+    const newElement = createNewTaskElement(task);
+    appendNewTaskElementToNav(newElement);
+    addNewTaskCardToDOM(
+      task.name,
+      task.description,
+      formatDate(task.date), //? format(task.date, "EEEE, d MMMM yyyy"
+      task.category,
+      task.id,
+      "activeTasksPage",
+      true,
+      true,
+      false,
+      false,
+      task.shadowColor
+    );
+  });
+  pubsub.publish("tasksUpdated", activeTasks.length);
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  completedTasks.forEach((task) => {
+    addNewTaskCardToDOM(
+      task.name,
+      task.description,
+      formatDate(task.date), //? format(task.date, "EEEE, d MMMM yyyy"
+      "", //? Don't display the category on the completed tasks
+      task.id,
+      "completedTasksPage",
+      false,
+      false,
+      false,
+      true,
+      task.shadowColor
+    );
+  });
+  pubsub.publish("completedTasksUpdated", completedTasks.length);
+});
