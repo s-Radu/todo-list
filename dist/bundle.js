@@ -9725,75 +9725,108 @@ __webpack_require__.r(__webpack_exports__);
 const DROPDOWN_SELECTOR = "#dropdown-example";
 const NEW_TASK_SELECTOR = "#newTask";
 
-//? get the task id
+let completedTasks = JSON.parse(localStorage.getItem("completedTasks")) || [];
+let activeTasks = JSON.parse(localStorage.getItem("activeTasks")) || [];
+
+//! get the task id
 function getTaskId(e) {
   return e.target.closest("div.task-item").dataset.taskId;
 }
 
-//? Removes the new task from the list
-function deleteTask(taskId) {
-  //* Remove active task from the tasks array
-  activeTasks = activeTasks.filter((task) => {
-    return task.id !== taskId;
-  });
+//! format date using date-fns
+function formatDate(date) {
+  return (0,date_fns__WEBPACK_IMPORTED_MODULE_2__.format)(date, "EEEE, d MMMM yyyy");
+}
 
-  //? Remove completed task from the tasks array
+//! Capitulize first letter of the string
+function capitulizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}
 
-  completedTasks = completedTasks.filter((task) => {
-    return task.id !== taskId;
-  });
+//! Removes the new task from the list
+function deleteTaskFromList(taskId, taskList) {
+  const index = taskList.findIndex((task) => task.id === taskId);
+  if (index !== -1) {
+    taskList.splice(index, 1);
+  }
+  return taskList;
+}
+//! update local storage
+function updateLocalStorage(taskList, isActiveTaskList) {
+  localStorage.setItem(
+    isActiveTaskList ? "activeTasks" : "completedTasks",
+    JSON.stringify(taskList)
+  );
+  publishTaskUpdate(taskList, isActiveTaskList);
+}
 
-  //? Update local storage
-  localStorage.setItem("activeTasks", JSON.stringify(activeTasks));
-  localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
+//! update pubsub
+function publishTaskUpdate(taskList, isActiveTaskList) {
+  _utilis_js__WEBPACK_IMPORTED_MODULE_0__["default"].publish(
+    isActiveTaskList ? "tasksUpdated" : "completedTasksUpdated",
+    taskList.length
+  );
+}
 
-  //? Publish the updated number of tasks
-  _utilis_js__WEBPACK_IMPORTED_MODULE_0__["default"].publish("tasksUpdated", activeTasks.length);
-  _utilis_js__WEBPACK_IMPORTED_MODULE_0__["default"].publish("completedTasksUpdated", completedTasks.length);
-
-  //* Remove the task from the navbar and the page
+//! remove task from the page
+function removeTaskFromUI(taskId) {
   const taskElements = (0,_utilis_js__WEBPACK_IMPORTED_MODULE_0__.getElement)(`[data-task-id="${taskId}"]`, true);
   taskElements.forEach((element) => {
     element.remove();
   });
 }
 
+//! delete task
+function deleteTask(taskId, taskList, isActiveTaskList) {
+  const updatedTaskList = deleteTaskFromList(taskId, taskList);
+  updateLocalStorage(updatedTaskList, isActiveTaskList);
+  removeTaskFromUI(taskId);
+  return updatedTaskList;
+}
+
+//! Remove the task
 function removeTask(e) {
   let taskId = getTaskId(e);
 
   //! Ask the user to confirm the deletion
-  let userResponse = confirm(
-    `${_drawer_js__WEBPACK_IMPORTED_MODULE_1__.userName}, are you sure you want to delete this task?`
-  );
+  let userResponse = askUserForResponse();
   if (userResponse) {
-    deleteTask(taskId);
+    activeTasks = deleteTask(taskId, activeTasks, true);
+    completedTasks = deleteTask(taskId, completedTasks, false);
   }
 }
+//! Ask the user to confirm the deletion
+function askUserForResponse() {
+  return confirm(`${_drawer_js__WEBPACK_IMPORTED_MODULE_1__.userName}, are you sure you want to delete this task?`);
+}
 
-//? Generates a new task id using the crypto.randomUUID method
+//! Generates a new task id using the crypto.randomUUID method
 function generateNewTaskId() {
   return crypto.randomUUID();
 }
 
-//? Creates a new list item element with an id and title provided by the form
+//! Creates a new list item element with an id and title provided by the form
 function createNewNavTask(newId, newTitle) {
-  const newElement = document.createElement("div");
-  newElement.dataset.taskId = newId;
-  newElement.className = `task-item cursor-pointer flex items-center justify-between w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group
-  hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 focus:bg-gray-700`;
-  newElement.innerHTML = `${newTitle}
-          <span>
-              <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-              </svg>
-         </span>
-         `;
+  const newElement = (0,_utilis_js__WEBPACK_IMPORTED_MODULE_0__.createElement)(
+    "div", //? element created
+    {}, //? attributes
+    { taskId: `${newId}` }, //? data attributes
+    `task-item cursor-pointer flex items-center justify-between w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group
+  hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 focus:bg-gray-700`, //? classes
+    `${newTitle}
+      <span>
+          <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+          </svg>
+      </span>
+    ` //? content
+  );
 
   return newElement;
 }
 
-//? Inserts the new element into the dropdown list
+//! Inserts the new element into the dropdown list
 function insertNewElement(newElement) {
   const parentUl = (0,_utilis_js__WEBPACK_IMPORTED_MODULE_0__.getElement)(DROPDOWN_SELECTOR);
   const newTaskEle = (0,_utilis_js__WEBPACK_IMPORTED_MODULE_0__.getElement)(NEW_TASK_SELECTOR);
@@ -9801,6 +9834,7 @@ function insertNewElement(newElement) {
   parentUl.insertBefore(newElement, newTaskEle);
 }
 
+//! Create a new task element
 function createNewTaskElement(task) {
   const newElement = createNewNavTask(task.id, task.name);
 
@@ -9810,66 +9844,46 @@ function createNewTaskElement(task) {
   return newElement;
 }
 
+//! Append the new task element to the nav
 function appendNewTaskElementToNav(newElement) {
   insertNewElement(newElement);
 }
 
-//? get data from the form
-
-let activeTasks = JSON.parse(localStorage.getItem("activeTasks")) || [];
-
-//* Display the tasks on the page from local storage
-document.addEventListener("DOMContentLoaded", () => {
-  activeTasks.forEach((task) => {
-    const newElement = createNewTaskElement(task);
-    appendNewTaskElementToNav(newElement);
-    addNewTaskCardToDOM(
-      task.name,
-      task.description,
-      formatDate(task.date), //? format(task.date, "EEEE, d MMMM yyyy"
-      task.category,
-      task.id,
-      "activeTasksPage"
-    );
-  });
-  _utilis_js__WEBPACK_IMPORTED_MODULE_0__["default"].publish("tasksUpdated", activeTasks.length);
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  completedTasks.forEach((task) => {
-    addNewTaskCardToDOM(
-      task.name,
-      task.description,
-      formatDate(task.date), //? format(task.date, "EEEE, d MMMM yyyy"
-      task.category,
-      task.id,
-      "completedTasksPage",
-      false,
-      false,
-      task.shadowColor
-    );
-  });
-  _utilis_js__WEBPACK_IMPORTED_MODULE_0__["default"].publish("completedTasksUpdated", completedTasks.length);
-});
-
-function capitulizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
+//! Get form element, with or without capitulizing the first letter
+function getFormElementValue(form, selector, capitulized = true) {
+  if (capitulized) {
+    return capitulizeFirstLetter(form.querySelector(selector).value);
+  } else {
+    return form.querySelector(selector).value;
+  }
 }
 
+//! Replace the text if the element has empty value
+function replaceTextIfEmptyValue(element, text) {
+  if (element === "") {
+    return text;
+  } else {
+    return element;
+  }
+}
+
+//! get data from the form
 function getFormData(e) {
   e.preventDefault();
 
   const modalEl = (0,_utilis_js__WEBPACK_IMPORTED_MODULE_0__.getElement)("#crud-modal");
   const modal = FlowbiteInstances.getInstance("Modal", "crud-modal");
   const form = modalEl.querySelector("form");
-  const name = capitulizeFirstLetter(form.querySelector("#name").value);
-  const date = form.querySelector("#date").value;
-  const category = capitulizeFirstLetter(form.querySelector("#category").value);
-  const description = capitulizeFirstLetter(
-    form.querySelector("#description").value
+  const name = getFormElementValue(form, "#name");
+  const date = getFormElementValue(form, "#date", false);
+  const category = getFormElementValue(form, "#category");
+  let description = getFormElementValue(form, "#description");
+  description = replaceTextIfEmptyValue(
+    description,
+    "No task description provided"
   );
 
-  if (name === "" || date === "" || category === "") {
+  if (name === "" || date === "") {
     alert("Please fill in all the fields");
   } else {
     const id = generateNewTaskId();
@@ -9877,10 +9891,8 @@ function getFormData(e) {
     activeTasks.push(newTask);
 
     //* Save the tasks to local storage
-    localStorage.setItem("activeTasks", JSON.stringify(activeTasks));
+    updateLocalStorage(activeTasks, true);
 
-    //? update the pubsub
-    _utilis_js__WEBPACK_IMPORTED_MODULE_0__["default"].publish("tasksUpdated", activeTasks.length);
     //? Reset the form and hide the modal
     form.reset();
     modal.hide();
@@ -9903,14 +9915,7 @@ function getFormData(e) {
   }
 }
 
-// setTimeout(() => {
-//   const submitButton = getElement("[data-submit");
-//   submitButton.addEventListener("click", getFormData);
-//   console.log("event added");
-// }, 100);
-
-//? Insted of using the setTimeout we can use a mutation observer to observe the content div and add the event listener to the submit button, observing means it will watch for changes in the content div and once the submit button is added to the content div it will add the event listener to it
-
+//! Create a new task element with the data provided in the form
 function createTODOCardElement(
   name,
   description,
@@ -9919,13 +9924,11 @@ function createTODOCardElement(
   id,
   showCompleteButton = true,
   showEditButton = true,
+  categoryEle = true,
+  isCompleted = false,
   shadowColor = "shadow-green-400"
 ) {
-  let element = document.createElement("div");
   let shadow = shadowColor ? shadowColor : "shadow-green-400";
-  element.dataset.taskId = id;
-  element.dataset.category = category;
-  element.className = `task-item max-w-sm m-4 p-6 bg-white rounded-xl shadow-md ${shadow} dark:bg-gray-800 dark:border-gray-700`;
 
   let completeButtonHTML = showCompleteButton
     ? `
@@ -9943,79 +9946,84 @@ function createTODOCardElement(
     </button>`
     : "";
 
-  element.innerHTML = `
-    <div class="flex items-center justify-between mb-4">
-    <h5 class="text-2xl font-bold text-gray-900 dark:text-white">${name}</h5>
-    <span class="cursor-pointer hover:scale-110" data-delete="${id}">
-        <svg class="ml-4 w-3 h-3 text-gray-600 dark:text-white" aria-hidden="true"
-            xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-        </svg>
-    </span>
-    </div>
-    <div class="flex flex-col items-center">
-      <p class="text-xl text-gray-800 dark:text-gray-300">${description}</p>
-      <p class=" m-4 text-sm text-gray-800 dark:text-gray-300">Due: ${date}</p>
-      <p class=" text-sm text-gray-800 dark:text-gray-300">Category: ${category}</p>
-    </div>
-    <div class="flex justify-around items-center mt-6">
-        ${completeButtonHTML}
-        ${editButtonHTML}
-    </div>
-    `;
+  let categoryHTML = categoryEle
+    ? ` <p class=" text-sm text-gray-800 dark:text-gray-300">Category: ${category}</p>`
+    : "";
+
+  const dateLabel = isCompleted ? "Completed: " : "Due: ";
+
+  let element = (0,_utilis_js__WEBPACK_IMPORTED_MODULE_0__.createElement)(
+    "div",
+    {},
+    { taskId: `${id}`, category: `${category}` },
+    `task-item max-w-sm m-4 p-6 bg-white rounded-xl shadow-md ${shadow} dark:bg-gray-800 dark:border-gray-700`,
+    `
+      <div class="flex items-center justify-between mb-4">
+      <h5 class="text-2xl font-bold text-gray-900 dark:text-white">${name}</h5>
+      <span class="cursor-pointer hover:scale-110" data-delete="${id}">
+          <svg class="ml-4 w-3 h-3 text-gray-600 dark:text-white" aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+          </svg>
+      </span>
+      </div>
+      <div class="flex flex-col items-center">
+        <p class="text-xl text-gray-800 dark:text-gray-300">${description}</p>
+        <p class=" m-4 text-sm text-gray-800 dark:text-gray-300">${dateLabel} ${date}</p>
+        ${categoryHTML}
+      </div>
+      <div class="flex justify-around items-center mt-6">
+          ${completeButtonHTML}
+          ${editButtonHTML}
+      </div>
+  `
+  );
 
   return element;
 }
 
-let completedTasks = JSON.parse(localStorage.getItem("completedTasks")) || [];
-
-function completeTesk(taskId) {
+//! Move the task to the completed tasks page
+function moveTaskToCompleted(taskId) {
   //* Find the project in the projects array
   const task = activeTasks.find((task) => task.id === taskId);
 
   //* Remove the task from the tasks array
-  activeTasks = activeTasks.filter((task) => task.id !== taskId);
+  activeTasks = deleteTask(taskId, activeTasks, true);
 
-  //* Add the task to the completedTasks array
+  //? Add the task to the completedTasks array
+  const TODAYS_DATE = new Date();
+
   task.shadowColor = "shadow-blue-400";
+  task.date = formatDate(TODAYS_DATE);
+
   completedTasks.push(task);
 
-  //? Update local storage
-  localStorage.setItem("activeTasks", JSON.stringify(activeTasks));
-  localStorage.setItem("completedTasks", JSON.stringify(completedTasks));
-
-  //? update pubsub
-  _utilis_js__WEBPACK_IMPORTED_MODULE_0__["default"].publish("tasksUpdated", activeTasks.length);
-
-  //* Remove the task from the navbar and the page
-  deleteTask(taskId);
+  //! Update local storage
+  updateLocalStorage(completedTasks, false);
 
   addNewTaskCardToDOM(
     task.name,
     task.description,
-    formatDate(task.date), //? format(task.date, "EEEE, d MMMM yyyy"
-    task.category,
+    task.date, //? already formated
+    "", //? Don't display the category on the completed tasks
     task.id,
     "completedTasksPage",
     false,
     false,
+    false,
+    true,
     task.shadowColor
   );
-
-  //? Publish the updated number of tasks
-  _utilis_js__WEBPACK_IMPORTED_MODULE_0__["default"].publish("completedTasksUpdated", completedTasks.length);
 }
 
-function formatDate(date) {
-  return (0,date_fns__WEBPACK_IMPORTED_MODULE_2__.format)(date, "EEEE, d MMMM yyyy");
-}
-
+//! get element id so it cn be moved to the completed tasks
 function moveToComplete(e) {
   let taskId = getTaskId(e);
-  completeTesk(taskId);
+  moveTaskToCompleted(taskId);
 }
 
+//! Add a new task card to the DOM
 function addNewTaskCardToDOM(
   name,
   description,
@@ -10025,6 +10033,8 @@ function addNewTaskCardToDOM(
   page,
   showCompleteButton = true,
   showEditButton = true,
+  categoryEle = true,
+  dateLabel = false,
   shadowColor
 ) {
   const newTaskCard = createTODOCardElement(
@@ -10035,6 +10045,8 @@ function addNewTaskCardToDOM(
     id,
     showCompleteButton,
     showEditButton,
+    categoryEle,
+    dateLabel,
     shadowColor
   );
 
@@ -10046,7 +10058,8 @@ function addNewTaskCardToDOM(
     //? Add event listener to the complete button
     const completeBtn = newTaskCard.querySelector("[data-complete]");
     completeBtn.addEventListener("click", moveToComplete);
-
+  }
+  if (showEditButton) {
     //? Add event listener to the edit button
     const editBtn = newTaskCard.querySelector("[data-edit]");
     editBtn.addEventListener("click", editTask);
@@ -10057,6 +10070,7 @@ function addNewTaskCardToDOM(
   pageElement.appendChild(newTaskCard);
 }
 
+//! Edit the task
 function editTask(e) {
   const parentElement = (0,_utilis_js__WEBPACK_IMPORTED_MODULE_0__.getElement)("[data-activeTasksPage]");
   const taskId = getTaskId(e);
@@ -10069,32 +10083,32 @@ function editTask(e) {
   function saveChanges(e) {
     e.preventDefault();
     const form = e.target.closest("form");
-    const name = capitulizeFirstLetter(form.querySelector("#name").value);
-    const date = form.querySelector("#date").value;
-    const category = capitulizeFirstLetter(
-      form.querySelector("#category").value
-    );
-    const description = capitulizeFirstLetter(
-      form.querySelector("#description").value
+    const name = getFormElementValue(form, "#name");
+    const date = getFormElementValue(form, "#date", false);
+    const category = getFormElementValue(form, "#category");
+    let description = getFormElementValue(form, "#description");
+    description = replaceTextIfEmptyValue(
+      description,
+      "No task description provided"
     );
 
     if (name === "" || date === "") {
       alert("Please fill in all the fields");
     } else {
+      //? to remove the current task
+      deleteTask(taskId, activeTasks, true);
+
       const id = generateNewTaskId();
       const newTask = { id, name, date, category, description };
       activeTasks.push(newTask);
 
       //* Save the tasks to local storage
-      localStorage.setItem("activeTasks", JSON.stringify(activeTasks));
-
-      //? update the pubsub
-      _utilis_js__WEBPACK_IMPORTED_MODULE_0__["default"].publish("tasksUpdated", activeTasks.length);
+      updateLocalStorage(activeTasks, true);
 
       //? Create a new task element with the data provided in the form
       const newElement = createNewTaskElement(newTask);
 
-      //* Append the new task element to the DOM
+      //* Append the new task element to nav
       appendNewTaskElementToNav(newElement);
 
       addNewTaskCardToDOM(
@@ -10109,26 +10123,20 @@ function editTask(e) {
       //? Reset the form and hide the modal
       removeEditModal(e);
       form.reset();
-      //? to remove the current task, we just uncoment the below function
-      deleteTask(taskId);
     }
   }
   const submitButton = (0,_utilis_js__WEBPACK_IMPORTED_MODULE_0__.getElement)("[data-editSubmit]");
   submitButton.addEventListener("click", saveChanges);
 }
 
+//! Show the edit modal
 function showEditModal(name, description, date, category) {
-  let element = document.createElement("div");
-
-  //! Set the position of the modal based on the current scroll position
-  const yAxys = window.scrollY + window.innerHeight / 2;
-  const xAxys = window.scrollX + window.innerWidth / 2;
-
-  element.setAttribute("data-editModal", "");
-  element.className = `absolute z-20 shadow-md -translate-x-2/4 -translate-y-2/4 shadow-green-600 rounded-lg p-4 w-full max-w-sm max-h-full`;
-  element.style.top = `${yAxys}px`;
-  element.style.left = `${xAxys}px`;
-  element.innerHTML = `
+  let element = (0,_utilis_js__WEBPACK_IMPORTED_MODULE_0__.createElement)(
+    "div",
+    {},
+    { editModal: "" },
+    `absolute z-20 -translate-x-2/4 -translate-y-2/4 shadow-green-600 rounded-lg p-4 w-full max-w-sm max-h-full`,
+    `
   <div class="relative bg-white rounded-lg shadow-button shadow-green-500 dark:bg-gray-700">
 
                 <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
@@ -10197,7 +10205,15 @@ function showEditModal(name, description, date, category) {
                     </did>
                 </form>
             </div>
-  `;
+  `
+  );
+
+  //! Set the position of the modal based on the current scroll position
+  const yAxys = window.scrollY + window.innerHeight / 2;
+  const xAxys = window.scrollX + window.innerWidth / 2;
+
+  element.style.top = `${yAxys}px`;
+  element.style.left = `${xAxys}px`;
 
   const closeButton = element.querySelector("[data-closeEditModal");
   closeButton.addEventListener("click", removeEditModal);
@@ -10205,10 +10221,52 @@ function showEditModal(name, description, date, category) {
   return element;
 }
 
+//! Remove the edit modal
 function removeEditModal(e) {
-  const modal = e.target.closest("[data-editModal]");
+  const modal = e.target.closest("[data-edit-modal]");
   modal.remove();
 }
+
+//! Display the tasks on the page from local storage
+document.addEventListener("DOMContentLoaded", () => {
+  activeTasks.forEach((task) => {
+    const newElement = createNewTaskElement(task);
+    appendNewTaskElementToNav(newElement);
+    addNewTaskCardToDOM(
+      task.name,
+      task.description,
+      formatDate(task.date), //? format(task.date, "EEEE, d MMMM yyyy"
+      task.category,
+      task.id,
+      "activeTasksPage",
+      true,
+      true,
+      true,
+      false,
+      task.shadowColor
+    );
+  });
+  publishTaskUpdate(activeTasks, true);
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  completedTasks.forEach((task) => {
+    addNewTaskCardToDOM(
+      task.name,
+      task.description,
+      formatDate(task.date), //? format(task.date, "EEEE, d MMMM yyyy"
+      "", //? Don't display the category on the completed tasks
+      task.id,
+      "completedTasksPage",
+      false,
+      false,
+      false,
+      true,
+      task.shadowColor
+    );
+  });
+  publishTaskUpdate(completedTasks, false);
+});
 
 
 /***/ }),
@@ -10312,6 +10370,7 @@ function allTasks() {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   createElement: () => (/* binding */ createElement),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
 /* harmony export */   getElement: () => (/* binding */ getElement)
 /* harmony export */ });
@@ -10320,6 +10379,41 @@ function getElement(selector, all = false) {
   return all
     ? parentElement.querySelectorAll(selector)
     : parentElement.querySelector(selector);
+}
+
+function createElement(
+  tag,
+  attributes,
+  dataAttributes,
+  classes,
+  content
+) {
+  const element = document.createElement(tag);
+  //! Add attributes !
+  if (attributes) {
+    for (const key in attributes) {
+      element.setAttribute(key, attributes[key]);
+    }
+  }
+
+  //! Add data attributes
+  if (dataAttributes) {
+    for (const key in dataAttributes) {
+      element.dataset[key] = dataAttributes[key];
+    }
+  }
+
+  //! Add classes
+  if (classes) {
+    element.className = classes;
+  }
+
+  //! Add content
+  if (content) {
+    element.innerHTML = content;
+  }
+
+  return element;
 }
 
 class PubSub {
