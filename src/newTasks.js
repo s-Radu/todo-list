@@ -418,7 +418,7 @@ function showEditModal(name, description, date, category) {
     { editModal: "" },
     `absolute z-20 -translate-x-2/4 -translate-y-2/4 shadow-green-600 rounded-lg p-4 w-full max-w-sm max-h-full`,
     `
-  <div class="relative bg-white rounded-lg shadow-button shadow-green-500 dark:bg-gray-700">
+     <div class="relative bg-white rounded-lg shadow-button shadow-green-500 dark:bg-gray-700">
 
                 <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
@@ -488,6 +488,8 @@ function showEditModal(name, description, date, category) {
             </div>
   `
   );
+
+  preventUserToSelectOlderDate(element, "#date");
 
   //! Set the position of the modal based on the current scroll position
   const yAxys = window.scrollY + window.innerHeight / 2;

@@ -40,6 +40,16 @@ export function createElement(
   return element;
 }
 
+export function preventUserToSelectOlderDate(element, selector) {
+  element = getElement(selector);
+  if (element) {
+    const today = new Date().toISOString().split("T")[0];
+    element.min = today;
+  } else {
+    console.error(`No element found with selector ${selector}`);
+  }
+}
+
 class PubSub {
   constructor() {
     this.events = {};
