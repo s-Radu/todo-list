@@ -9,22 +9,22 @@ const NEW_TASK_SELECTOR = "#newTask";
 let completedTasks = JSON.parse(localStorage.getItem("completedTasks")) || [];
 let activeTasks = JSON.parse(localStorage.getItem("activeTasks")) || [];
 
-//? get the task id
+//! get the task id
 function getTaskId(e) {
   return e.target.closest("div.task-item").dataset.taskId;
 }
 
-//? format date using date-fns
+//! format date using date-fns
 function formatDate(date) {
   return format(date, "EEEE, d MMMM yyyy");
 }
 
-//? Capitulize first letter of the string
+//! Capitulize first letter of the string
 function capitulizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-//? Removes the new task from the list
+//! Removes the new task from the list
 function deleteTaskFromList(taskId, taskList) {
   const index = taskList.findIndex((task) => task.id === taskId);
   if (index !== -1) {
@@ -32,7 +32,7 @@ function deleteTaskFromList(taskId, taskList) {
   }
   return taskList;
 }
-
+//! update local storage
 function updateLocalStorage(taskList, isActiveTaskList) {
   localStorage.setItem(
     isActiveTaskList ? "activeTasks" : "completedTasks",
@@ -41,6 +41,7 @@ function updateLocalStorage(taskList, isActiveTaskList) {
   publishTaskUpdate(taskList, isActiveTaskList);
 }
 
+//! update pubsub
 function publishTaskUpdate(taskList, isActiveTaskList) {
   pubsub.publish(
     isActiveTaskList ? "tasksUpdated" : "completedTasksUpdated",
@@ -48,6 +49,7 @@ function publishTaskUpdate(taskList, isActiveTaskList) {
   );
 }
 
+//! remove task from the page
 function removeTaskFromUI(taskId) {
   const taskElements = getElement(`[data-task-id="${taskId}"]`, true);
   taskElements.forEach((element) => {
@@ -55,6 +57,7 @@ function removeTaskFromUI(taskId) {
   });
 }
 
+//! delete task
 function deleteTask(taskId, taskList, isActiveTaskList) {
   const updatedTaskList = deleteTaskFromList(taskId, taskList);
   updateLocalStorage(updatedTaskList, isActiveTaskList);
@@ -62,17 +65,20 @@ function deleteTask(taskId, taskList, isActiveTaskList) {
   return updatedTaskList;
 }
 
+//! Remove the task
 function removeTask(e) {
   let taskId = getTaskId(e);
 
   //! Ask the user to confirm the deletion
-  let userResponse = confirm(
-    `${userName}, are you sure you want to delete this task?`
-  );
+  let userResponse = askUserForResponse();
   if (userResponse) {
     activeTasks = deleteTask(taskId, activeTasks, true);
     completedTasks = deleteTask(taskId, completedTasks, false);
   }
+}
+//! Ask the user to confirm the deletion
+function askUserForResponse() {
+  return confirm(`${userName}, are you sure you want to delete this task?`);
 }
 
 //? Generates a new task id using the crypto.randomUUID method
