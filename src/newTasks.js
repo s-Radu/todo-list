@@ -107,7 +107,7 @@ function createNewNavTask(newId, newTitle) {
   return newElement;
 }
 
-//? Inserts the new element into the dropdown list
+//! Inserts the new element into the dropdown list
 function insertNewElement(newElement) {
   const parentUl = getElement(DROPDOWN_SELECTOR);
   const newTaskEle = getElement(NEW_TASK_SELECTOR);
@@ -115,6 +115,7 @@ function insertNewElement(newElement) {
   parentUl.insertBefore(newElement, newTaskEle);
 }
 
+//! Create a new task element
 function createNewTaskElement(task) {
   const newElement = createNewNavTask(task.id, task.name);
 
@@ -124,23 +125,30 @@ function createNewTaskElement(task) {
   return newElement;
 }
 
+//! Append the new task element to the nav
 function appendNewTaskElementToNav(newElement) {
   insertNewElement(newElement);
 }
 
-//? get data from the form
+function getFormElement(form, selector, capitulized = true) {
+  if (capitulized) {
+    return capitulizeFirstLetter(form.querySelector(selector).value);
+  } else {
+    return form.querySelector(selector).value;
+  }
+}
+
+//! get data from the form
 export function getFormData(e) {
   e.preventDefault();
 
   const modalEl = getElement("#crud-modal");
   const modal = FlowbiteInstances.getInstance("Modal", "crud-modal");
   const form = modalEl.querySelector("form");
-  const name = capitulizeFirstLetter(form.querySelector("#name").value);
-  const date = form.querySelector("#date").value;
-  const category = capitulizeFirstLetter(form.querySelector("#category").value);
-  const description = capitulizeFirstLetter(
-    form.querySelector("#description").value
-  );
+  const name = getFormElement(form, "#name");
+  const date = getFormElement(form, "#date", false);
+  const category = getFormElement(form, "#category");
+  const description = getFormElement(form, "#description");
 
   if (name === "" || date === "" || category === "") {
     alert("Please fill in all the fields");
@@ -343,14 +351,10 @@ function editTask(e) {
   function saveChanges(e) {
     e.preventDefault();
     const form = e.target.closest("form");
-    const name = capitulizeFirstLetter(form.querySelector("#name").value);
-    const date = form.querySelector("#date").value;
-    const category = capitulizeFirstLetter(
-      form.querySelector("#category").value
-    );
-    const description = capitulizeFirstLetter(
-      form.querySelector("#description").value
-    );
+    const name = getFormElement(form, "#name");
+    const date = getFormElement(form, "#date", false);
+    const category = getFormElement(form, "#category");
+    const description = getFormElement(form, "#description");
 
     if (name === "" || date === "") {
       alert("Please fill in all the fields");
