@@ -5,6 +5,26 @@ export function getElement(selector, all = false) {
     : parentElement.querySelector(selector);
 }
 
+export function createElement(tag, attributes, classes, content) {
+  const element = document.createElement(tag);
+  //! Add attributes !
+  for (const key in attributes) {
+    element.setAttribute(key, attributes[key]);
+  }
+
+  //! Add classes
+  if (classes) {
+    element.className = classes.join(" ");
+  }
+
+  //! Add content
+  if (content) {
+    element.innerHTML = content;
+  }
+
+  return element;
+}
+
 class PubSub {
   constructor() {
     this.events = {};
