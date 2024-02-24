@@ -14324,7 +14324,7 @@ __webpack_require__.r(__webpack_exports__);
   //? Adds the event listener to both our buttons
 
   //> Functions
-  // getUserName(); //> Will be put back to work as soon as we got things moving better
+  (0,_drawer__WEBPACK_IMPORTED_MODULE_5__.getUserName)(); //> Will be put back to work as soon as we got things moving better
 
   ids.forEach((id) => {
     (0,_utilis__WEBPACK_IMPORTED_MODULE_3__.getElement)(`#${id}`).addEventListener("click", (e) => {
