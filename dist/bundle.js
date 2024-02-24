@@ -9619,6 +9619,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (/* binding */ newTaskModal)
 /* harmony export */ });
+/* harmony import */ var _utilis_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utilis.js */ "./src/utilis.js");
+
+
 function newTaskModal() {
   let modal = document.createElement("div");
   modal.id = "crud-modal";
@@ -9695,6 +9698,8 @@ function newTaskModal() {
                   </div>
               </div>
       `;
+  //! prevent user from selecting a date in the past
+  setTimeout(() => (0,_utilis_js__WEBPACK_IMPORTED_MODULE_0__.preventUserToSelectOlderDate)(modal, "#date"), 0);
 
   return modal;
 }
@@ -10137,7 +10142,7 @@ function showEditModal(name, description, date, category) {
     { editModal: "" },
     `absolute z-20 -translate-x-2/4 -translate-y-2/4 shadow-green-600 rounded-lg p-4 w-full max-w-sm max-h-full`,
     `
-  <div class="relative bg-white rounded-lg shadow-button shadow-green-500 dark:bg-gray-700">
+     <div class="relative bg-white rounded-lg shadow-button shadow-green-500 dark:bg-gray-700">
 
                 <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
@@ -10207,6 +10212,8 @@ function showEditModal(name, description, date, category) {
             </div>
   `
   );
+  //! prevent user from selecting a date in the past
+  preventUserToSelectOlderDate(element, "#date");
 
   //! Set the position of the modal based on the current scroll position
   const yAxys = window.scrollY + window.innerHeight / 2;
@@ -10372,7 +10379,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   createElement: () => (/* binding */ createElement),
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__),
-/* harmony export */   getElement: () => (/* binding */ getElement)
+/* harmony export */   getElement: () => (/* binding */ getElement),
+/* harmony export */   preventUserToSelectOlderDate: () => (/* binding */ preventUserToSelectOlderDate)
 /* harmony export */ });
 function getElement(selector, all = false) {
   const parentElement = document.getElementById("content");
@@ -10414,6 +10422,16 @@ function createElement(
   }
 
   return element;
+}
+
+function preventUserToSelectOlderDate(element, selector) {
+  element = getElement(selector);
+  if (element) {
+    const today = new Date().toISOString().split("T")[0];
+    element.min = today;
+  } else {
+    console.error(`No element found with selector ${selector}`);
+  }
 }
 
 class PubSub {
