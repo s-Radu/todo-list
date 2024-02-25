@@ -10,10 +10,10 @@ import { getUserName } from "./drawer";
 import nav from "./nav";
 import navDrawer from "./drawer";
 import newTaskModal from "./newTaskModal";
-import homePage from "./home";
-import activeTasksPage from "./activeTasks.js";
-import completedTasksPage from "./completedTasks.js";
-import notesPage from "./notes";
+import homePage from "./homePage.js";
+import activeTasksPage from "./activeTasksPage.js";
+import completedTasksPage from "./completedTasksPage.js";
+import notesPage from "./notesPage.js";
 import footer from "./footer";
 
 //! IIFE
