@@ -4,40 +4,36 @@ export function getElement(selector, all = false) {
     ? parentElement.querySelectorAll(selector)
     : parentElement.querySelector(selector);
 }
-
-export function createElement(
+export function createElement({
   tag,
   attributes,
   dataAttributes,
   id,
   classes,
-  content
-) {
+  content,
+}) {
   const element = document.createElement(tag);
-  //! Add attributes !
+
   if (attributes) {
     for (const key in attributes) {
       element.setAttribute(key, attributes[key]);
     }
   }
 
-  //! Add data attributes
   if (dataAttributes) {
     for (const key in dataAttributes) {
       element.dataset[key] = dataAttributes[key];
     }
   }
-  //! Add Id
+
   if (id) {
     element.id = id;
   }
 
-  //! Add classes
   if (classes) {
     element.className = classes;
   }
 
-  //! Add content
   if (content) {
     element.innerHTML = content;
   }

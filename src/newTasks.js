@@ -92,22 +92,19 @@ function generateNewTaskId() {
 
 //! Creates a new list item element with an id and title provided by the form
 function createNewNavTask(newId, newTitle) {
-  const newElement = createElement(
-    "div", //? element created
-    {}, //? attributes
-    { taskId: `${newId}` }, //? data attributes
-    "", //? id
-    `task-item cursor-pointer flex items-center justify-between w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group
-  hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 focus:bg-gray-700`, //? classes
-    `${newTitle}
-      <span>
-          <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-          </svg>
-      </span>
-    ` //? content
-  );
+  const newElement = createElement({
+    tag: "div",
+    dataAttributes: { taskId: `${newId}` },
+    classes: `task-item cursor-pointer flex items-center justify-between w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group
+  hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 focus:bg-gray-700`,
+    content: `${newTitle} 
+            <span>
+              <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+              </svg>
+            </span>`,
+  });
 
   return newElement;
 }
@@ -238,34 +235,35 @@ function createTODOCardElement(
 
   const dateLabel = isCompleted ? "Completed: " : "Due: ";
 
-  let element = createElement(
-    "div", //? element created
-    {}, //? attributes
-    { taskId: `${id}`, category: `${category}` }, //? data attributes
-    "", //? id
-    `task-item max-w-sm m-4 p-6 bg-white rounded-xl shadow-md ${shadow} dark:bg-gray-800 dark:border-gray-700`, //? classes
-    `
-      <div class="flex items-center justify-between mb-4">
-      <h5 class="text-2xl font-bold text-gray-900 dark:text-white">${name}</h5>
-      <span class="cursor-pointer hover:scale-110" data-delete="${id}">
-          <svg class="ml-4 w-3 h-3 text-gray-600 dark:text-white" aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-          </svg>
-      </span>
-      </div>
-      <div class="flex flex-col items-center">
-        <p class="text-xl text-gray-800 dark:text-gray-300">${description}</p>
-        <p class=" m-4 text-sm text-gray-800 dark:text-gray-300">${dateLabel} ${date}</p>
-        ${categoryHTML}
-      </div>
-      <div class="flex justify-around items-center mt-6">
-          ${completeButtonHTML}
-          ${editButtonHTML}
-      </div>
-  ` //? content
-  );
+  let element = createElement({
+    tag: "div",
+    dataAttributes: {
+      taskId: `${id}`,
+      category: `${category}`,
+    },
+    classes: `task-item max-w-sm m-4 p-6 bg-white rounded-xl shadow-md ${shadow} dark:bg-gray-800 dark:border-gray-700`,
+    content: ` 
+            <div class="flex items-center justify-between mb-4">
+              <h5 class="text-2xl font-bold text-gray-900 dark:text-white">${name}</h5>
+              <span class="cursor-pointer hover:scale-110" data-delete="${id}">
+                  <svg class="ml-4 w-3 h-3 text-gray-600 dark:text-white" aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                          d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                  </svg>
+              </span>
+            </div>
+                <div class="flex flex-col items-center">
+                  <p class="text-xl text-gray-800 dark:text-gray-300">${description}</p>
+                  <p class=" m-4 text-sm text-gray-800 dark:text-gray-300">${dateLabel} ${date}</p>
+                  ${categoryHTML}
+                </div>
+              <div class="flex justify-around items-center mt-6">
+                  ${completeButtonHTML}
+                  ${editButtonHTML}
+              </div>
+  `,
+  });
 
   return element;
 }
@@ -418,83 +416,83 @@ function editTask(e) {
 
 //! Show the edit modal
 function showEditModal(name, description, date, category) {
-  let element = createElement(
-    "div", //? element created
-    {}, //? attributes
-    { editModal: "" }, //? data attributes
-    "", //? id
-    `absolute z-20 -translate-x-2/4 -translate-y-2/4 shadow-green-600 rounded-lg p-4 w-full max-w-sm max-h-full`, //? classes
-    `
-     <div class="relative bg-white rounded-lg shadow-button shadow-green-500 dark:bg-gray-700">
+  let element = createElement({
+    tag: "div",
+    dataAttributes: { editModal: "" },
+    classes:
+      "absolute z-20 -translate-x-2/4 -translate-y-2/4 shadow-green-600 rounded-lg p-4 w-full max-w-sm max-h-full",
+    content: `
+      <div class="relative bg-white rounded-lg shadow-button shadow-green-500 dark:bg-gray-700">
+ 
+                 <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                         Edit current task
+                     </h3>
+                     <button type="button" data-closeEditModal
+                         class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                         <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                             viewBox="0 0 14 14">
+                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                 d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                         </svg>
+                         <span class="sr-only">Close modal</span>
+                     </button>
+                 </div>
+ 
+                 <form class="p-4 md:p-5">
+                     <div class="grid gap-4 mb-4 grid-cols-2">
+                         <div class="col-span-2">
+                             <label for="name"
+                                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+                             <input type="text" name="name" id="name"
+                                 class="bg-gray-50 border border-gray-300 text-green-500 text-base rounded-lg focus:ring-gray-600 focus:border-gray-400 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-500 dark:placeholder-green-500 dark:text-green-500 dark:focus:ring-gray-400 dark:focus:border-gray-600"
+                                 placeholder="${name}" required="">
+                         </div>
+                         <div class="col-span-2 sm:col-span-1">
+                             <label for="date"
+                                 class="block mb-2 text-base font-medium text-gray-900 dark:text-white">Date</label>
+                             <input type="date" name="date" id="date"
+                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-base rounded-lg focus:ring-gray-600 focus:border-gray-400 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-500 dark:placeholder-green-500 dark:text-green-500 dark:focus:ring-gray-400 dark:focus:border-gray-600"
+                                 required="" placeholder="${date}">
+                         </div>
+                         <div class="col-span-2 sm:col-span-1">
+                             <label for="category"
+                                 class="block mb-2 text-base font-medium text-gray-900 dark:text-white">Category</label>
+                             <select id="category"
+                                 class="bg-gray-50 border border-gray-300 text-green-500 text-base rounded-lg focus:ring-gray-400 focus:border-gray-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-500 dark:placeholder-green-500 dark:text-green-500 dark:focus:ring-gray-400 dark:focus:border-gray-600">
+                                 <option selected="" value="${category}">${category}</option>
+                                 <option value="Urgent">Urgent</option>
+                                 <option value="Important">Important</option>
+                                 <option value="Upcoming">Upcoming</option>
+                                 <option value="Sometimes">Sometimes</option>
+                             </select>
+                         </div>
+                         <div class="col-span-2">
+                             <label for="description"
+                                 class="block mb-2 text-base font-medium text-gray-900 dark:text-white">Product
+                                 Description</label>
+                             <textarea id="description" rows="4"
+                                 class="block p-2.5 w-full text-base text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-gray-400 focus:border-gray-400 dark:bg-gray-700 dark:border-gray-500 dark:placeholder-green-500 dark:text-green-500 dark:focus:ring-gray-400 dark:focus:border-gray-400"
+                                 placeholder="${description}"></textarea>
+                         </div>
+                     </div>
+                     <did class="flex w-full justify-center items-center">
+                         <button data-editSubmit type='submit'
+                             class="text-white bg-gray-600 shadow-sm shadow-green-700 dark:shadow-gray-400 hover:bg-gray-500 inline-flex items-center rounded-lg text-sm px-5 py-2.5 text-center">
+                             <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                                 xmlns="http://www.w3.org/2000/svg">
+                                 <path fill-rule="evenodd"
+                                     d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                                     clip-rule="evenodd"></path>
+                             </svg>
+                             Save changes
+                         </button>
+                     </did>
+                 </form>
+             </div>
+   `,
+  });
 
-                <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                        Edit current task
-                    </h3>
-                    <button type="button" data-closeEditModal
-                        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
-                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                            viewBox="0 0 14 14">
-                            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                        </svg>
-                        <span class="sr-only">Close modal</span>
-                    </button>
-                </div>
-
-                <form class="p-4 md:p-5">
-                    <div class="grid gap-4 mb-4 grid-cols-2">
-                        <div class="col-span-2">
-                            <label for="name"
-                                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                            <input type="text" name="name" id="name"
-                                class="bg-gray-50 border border-gray-300 text-green-500 text-base rounded-lg focus:ring-gray-600 focus:border-gray-400 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-500 dark:placeholder-green-500 dark:text-green-500 dark:focus:ring-gray-400 dark:focus:border-gray-600"
-                                placeholder="${name}" required="">
-                        </div>
-                        <div class="col-span-2 sm:col-span-1">
-                            <label for="date"
-                                class="block mb-2 text-base font-medium text-gray-900 dark:text-white">Date</label>
-                            <input type="date" name="date" id="date"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-base rounded-lg focus:ring-gray-600 focus:border-gray-400 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-500 dark:placeholder-green-500 dark:text-green-500 dark:focus:ring-gray-400 dark:focus:border-gray-600"
-                                required="" placeholder="${date}">
-                        </div>
-                        <div class="col-span-2 sm:col-span-1">
-                            <label for="category"
-                                class="block mb-2 text-base font-medium text-gray-900 dark:text-white">Category</label>
-                            <select id="category"
-                                class="bg-gray-50 border border-gray-300 text-green-500 text-base rounded-lg focus:ring-gray-400 focus:border-gray-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-500 dark:placeholder-green-500 dark:text-green-500 dark:focus:ring-gray-400 dark:focus:border-gray-600">
-                                <option selected="" value="${category}">${category}</option>
-                                <option value="Urgent">Urgent</option>
-                                <option value="Important">Important</option>
-                                <option value="Upcoming">Upcoming</option>
-                                <option value="Sometimes">Sometimes</option>
-                            </select>
-                        </div>
-                        <div class="col-span-2">
-                            <label for="description"
-                                class="block mb-2 text-base font-medium text-gray-900 dark:text-white">Product
-                                Description</label>
-                            <textarea id="description" rows="4"
-                                class="block p-2.5 w-full text-base text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-gray-400 focus:border-gray-400 dark:bg-gray-700 dark:border-gray-500 dark:placeholder-green-500 dark:text-green-500 dark:focus:ring-gray-400 dark:focus:border-gray-400"
-                                placeholder="${description}"></textarea>
-                        </div>
-                    </div>
-                    <did class="flex w-full justify-center items-center">
-                        <button data-editSubmit type='submit'
-                            class="text-white bg-gray-600 shadow-sm shadow-green-700 dark:shadow-gray-400 hover:bg-gray-500 inline-flex items-center rounded-lg text-sm px-5 py-2.5 text-center">
-                            <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd"
-                                    d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
-                                    clip-rule="evenodd"></path>
-                            </svg>
-                            Save changes
-                        </button>
-                    </did>
-                </form>
-            </div>
-  ` //? content
-  );
   //! prevent user from selecting a date in the past
   setTimeout(() => preventUserToSelectOlderDate(element, "#date"), 0);
 
