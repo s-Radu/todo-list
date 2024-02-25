@@ -6,8 +6,8 @@ export default function newTaskModal() {
     attributes: { tabindex: "-1", ariaHidden: "true" },
     id: "crud-modal",
     classes:
-      "hidden overflow-y-auto overflow-x-hidden bg-opacity-75 bg-black fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full",
-    content: `<div class="absolute left-2/4 top-2/4 -translate-x-2/4 -translate-y-2/4 rounded-lg p-4 w-full max-w-md max-h-full">
+      "hidden  bg-opacity-75 bg-black fixed top-0 right-0 left-0 z-50 justify-center items-center w-full  h-screen",
+    content: `<div class="absolute left-2/4 top-2/4 -translate-x-2/4 -translate-y-2/4 rounded-lg p-4 mr-4 w-full max-w-md max-h-full">
 
         <div class="relative bg-white rounded-lg shadow-button shadow-white dark:shadow-gray-500 dark:bg-gray-700">
 

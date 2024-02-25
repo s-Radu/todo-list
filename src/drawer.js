@@ -1,15 +1,18 @@
 import { format } from "date-fns";
-import pubsub, { getElement } from "./utilis";
+import pubsub, { getElement, createElement } from "./utilis";
 
 export default function drawer() {
-  const drawer = document.createElement("div");
-  drawer.id = "drawer-navigation";
-  drawer.className =
-    "fixed top-0 left-0 z-40 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white rounded-r-2xl border-r-2 border-gray-600 w-64 dark:bg-gray-800 font-josefin scrollbar-hidden";
-  drawer.setAttribute("tabindex", "-1");
-  drawer.setAttribute("aria-labelledby", "drawer-navigation-label");
-  drawer.innerHTML = `
-  <h5 id="drawer-navigation-label" class="text-base font-semibold text-gray-500 uppercase dark:text-gray-300">
+  const drawer = createElement({
+    tag: "div",
+    id: "drawer-navigation",
+    classes:
+      "fixed top-0 left-0 z-40 h-screen p-4 overflow-y-auto transition-transform -translate-x-full bg-white rounded-r-2xl border-r-2 border-gray-600 w-64 dark:bg-gray-800 font-josefin scrollbar-hidden",
+    attributes: {
+      tabindex: "-1",
+      "aria-labbeledby": "drawer-navigation-label",
+    },
+    content: `
+    <h5 id="drawer-navigation-label" class="text-base font-semibold text-gray-500 uppercase dark:text-gray-300">
 
             </h5>
             <button type="button" data-drawer-hide="drawer-navigation" aria-controls="drawer-navigation"
@@ -209,7 +212,8 @@ export default function drawer() {
                 </ul>
                 <div class="text-black dark:text-white mt-6" id="todaysDate"></div>
             </div>
-  `;
+    `,
+  });
 
   return drawer;
 }

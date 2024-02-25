@@ -4,6 +4,7 @@ export function getElement(selector, all = false) {
     ? parentElement.querySelectorAll(selector)
     : parentElement.querySelector(selector);
 }
+
 export function createElement({
   tag,
   attributes,
