@@ -1,45 +1,46 @@
+import { createElement } from "./utilis.js";
+
 export default function footer() {
-  let footer = document.createElement("footer");
-  footer.id = "footer";
-  footer.className =
-    //? might have to add bottom-0 but it might interfeere with the page itself and make it look ugly
-    "fixed left-0 z-20 w-full p-4 bg-white border-t border-gray-200 rounded-t-xl shadow flex flex-col md:flex-row items-center justify-between md:p-6 dark:bg-gray-800 dark:border-gray-600";
-  footer.innerHTML = `
-  <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 <a
-  href="https://github.com/s-Radu"
-  class="hover:underline hover:text-gray-500 dark:hover:text-white">lilVoid™</a>. All Rights Reserved.
+  let footer = createElement({
+    tag: "footer",
+    id: "footer",
+    classes: `fixed left-0 right-0 container mx-auto z-20 max-h-20 p-4 bg-white border-t border-gray-200 rounded-t-xl shadow flex flex-col md:flex-row items-center justify-between md:p-6 dark:bg-gray-800 dark:border-gray-600`,
+    content: `
+    <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024 
+        <a href="https://github.com/s-Radu" class="hover:underline hover:text-gray-500 dark:hover:text-white">lilVoid™</a>. All Rights Reserved.
     </span>
-            <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
-                <li id="navAbout">
-                    <p class="hover:underline me-4 md:me-6 cursor-pointer" type="button"
-                        data-drawer-target="drawer-right-example" data-drawer-show="drawer-right-example"
-                        data-drawer-placement="right" aria-controls="drawer-right-example">
-                        About
-                    </p>
-                </li>
-                <li id="navPrivacy">
-                    <p class="hover:underline me-4 md:me-6 cursor-pointer" type="button"
-                        data-drawer-target="drawer-right-example" data-drawer-show="drawer-right-example"
-                        data-drawer-placement="right" aria-controls="drawer-right-example">
-                        Privacy Policy
-                    </p>
-                </li>
-                <li id="navLicencing">
-                    <p class="hover:underline me-4 md:me-6 cursor-pointer" type="button"
-                        data-drawer-target="drawer-right-example" data-drawer-show="drawer-right-example"
-                        data-drawer-placement="right" aria-controls="drawer-right-example">
-                        Licencing
-                    </p>
-                </li>
-                <li id="navContact">
-                    <p class="hover:underline me-4 md:me-6 cursor-pointer" type="button"
-                        data-drawer-target="drawer-right-example" data-drawer-show="drawer-right-example"
-                        data-drawer-placement="right" aria-controls="drawer-right-example">
-                        Contact
-                    </p>
-                </li>
-            </ul>
-            `;
+              <ul class="flex flex-wrap items-center mt-3 text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0">
+                  <li id="navAbout">
+                      <p class="hover:underline me-4 md:me-6 cursor-pointer" type="button"
+                          data-drawer-target="drawer-right-example" data-drawer-show="drawer-right-example"
+                          data-drawer-placement="right" aria-controls="drawer-right-example">
+                          About
+                      </p>
+                  </li>
+                  <li id="navPrivacy">
+                      <p class="hover:underline me-4 md:me-6 cursor-pointer" type="button"
+                          data-drawer-target="drawer-right-example" data-drawer-show="drawer-right-example"
+                          data-drawer-placement="right" aria-controls="drawer-right-example">
+                          Privacy Policy
+                      </p>
+                  </li>
+                  <li id="navLicencing">
+                      <p class="hover:underline me-4 md:me-6 cursor-pointer" type="button"
+                          data-drawer-target="drawer-right-example" data-drawer-show="drawer-right-example"
+                          data-drawer-placement="right" aria-controls="drawer-right-example">
+                          Licencing
+                      </p>
+                  </li>
+                  <li id="navContact">
+                      <p class="hover:underline me-4 md:me-6 cursor-pointer" type="button"
+                          data-drawer-target="drawer-right-example" data-drawer-show="drawer-right-example"
+                          data-drawer-placement="right" aria-controls="drawer-right-example">
+                          Contact
+                      </p>
+                  </li>
+              </ul>
+              `,
+  });
 
   let drawerContents = {
     navAbout: { title: "About", content: about.content },
@@ -69,36 +70,35 @@ export default function footer() {
 }
 
 function createDrawer(title, content) {
-  const ele = document.createElement("div");
-  ele.id = "drawer-right-example";
-  ele.setAttribute("tabindex", "-1");
-  ele.setAttribute("aria-labelledby", "drawer-right-label");
-  ele.className =
-    "fixed top-0 bottom-0 right-0 z-40 min-h-screen p-4 overflow-y-auto rounded-l-xl border-l-2 border-black dark:border-white transition-transform translate-x-full bg-white w-80 dark:bg-gray-600";
-  ele.innerHTML = `
-  <span id="drawer-right-label"
-    class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400">
+  const drawer = createElement({
+    tag: "div",
+    id: "drawer-right-example",
+    attributes: { tabindex: "-1", "aria-labelledby": "drawer-right-label" },
+    classes: `fixed top-0 bottom-0 -right-2 md:-right-6 z-40 min-h-screen p-4 overflow-y-auto rounded-l-xl border-l-2 border-black dark:border-white transition-transform translate-x-full bg-white w-80 dark:bg-gray-600`,
+    content: `
+    <span id="drawer-right-label" class="inline-flex items-center mb-4 text-base font-semibold text-gray-500 dark:text-gray-400">
         <svg class="w-6 h-6 me-2.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
             viewBox="0 0 20 20">
             <path
                 d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
         </svg>
-    <p class="text-2xl text-gray-700 dark:text-gray-300" id="drawer-title">${title}</p>
+        <p class="text-2xl text-gray-700 dark:text-gray-300" id="drawer-title">${title}</p>
     </span>
 
     <button type="button" data-drawer-hide="drawer-right-example" aria-controls="drawer-right-example"
-    class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
-        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-            viewBox="0 0 14 14">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-        </svg>
-    <span class="sr-only">Close menu</span>
+        class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 absolute top-2.5 end-2.5 inline-flex items-center justify-center dark:hover:bg-gray-600 dark:hover:text-white">
+            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 14 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+            </svg>
+        <span class="sr-only">Close menu</span>
     </button>
 
-    <div class="flex flex-col h-full" id="drawer-content">${content}</div>
-  `;
-  return ele;
+    <div class="flex flex-col h-full" id="drawer-content">${content}</div>`,
+  });
+
+  return drawer;
 }
 
 let about = {
