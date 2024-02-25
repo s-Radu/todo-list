@@ -96,6 +96,7 @@ function createNewNavTask(newId, newTitle) {
     "div", //? element created
     {}, //? attributes
     { taskId: `${newId}` }, //? data attributes
+    "", //? id
     `task-item cursor-pointer flex items-center justify-between w-full p-2 text-gray-900 transition duration-75 rounded-lg pl-11 group
   hover:bg-gray-100 dark:text-white dark:hover:bg-gray-700 focus:bg-gray-700`, //? classes
     `${newTitle}
@@ -238,10 +239,11 @@ function createTODOCardElement(
   const dateLabel = isCompleted ? "Completed: " : "Due: ";
 
   let element = createElement(
-    "div",
-    {},
-    { taskId: `${id}`, category: `${category}` },
-    `task-item max-w-sm m-4 p-6 bg-white rounded-xl shadow-md ${shadow} dark:bg-gray-800 dark:border-gray-700`,
+    "div", //? element created
+    {}, //? attributes
+    { taskId: `${id}`, category: `${category}` }, //? data attributes
+    "", //? id
+    `task-item max-w-sm m-4 p-6 bg-white rounded-xl shadow-md ${shadow} dark:bg-gray-800 dark:border-gray-700`, //? classes
     `
       <div class="flex items-center justify-between mb-4">
       <h5 class="text-2xl font-bold text-gray-900 dark:text-white">${name}</h5>
@@ -262,7 +264,7 @@ function createTODOCardElement(
           ${completeButtonHTML}
           ${editButtonHTML}
       </div>
-  `
+  ` //? content
   );
 
   return element;
@@ -417,10 +419,11 @@ function editTask(e) {
 //! Show the edit modal
 function showEditModal(name, description, date, category) {
   let element = createElement(
-    "div",
-    {},
-    { editModal: "" },
-    `absolute z-20 -translate-x-2/4 -translate-y-2/4 shadow-green-600 rounded-lg p-4 w-full max-w-sm max-h-full`,
+    "div", //? element created
+    {}, //? attributes
+    { editModal: "" }, //? data attributes
+    "", //? id
+    `absolute z-20 -translate-x-2/4 -translate-y-2/4 shadow-green-600 rounded-lg p-4 w-full max-w-sm max-h-full`, //? classes
     `
      <div class="relative bg-white rounded-lg shadow-button shadow-green-500 dark:bg-gray-700">
 
@@ -490,7 +493,7 @@ function showEditModal(name, description, date, category) {
                     </did>
                 </form>
             </div>
-  `
+  ` //? content
   );
   //! prevent user from selecting a date in the past
   setTimeout(() => preventUserToSelectOlderDate(element, "#date"), 0);

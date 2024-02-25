@@ -9,6 +9,7 @@ export function createElement(
   tag,
   attributes,
   dataAttributes,
+  id,
   classes,
   content
 ) {
@@ -25,6 +26,10 @@ export function createElement(
     for (const key in dataAttributes) {
       element.dataset[key] = dataAttributes[key];
     }
+  }
+  //! Add Id
+  if (id) {
+    element.id = id;
   }
 
   //! Add classes
