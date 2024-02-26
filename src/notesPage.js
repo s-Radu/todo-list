@@ -53,9 +53,18 @@ function createForm() {
   const form = createElement({
     tag: "form",
     classes:
-      "flex flex-col items-center z-20 absolute top-0 left-0 min-w-60 min-h-60 rounded-2xl bg-white dark:bg-gray-800 shadow-md shadow-rose-500 transition-all duration-300 ease-in-out animate-fade-in-down",
+      "absolute flex flex-col items-center  z-20 p-4 top-0 left-0 min-w-72 min-h-60 rounded-2xl bg-white dark:bg-gray-800 shadow-md shadow-rose-500 transition-all duration-300 ease-in-out animate-fade-in-down",
     content: `
-    <div class="flex flex-col mx-auto m-4">
+    <div class="relative w-full flex flex-col items-center">
+        <h2 class="text-2xl font-semibold m-4 text-gray-400">Add a new note</h2>
+        <span class="absolute top-0 right-0 -translate-y-2/4 cursor-pointer hover:scale-105 text-gray-400 dark:hover:text-white hover:text-black" data-delete=''>
+            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+            </svg>
+        </span>
+    </div>
+
+    <div class="flex flex-col mx-auto ">
         <input type="text" class="border-2 border-gray-400 dark:border-gray-600 rounded-lg p-2 m-2" placeholder="Title">
         <textarea class="border-2 border-gray-400 dark:border-gray-600 rounded-lg p-2 m-2" placeholder="Content"></textarea>
     </div>
@@ -64,6 +73,9 @@ function createForm() {
   });
   const addNoteButton = form.querySelector("button");
   addNoteButton.addEventListener("click", addNewNote);
+
+  const deleteBtn = form.querySelector("[data-delete]");
+  deleteBtn.addEventListener("click", removeForm);
 
   return form;
 }
@@ -76,6 +88,11 @@ function addNewNote(e) {
   const content = capitulizeFirstLetter(form.querySelector("textarea").value);
   const date = todaysDate();
 
+  if (!title || !content) {
+    alert("Please fill in both fields");
+    return;
+  }
+
   const note = createNewNote({
     title,
     content,
@@ -83,8 +100,7 @@ function addNewNote(e) {
   });
 
   parentElement.appendChild(note);
-  form.reset();
-  form.remove();
+  removeForm(e);
 }
 
 function deleteNote(e) {
@@ -121,4 +137,10 @@ function todaysDate() {
   const str = format(now, "EEEE, d MMMM yyyy HH:mm:ss");
 
   return str;
+}
+
+function removeForm(e) {
+  const form = e.target.closest("form");
+  form.remove();
+  form.reset();
 }
