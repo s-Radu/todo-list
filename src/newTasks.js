@@ -24,7 +24,7 @@ function formatDate(date) {
 }
 
 //! Capitulize first letter of the string
-function capitulizeFirstLetter(string) {
+export function capitulizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 

@@ -1,4 +1,5 @@
-import { createElement } from "./utilis.js";
+import { createElement, getElement } from "./utilis.js";
+import { capitulizeFirstLetter } from "./newTasks.js";
 import { format } from "date-fns";
 
 export default function notesPage() {
@@ -37,21 +38,53 @@ export default function notesPage() {
   });
 
   const newNoteBtn = page.querySelector("#newNote");
-  newNoteBtn.addEventListener("click", addNewNote);
+  newNoteBtn.addEventListener("click", appendForm);
 
   return page;
 }
 
-function addNewNote(e) {
+function appendForm(e) {
   const parentElement = e.target.closest("#allNotes");
-  const dayAdded = todaysDate();
-  const newNote = createNewNote({
-    title: "sarmale",
-    content: "I love sarmale",
-    date: dayAdded,
+  const form = createForm();
+  parentElement.appendChild(form);
+}
+
+function createForm() {
+  const form = createElement({
+    tag: "form",
+    classes:
+      "flex flex-col items-center z-20 absolute top-0 left-0 min-w-60 min-h-60 rounded-2xl bg-white dark:bg-gray-800 shadow-md shadow-rose-500 transition-all duration-300 ease-in-out animate-fade-in-down",
+    content: `
+    <div class="flex flex-col mx-auto m-4">
+        <input type="text" class="border-2 border-gray-400 dark:border-gray-600 rounded-lg p-2 m-2" placeholder="Title">
+        <textarea class="border-2 border-gray-400 dark:border-gray-600 rounded-lg p-2 m-2" placeholder="Content"></textarea>
+    </div>
+        <button class="bg-gray-500 dark:bg-gray-600 text-gray-900 dark:text-white hover:scale-105 hover:shadow-md hover:shadow-rose-400 transition-all duration-300 ease-in-out rounded-lg p-2 m-2">Add Note</button>
+        `,
   });
-  parentElement.appendChild(newNote);
-  console.log(dayAdded);
+  const addNoteButton = form.querySelector("button");
+  addNoteButton.addEventListener("click", addNewNote);
+
+  return form;
+}
+
+function addNewNote(e) {
+  e.preventDefault();
+  const parentElement = getElement("#allNotes");
+  const form = e.target.closest("form");
+  const title = capitulizeFirstLetter(form.querySelector("input").value);
+  const content = capitulizeFirstLetter(form.querySelector("textarea").value);
+  const date = todaysDate();
+
+  const note = createNewNote({
+    title,
+    content,
+    date,
+  });
+
+  parentElement.appendChild(note);
+  form.reset();
+  form.remove();
 }
 
 function deleteNote(e) {
