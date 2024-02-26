@@ -5,7 +5,7 @@ import pubsub, { getElement } from "./utilis.js";
 export default function home() {
   let home = document.createElement("div");
   home.className = //! change back hidden when done creating the new page
-    "relative hidden container mx-auto flex flex-col rounded-2xl min-h-full";
+    "relative hidden container mx-auto flex flex-col rounded-2xl min-h-screen";
   home.id = "homePage";
   home.innerHTML = `
 <h1 class="text-center text-4xl text-black dark:text-white mt-6 md:mt-40">Welcome to ToDoMaster!</h1>
