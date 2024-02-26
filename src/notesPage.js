@@ -1,6 +1,7 @@
 import { createElement } from "./utilis.js";
+import { format } from "date-fns";
 
-export default function allTasks() {
+export default function notesPage() {
   let page = createElement({
     tag: "div",
     id: "notesPage",
@@ -9,10 +10,10 @@ export default function allTasks() {
     content: `
     <h1 class="text-center text-4xl m-4 text-gray-500 dark:text-white">Notes</h1>
 
-              <div class="flex flex-wrap justify-center items-start gap-4 p-5" id="allNotes">
+        <div class="flex flex-wrap justify-start items-start gap-4 p-5 relative" id="allNotes">
 
-              <div id="newNote"
-              class="shadow-md mx-auto m-4 shadow-rose-500 rounded-lg p-4 flex flex-col items-center min-w-40 max-w-screen-sm dark:bg-gray-800 dark:shadow-rose-600 hover:shadow-button hover:shadow-rose-500 hover:scale-105 transition-all duration-300 ease-in-expo ">
+         <div id="newNote"
+              class="shadow-md m-4 shadow-rose-500 border-t-2 border-rose-500 rounded-lg p-4 flex flex-col items-center min-w-32 min-h-32 max-w-screen-sm hover:opacity-80">
   
               <svg viewBox="0 0 24.00 24.00" fill="none" xmlns="http://www.w3.org/2000/svg"
                   class="cursor-pointer animate-pulse transition-all duration-150 ease-in-out w-20 h-20 dark:text-gray-400 text-gray-600 hover:text-gray-900 hover:scale-110 dark:hover:text-gray-100 ">
@@ -29,62 +30,62 @@ export default function allTasks() {
                           stroke="currentColor" stroke-width="1.2"></path>
                   </g>
               </svg>
-          </div>
+          </div>  
 
-
-                  <div
-                      class="bg-white dark:bg-gray-800 shadow-lg shadow-rose-500 dark:shadow-rose-600 dark:shadow-sm rounded-lg p-4 flex flex-col justify-between items-center relative max-w-84">
-                        <span class="absolute top-4 right-4 cursor-pointer hover:scale-105 text-gray-400 dark:hover:text-white hover:text-black">
-                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                            </svg>
-                         </span>
-                      <h2 class="text-xl font-semibold m-4 text-gray-500 dark:text-gray-200">Task 1</h2>
-                      <p class="text-gray-500">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur
-                          repellendus mollitia quo rerum fuga! In?</p>
-                      <p class="text-sm text-gray-500 italic m-4 self-end">Due: <span>25.02.2024</span></p>
-                  </div>
-                  <div
-                      class="bg-white dark:bg-gray-800 shadow-lg shadow-rose-500 dark:shadow-rose-600 dark:shadow-sm rounded-lg p-4 flex flex-col justify-between items-center relative max-w-[30rem]">
-                        <span class="absolute top-4 right-4 cursor-pointer hover:scale-105 text-gray-400 dark:hover:text-white hover:text-black">
-                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                            </svg>
-                         </span>
-                      <h2 class="text-xl font-semibold m-4 text-gray-500 dark:text-gray-200">Task 1</h2>
-                      <p class="text-gray-500">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur
-                          repellendus mollitia quo rerum fuga! In?</p>
-                      <p class="text-sm text-gray-500 italic m-4 self-end">Due: <span>25.02.2024</span></p>
-                  </div>
-                  <div
-                      class="bg-white dark:bg-gray-800 shadow-lg shadow-rose-500 dark:shadow-rose-600 dark:shadow-sm rounded-lg p-4 flex flex-col justify-between items-center relative max-w-80">
-                        <span class="absolute top-4 right-4 cursor-pointer hover:scale-105 text-gray-400 dark:hover:text-white hover:text-black">
-                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                            </svg>
-                         </span>
-                      <h2 class="text-xl font-semibold m-4 text-gray-500 dark:text-gray-200">Task 1</h2>
-                      <p class="text-gray-500">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur
-                          repellendus mollitia quo rerum fuga! In?</p>
-                      <p class="text-sm text-gray-500 italic m-4 self-end">Due: <span>25.02.2024</span></p>
-                  </div>
-                  <div
-                      class="bg-white dark:bg-gray-800 shadow-lg shadow-rose-500 dark:shadow-rose-600 dark:shadow-sm rounded-lg p-4 flex flex-col justify-between items-center relative max-w-64">
-                        <span class="absolute top-4 right-4 cursor-pointer hover:scale-105 text-gray-400 dark:hover:text-white hover:text-black">
-                            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
-                            </svg>
-                         </span>
-                      <h2 class="text-xl font-semibold m-4 text-gray-500 dark:text-gray-200">Task 1</h2>
-                      <p class="text-gray-500">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aspernatur
-                          repellendus mollitia quo rerum fuga! In?</p>
-                      <p class="text-sm text-gray-500 italic m-4 self-end">Due: <span>25.02.2024</span></p>
-                     </div>
-                </div>
+        </div>    
      `,
   });
+
+  const newNoteBtn = page.querySelector("#newNote");
+  newNoteBtn.addEventListener("click", addNewNote);
 
   return page;
 }
 
-//? Add funcitonality to handle the adding, deleting, editing, sorting and storing in the local storage of new notes.
+function addNewNote(e) {
+  const parentElement = e.target.closest("#allNotes");
+  const dayAdded = todaysDate();
+  const newNote = createNewNote({
+    title: "sarmale",
+    content: "I love sarmale",
+    date: dayAdded,
+  });
+  parentElement.appendChild(newNote);
+  console.log(dayAdded);
+}
+
+function deleteNote(e) {
+  const parentElement = e.target.closest("[data-delete]");
+  if (parentElement) {
+    console.log("Note deleted");
+  }
+}
+
+function createNewNote({ title, content, date }) {
+  let note = createElement({
+    tag: "div",
+    classes: `bg-white dark:bg-gray-800 text-gray-500 hover:text-gray-900 dark:hover:text-gray-200 transition-all duration-150 ease-in-out shadow-lg shadow-rose-500 dark:shadow-rose-600 dark:shadow-sm rounded-lg p-4 m-4 flex flex-col justify-between items-center relative max-w-96`,
+    content: `
+    <span class="absolute top-4 right-4 cursor-pointer hover:scale-105 text-gray-400 dark:hover:text-white hover:text-black" data-delete=''>
+        <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+        </svg>
+    </span>
+    <h2 class="text-2xl font-semibold m-4 ">${title}</h2>
+    <p class=" text-base">${content}</p>
+    <p class="text-sm  italic m-4 self-end">Added: ${date}</span></p>
+`,
+  });
+
+  const deleteBtn = note.querySelector("[data-delete]");
+  deleteBtn.addEventListener("click", deleteNote);
+
+  return note;
+}
+
+function todaysDate() {
+  const now = new Date();
+  const str = format(now, "EEEE, d MMMM yyyy HH:mm:ss");
+
+  return str;
+}
