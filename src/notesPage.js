@@ -2,6 +2,8 @@ import { createElement, getElement } from "./utilis.js";
 import { capitulizeFirstLetter } from "./newTasks.js";
 import { format } from "date-fns";
 
+let activeNotes = JSON.parse(localStorage.getItem("activeNotes")) || [];
+
 export default function notesPage() {
   let page = createElement({
     tag: "div",
@@ -99,6 +101,15 @@ function addNewNote(e) {
     date,
   });
 
+  const newNote = {
+    title,
+    content,
+    date,
+  };
+
+  updateNotesArray(newNote);
+  updateLocalStorage();
+
   parentElement.appendChild(note);
   removeForm(e);
 }
@@ -144,3 +155,27 @@ function removeForm(e) {
   form.remove();
   form.reset();
 }
+
+function updateNotesArray(newNote) {
+  activeNotes.push(newNote);
+  console.log(activeNotes);
+}
+
+function updateLocalStorage() {
+  localStorage.setItem("activeNotes", JSON.stringify(activeNotes));
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  activeNotes.forEach((note) => {
+    const parentElement = getElement("#allNotes");
+    const newNote = createNewNote({
+      title: note.title,
+      content: note.content,
+      date: note.date,
+    });
+    parentElement.appendChild(newNote);
+  });
+});
+
+//TODO Save data to local storage and add it on the page when page refreshed
+//TODO update pubsub
