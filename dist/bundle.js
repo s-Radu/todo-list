@@ -8928,7 +8928,7 @@ function activeTasks() {
   let page = (0,_utilis_js__WEBPACK_IMPORTED_MODULE_0__.createElement)({
     tag: "div",
     classes:
-      " flex flex-col font-josefin text-white container mx-auto m-4 min-h-screen",
+      "hidden flex flex-col font-josefin text-white container mx-auto m-4 min-h-screen",
     id: "activePage",
     content: `
     <h1 class="text-center text-4xl m-4 text-gray-500 dark:text-white">Active Tasks</h1>
@@ -9638,7 +9638,7 @@ __webpack_require__.r(__webpack_exports__);
 function home() {
   let home = document.createElement("div");
   home.className = //! change back hidden when done creating the new page
-    "relative hidden container mx-auto flex flex-col rounded-2xl min-h-screen";
+    "relative container mx-auto flex flex-col rounded-2xl min-h-screen";
   home.id = "homePage";
   home.innerHTML = `
 <h1 class="text-center text-4xl text-black dark:text-white mt-6 md:mt-40">Welcome to ToDoMaster!</h1>
