@@ -8928,7 +8928,7 @@ function activeTasks() {
   let page = (0,_utilis_js__WEBPACK_IMPORTED_MODULE_0__.createElement)({
     tag: "div",
     classes:
-      "hidden flex flex-col font-josefin text-white container mx-auto m-4 min-h-screen",
+      " flex flex-col font-josefin text-white container mx-auto m-4 min-h-screen",
     id: "activePage",
     content: `
     <h1 class="text-center text-4xl m-4 text-gray-500 dark:text-white">Active Tasks</h1>
@@ -10454,7 +10454,7 @@ function notesPage() {
     tag: "div",
     id: "notesPage",
     //! add hidden when done creating the new page
-    classes: "flex flex-col container mx-auto m-4 min-h-screen",
+    classes: "hidden flex flex-col container mx-auto m-4 min-h-screen",
     content: `
     <h1 class="text-center text-4xl m-4 text-gray-500 dark:text-white">Notes</h1>
 
@@ -14604,7 +14604,7 @@ __webpack_require__.r(__webpack_exports__);
   //? Adds the event listener to both our buttons
 
   //> Functions
-  (0,_drawer__WEBPACK_IMPORTED_MODULE_5__.getUserName)(); //> Will be put back to work as soon as we got things moving better
+  // getUserName(); //> Will be put back to work as soon as we got things moving better
 
   ids.forEach((id) => {
     (0,_utilis__WEBPACK_IMPORTED_MODULE_3__.getElement)(`#${id}`).addEventListener("click", (e) => {
