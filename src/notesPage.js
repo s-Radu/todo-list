@@ -127,8 +127,16 @@ function deleteNote(e, id) {
     const parentElement = deleteButton.closest("div");
     if (parentElement && parentElement.id === id) {
       parentElement.remove();
+      deleteNoteFromLocalStorage(id);
     }
   }
+}
+
+function deleteNoteFromLocalStorage(id) {
+  const noteToDelete = activeNotes.find((note) => note.id === id);
+  const index = activeNotes.indexOf(noteToDelete);
+  activeNotes.splice(index, 1);
+  updateLocalStorage();
 }
 
 function createNewNote({ title, content, date, id }) {
@@ -169,7 +177,6 @@ function removeForm(e) {
 
 function updateNotesArray(newNote) {
   activeNotes.push(newNote);
-  console.log(activeNotes);
 }
 
 function updateLocalStorage() {
