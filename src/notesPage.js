@@ -9,7 +9,7 @@ export default function notesPage() {
     tag: "div",
     id: "notesPage",
     //! add hidden when done creating the new page
-    classes: "flex flex-col container mx-auto m-4 min-h-screen",
+    classes: "hidden flex flex-col container mx-auto m-4 min-h-screen",
     content: `
     <h1 class="text-center text-4xl m-4 text-gray-500 dark:text-white">Notes</h1>
 
