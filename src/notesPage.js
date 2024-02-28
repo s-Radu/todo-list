@@ -1,6 +1,7 @@
 import { createElement, getElement } from "./utilis.js";
 import { capitulizeFirstLetter } from "./newTasks.js";
 import { format } from "date-fns";
+import { userName } from "./drawer.js";
 
 let activeNotes = JSON.parse(localStorage.getItem("activeNotes")) || [];
 
@@ -123,12 +124,17 @@ function addNewNote(e) {
 
 function deleteNote(e, id) {
   const deleteButton = e.target.closest("[data-delete]");
-  if (deleteButton) {
-    const parentElement = deleteButton.closest("div");
-    if (parentElement && parentElement.id === id) {
-      parentElement.remove();
-      deleteNoteFromLocalStorage(id);
+  confirm("Are you sure you want to delete this note?");
+  if (confirm === true) {
+    if (deleteButton) {
+      const parentElement = deleteButton.closest("div");
+      if (parentElement && parentElement.id === id) {
+        parentElement.remove();
+        deleteNoteFromLocalStorage(id);
+      }
     }
+  } else {
+    return;
   }
 }
 
