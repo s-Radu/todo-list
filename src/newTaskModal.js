@@ -7,7 +7,7 @@ export default function newTaskModal() {
     id: "crud-modal",
     classes:
       "hidden bg-opacity-75 bg-black fixed  top-0 -right-10 -bottom-40 left-0 z-50 ",
-    content: `<div class="absolute left-2/4 top-2/4 -translate-x-2/4 -translate-y-2/4 rounded-lg p-4 mr-4 w-full max-w-md max-h-full">
+    content: `<div class="absolute left-2/4 top-2/4 -translate-x-2/4 -translate-y-2/4 rounded-lg p-4 mr-4 w-full max-w-xs md:max-w-md max-h-full">
 
         <div class="relative bg-white rounded-lg shadow-button shadow-white dark:shadow-gray-500 dark:bg-gray-700">
 
@@ -81,5 +81,5 @@ export default function newTaskModal() {
 
   return modal;
 }
-//? Might have to get rid of submit button and add a click event listener to the modal to add the new Task
-//TODO make sure the overlay is taking up the whole page, even if the user scrolled
+
+//! make the moal smaller on mobile
