@@ -2,6 +2,7 @@ import { createElement, getElement } from "./utilis.js";
 import { capitulizeFirstLetter } from "./newTasks.js";
 import { format } from "date-fns";
 import { userName } from "./drawer.js";
+import pubsub from "./utilis.js";
 
 let activeNotes = JSON.parse(localStorage.getItem("activeNotes")) || [];
 
@@ -117,6 +118,7 @@ function addNewNote(e) {
 
   updateNotesArray(newNote);
   updateLocalStorage();
+  updatePubSub();
 
   parentElement.appendChild(note);
   removeForm(e);
@@ -124,13 +126,14 @@ function addNewNote(e) {
 
 function deleteNote(e, id) {
   const deleteButton = e.target.closest("[data-delete]");
-  confirm("Are you sure you want to delete this note?");
+  confirm(`${userName} are you sure you want to delete this note?`);
   if (confirm === true) {
     if (deleteButton) {
       const parentElement = deleteButton.closest("div");
       if (parentElement && parentElement.id === id) {
         parentElement.remove();
         deleteNoteFromLocalStorage(id);
+        updatePubSub();
       }
     }
   } else {
@@ -189,6 +192,10 @@ function updateLocalStorage() {
   localStorage.setItem("activeNotes", JSON.stringify(activeNotes));
 }
 
+function updatePubSub() {
+  pubsub.publish("notes", activeNotes.length);
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   activeNotes.forEach((note) => {
     const parentElement = getElement("#allNotes");
@@ -199,6 +206,7 @@ document.addEventListener("DOMContentLoaded", () => {
       id: note.id,
     });
     parentElement.appendChild(newNote);
+    updatePubSub();
   });
 });
 
