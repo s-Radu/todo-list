@@ -126,8 +126,10 @@ function addNewNote(e) {
 
 function deleteNote(e, id) {
   const deleteButton = e.target.closest("[data-delete]");
-  confirm(`${userName} are you sure you want to delete this note?`);
-  if (confirm === true) {
+  let askForConfirmation = confirm(
+    `${userName} are you sure you want to delete this note?`
+  );
+  if (askForConfirmation) {
     if (deleteButton) {
       const parentElement = deleteButton.closest("div");
       if (parentElement && parentElement.id === id) {
