@@ -9,7 +9,7 @@ export default function nav() {
       <div class="flex flex-wrap items-center justify-between mx-auto p-4">
                 <div class="flex justify-between items-center w-32 md:ml-4">
 
-                        <button class="rounded-lg hover:scale-105" type="button" data-drawer-target="drawer-navigation"
+                        <button class="rounded-lg hover:scale-105 relative group" type="button" data-drawer-target="drawer-navigation"
                             data-drawer-show="drawer-navigation" aria-controls="drawer-navigation">
                             <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="40" height="40">
                                 <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -19,10 +19,15 @@ export default function nav() {
                                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                     </path>
                                 </g>
+                                <span
+                                class="absolute text-xs bg-gray-700 text-gray-100 dark:bg-gray-100 dark:text-gray-700 p-1 min-w-20 text-center rounded-lg opacity-0  group-hover:opacity-100 -bottom-10 -left-1/3 transition-all duration-200 ease-in-expo"
+                                x-show="showTooltip">
+                                Open menu
+                            </span>
                             </svg>
                         </button>
 
-                    <a href="#" class="hover:scale-105" id="mainHome">
+                    <button class="hover:scale-105 group relative" id="mainHome">
                         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="40"
                             hight="40">
                             <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
@@ -35,8 +40,13 @@ export default function nav() {
                                 <path d="M15 18H9" class="dark:stroke-white stroke-black" stroke-width="1.5"
                                     stroke-linecap="round"></path>
                             </g>
+                            <span
+                                class="absolute text-xs bg-gray-700 text-gray-100 dark:bg-gray-100 dark:text-gray-700 p-1 min-w-20 text-center rounded-lg opacity-0  group-hover:opacity-100 -bottom-10 -left-1/3 transition-all duration-200 ease-in-expo"
+                                x-show="showTooltip">
+                                Home
+                            </span>
                         </svg>
-                    </a>
+                    </button>
                 </div>
 
                 <div class="flex justify-between items-center w-32 md:mr-4" >
@@ -61,10 +71,15 @@ export default function nav() {
                         </svg>
                     </div>
                     <div id="toggle"
-                        class="w-12 h-6 flex items-center bg-gray-800 dark:bg-gray-300 rounded-full p-1 cursor-pointer transform duration-200 ease-in-expo hover:scale-105">
+                        class="w-12 h-6 flex items-center group relative bg-gray-800 dark:bg-gray-300 rounded-full p-1 cursor-pointer transform duration-200 ease-in-expo hover:scale-105">
                         <div id="circle"
                             class="w-5 h-5 bg-gray-300 dark:bg-gray-800 rounded-full shadow-md shadow-black duration-500 translate-x-5  ease-in-expo">
                         </div>
+                        <span
+                                class="absolute text-xs bg-gray-700 text-gray-100 dark:bg-gray-100 dark:text-gray-700 p-1 min-w-20 text-center rounded-lg opacity-0  group-hover:opacity-100 -bottom-16 -left-1/3 transition-all duration-200 ease-in-expo"
+                                x-show="showTooltip">
+                                Toggle dark mode
+                            </span>
                     </div>
                 </div>
 
