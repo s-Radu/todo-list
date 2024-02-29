@@ -1,20 +1,23 @@
 # Todo List App
 
 > [!NOTE]
-> More details needs adding, but for now just a quick readme file
+> This project is part of the Odin project learning taril
 
 ---
 
 ## Description
 
-This is a simple Todo List application built with [insert technology stack here]. It allows users to manage their tasks effectively.
+This is a simple Todo List application built with Vanilla javaScript. It allows users to manage their tasks effectively.
 
 ## Features
 
 - Add new tasks
 - Mark tasks as completed
 - Delete tasks
-- Filter tasks (All, Active, Completed)
+- Filter tasks (Active, Completed)
+- Add new notes
+- Delete notes
+- All your tasks and notes will be saved in local storage
 
 ### Prerequisites
 
@@ -76,5 +79,6 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 ### Images
 
-Most images have been downloaded from [Unsplash](https://unsplash.com/)
+Most images have been downloaded from [Unsplash](https://unsplash.com/), and [pngWing](https://www.pngwing.com/)
+
 Thanks to all artists!!
