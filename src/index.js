@@ -19,8 +19,6 @@ import footer from "./footer";
 //! IIFE
 
 (function () {
-  const TOGGLE_SELECTOR = "#toggle";
-
   //> Content Page
   const parentElement = document.getElementById("content");
 
@@ -39,7 +37,7 @@ import footer from "./footer";
   pagesElements.forEach((element) => parentElement.appendChild(element()));
 
   //> DOM elements
-  let darkModeToggle = getElement(TOGGLE_SELECTOR);
+  let darkModeToggle = getElement("#toggle");
 
   let ids = ["mainHome", "home", "active", "completed", "notes"];
 
