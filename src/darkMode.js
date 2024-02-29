@@ -1,24 +1,35 @@
 import { getElement } from "./utilis";
 
-export default (function darkMode() {
-  //* On page load or when changing themes, best to add inline in `head` to avoid FOUC
-  if (
-    localStorage.getItem("color-theme") === "dark" ||
-    (!("color-theme" in localStorage) &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches)
-  ) {
-    document.documentElement.classList.add("dark");
-  } else {
-    document.documentElement.classList.remove("dark");
-  }
-})();
+let circle;
 
-export function toggleDarkMode() {
-  const circle = getElement("#circle");
+function updateTheme(isDarkMode) {
   const html = document.querySelector("html");
 
-  const isDarkMode = circle.classList.contains("translate-x-5");
-
-  circle.classList.toggle("translate-x-5", !isDarkMode);
-  html.classList.toggle("dark", !isDarkMode);
+  circle.classList.toggle("translate-x-5", isDarkMode);
+  html.classList.toggle("dark", isDarkMode);
 }
+
+function setInitialTheme() {
+  circle = getElement("#circle");
+
+  const isDarkMode =
+    localStorage.getItem("color-theme") === "dark" ||
+    (!("color-theme" in localStorage) &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches);
+
+  updateTheme(isDarkMode);
+}
+
+export function toggleDarkMode() {
+  const isDarkMode = !circle.classList.contains("translate-x-5");
+
+  updateTheme(isDarkMode);
+
+  //? Update the color-theme in localStorage
+  localStorage.setItem("color-theme", isDarkMode ? "dark" : "light");
+}
+
+//! Call the functions after the page has finished loading
+window.onload = function () {
+  setInitialTheme();
+};
