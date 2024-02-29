@@ -25,14 +25,18 @@ import footer from "./footer";
   const parentElement = document.getElementById("content");
 
   //> Append elements
-  parentElement.appendChild(nav());
-  parentElement.appendChild(navDrawer());
-  parentElement.appendChild(homePage());
-  parentElement.appendChild(activeTasksPage());
-  parentElement.appendChild(completedTasksPage());
-  parentElement.appendChild(notesPage());
-  parentElement.appendChild(newTaskModal());
-  parentElement.appendChild(footer());
+
+  const pagesElements = [
+    nav,
+    navDrawer,
+    homePage,
+    activeTasksPage,
+    completedTasksPage,
+    notesPage,
+    newTaskModal,
+    footer,
+  ];
+  pagesElements.forEach((element) => parentElement.appendChild(element()));
 
   //> DOM elements
   let darkModeToggle = getElement(TOGGLE_SELECTOR);
@@ -45,7 +49,7 @@ import footer from "./footer";
   //? Adds the event listener to both our buttons
 
   //> Functions
-  // getUserName(); //> Will be put back to work as soon as we got things moving better
+  getUserName(); //> Will be put back to work as soon as we got things moving better
 
   ids.forEach((id) => {
     getElement(`#${id}`).addEventListener("click", (e) => {
