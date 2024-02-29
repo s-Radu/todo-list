@@ -15,7 +15,7 @@ export default function notesPage() {
     content: `
     <h1 class="text-center text-4xl m-4 text-gray-500 dark:text-white">Notes</h1>
 
-        <div class="flex flex-wrap justify-start items-start gap-4 p-5 relative" id="allNotes">
+        <div class="flex flex-wrap justify-center md:justify-start items-start gap-4 p-5 relative" id="allNotes">
 
          <div id="newNote"
               class="shadow-md m-4 shadow-rose-500 border-t-2 border-rose-500 rounded-lg p-4 flex flex-col items-center min-w-32 min-h-32 max-w-screen-sm hover:opacity-80">
