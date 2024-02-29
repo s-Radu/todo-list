@@ -1,6 +1,5 @@
 import "./style.css";
 import "flowbite";
-import "./darkMode.js";
 
 //> module imports
 import { getElement } from "./utilis";
